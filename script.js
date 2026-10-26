@@ -65,8 +65,10 @@ const navLinks = document.querySelectorAll('.pill-nav-item, .mobile-nav-link');
 const trackedSections = [
   { id: 'top', linkText: 'Home' },
   { id: 'work', linkText: 'Work' },
-  { id: 'prices', linkText: 'Prices' },
+  { id: 'showreel', linkText: 'Reel' },
   { id: 'projects', linkText: 'Projects' },
+  { id: 'approach', linkText: 'Approach' },
+  { id: 'about', linkText: 'About' },
   { id: 'contact', linkText: 'Contact' }
 ];
 

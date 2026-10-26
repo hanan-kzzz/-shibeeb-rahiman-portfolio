@@ -610,7 +610,7 @@ body{cursor:default}
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2.5vw, 36px);
+  gap: clamp(10px, 1.8vw, 26px);
   margin: 0 16px;
 }
 
