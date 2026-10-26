@@ -2239,3 +2239,68 @@ body{cursor:default}
     max-width: 380px;
   }
 }
+
+
+/* Footer Social Logo Buttons */
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-logo-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(18, 7, 4, 0.12);
+  border: 1.5px solid rgba(18, 7, 4, 0.28);
+  color: #120704 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.social-logo-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.social-logo-btn:hover {
+  background: #120704;
+  color: #ffffff !important;
+  border-color: #120704;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.social-logo-btn:hover svg {
+  transform: scale(1.08);
+}
+
+.social-logo-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+@media (max-width: 680px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .footer-social-links {
+    order: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .social-logo-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
