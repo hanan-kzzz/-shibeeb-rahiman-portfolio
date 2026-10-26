@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10100e">
+  <meta name="description" content="Shibeeb Rahiman — graphic designer and motion designer creating visual identities, digital experiences and moving images.">
+  <title>Shibeeb Rahiman — Graphic & Motion Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div><div class="pointer-glow" aria-hidden="true"></div>
+  <!-- Mobile Backdrop Overlay -->
+  <div class="pill-nav-backdrop" id="pillNavBackdrop" aria-hidden="true"></div>
+
+  <header class="pill-nav-container">
+    <div class="pill-nav-bar" id="pillNav">
+      <!-- Left: Obsidian Circle with Electric Lime Flame Icon -->
+      <a class="pill-logo-btn" href="#top" aria-label="Home" title="Shibeeb Rahiman">
+        <span class="pill-flame-circle">
+          <svg class="pill-flame-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7 2.1C12.4 2 12.1 2.2 12 2.5C11.3 4.5 11 6.2 11.1 7.7C10.4 7.1 9.7 6.3 9.2 5.4C9 5.1 8.6 5 8.3 5.2C7.1 5.9 6.1 6.9 5.3 8.1C4 9.9 3.3 12.1 3.3 14.4C3.3 19.1 7.1 22.9 11.8 22.9C16.5 22.9 20.3 19.1 20.3 14.4C20.3 10.7 18 7.4 14.9 5.7C14.5 4.4 13.8 3.2 12.7 2.1ZM11.8 20.4C9.1 20.4 6.9 18.2 6.9 15.5C6.9 14.1 7.5 12.9 8.4 12C8.5 13.1 8.9 14.1 9.5 15C9.7 15.3 10.1 15.3 10.4 15.1C10.7 14.9 10.7 14.5 10.5 14.2C9.8 13.3 9.4 12.1 9.5 10.9C10.8 12.2 12.5 13.1 14.4 13.1C14.8 13.1 15.1 13.1 15.4 13C15.3 13.9 15 14.7 14.5 15.4C14.3 15.7 14.4 16.1 14.7 16.3C15 16.5 15.3 16.4 15.5 16.1C16.2 15.1 16.6 14 16.7 12.8C16.9 13.5 17 14.3 17 15.1C17 18.2 14.7 20.4 11.8 20.4Z" fill="#d3ff38"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Center: Navigation Links (Desktop) -->
+      <nav class="pill-nav-links" id="navlinks" aria-label="Main Navigation">
+        <a href="#top" class="pill-nav-item active">Home</a>
+        <a href="#work" class="pill-nav-item">Work</a>
+        <a href="#prices" class="pill-nav-item">Prices</a>
+        <a href="#projects" class="pill-nav-item">Projects</a>
+        <a href="#contact" class="pill-nav-item">Contact</a>
+      </nav>
+
+      <!-- Right Controls: White Pill CTA Button + Menu Toggle -->
+      <div class="pill-nav-right">
+        <a href="#contact" class="pill-email-btn" id="pillEmailBtn" aria-label="Let's talk">
+          <span class="pill-email-text" id="pillEmailText">Let's talk</span>
+        </a>
+
+        <button class="pill-menu-toggle" id="pillMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <!-- Hamburger bars (closed state) -->
+          <svg class="icon-hamburger" viewBox="0 0 24 24" width="18" height="18" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+          <!-- Close X icon (open state) -->
+          <svg class="icon-close" viewBox="0 0 24 24" width="18" height="18" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu: Solid Black Card with Centered Links -->
+    <div class="pill-mobile-dropdown" id="pillMobileDropdown" aria-hidden="true">
+      <nav class="mobile-nav-list" aria-label="Mobile Navigation">
+        <a href="#top" class="mobile-nav-link active">Home</a>
+        <a href="#work" class="mobile-nav-link">Work</a>
+        <a href="#prices" class="mobile-nav-link">Prices</a>
+        <a href="#projects" class="mobile-nav-link">Projects</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <!-- HERO SECTION (Exact Layout of Reference Image with Cool Luxury Colorway) -->
+    <section class="hero-canvas-wrap">
+      <div class="folio-hero-card">
+        <!-- Ambient Radial Backlight (Electric Blue & Midnight Obsidian — Replacing Red/Orange) -->
+        <div class="hero-ambient-glow" aria-hidden="true"></div>
+
+        <!-- Main Hero Stage: Left Greeting & Title | Center Portrait | Right Statement -->
+        <div class="folio-hero-body">
+          <!-- Left: Greeting & Monumental Title -->
+          <div class="folio-hero-left">
+            <span class="folio-greeting">Hey, I'm a</span>
+            <h1 class="folio-main-title">Creative<br>Designer</h1>
+          </div>
+
+          <!-- Center: High-Fidelity Cinematic Portrait Cutout -->
+          <div class="folio-hero-center" id="heroPortraitStage">
+            <div class="portrait-glow-halo" aria-hidden="true"></div>
+            <img class="folio-portrait-img" id="folioPortraitImg" src="shibeeb-portrait.png" alt="Shibeeb Rahiman — Creative Graphic &amp; Motion Designer" fetchpriority="high">
+          </div>
+
+          <!-- Right: Statement & Conversion Narrative -->
+          <div class="folio-hero-right">
+            <h2 class="folio-statement-title">Great design should feel invisible.</h2>
+            <p class="folio-statement-desc">
+              From logo to visual language, I build brands that connect, convert, and command attention.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Row: 4 Numbered Disciplines from Reference Image -->
+        <div class="folio-disciplines-bar">
+          <div class="discipline-col">
+            <span class="discipline-num">#01</span>
+            <span class="discipline-name">Brand Strategy</span>
+          </div>
+          <div class="discipline-col">
+            <span class="discipline-num">#02</span>
+            <span class="discipline-name">Brand Identity Design</span>
+          </div>
+          <div class="discipline-col">
+            <span class="discipline-num">#03</span>
+            <span class="discipline-name">Motion Graphics</span>
+          </div>
+          <div class="discipline-col">
+            <span class="discipline-num">#04</span>
+            <span class="discipline-name">Packaging &amp; Direction</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work-section section wrap">
+      <div class="section-kicker mono"><span>01 / SELECTED WORK</span><span>A MIX OF VISUAL WORLDS</span></div>
+      <div class="work-intro"><h2>VISUALS THAT<br>MAKE YOU <span>LOOK.</span></h2><p>Brand systems, digital interfaces and motion-led ideas — built to be noticed, remembered and felt.</p></div>
+      <div class="project-grid">
+        <a class="project p-wide reveal" href="#contact"><div class="art art-brand"><div class="art-label mono">IDENTITY / 2026</div><div class="brand-art-title">FORM<br><i>FOLLOWS</i><br>FEELING<span>®</span></div><div class="brand-art-bottom">A VISUAL IDENTITY STUDY <b>01</b></div><div class="brand-stamp">F<br>F</div></div><div class="project-caption"><div><h3>Form Follows Feeling</h3><p>Brand identity · Art direction</p></div><span>↗</span></div></a>
+        <a class="project reveal" href="#contact"><div class="art art-digital"><div class="ui-top mono">NOVA / DIGITAL EXPERIENCE</div><div class="ui-head">Ideas<br>in motion.</div><div class="ui-orb"></div><div class="ui-card c1">STRATEGY<br><b>01</b></div><div class="ui-card c2">DESIGN<br><b>02</b></div><div class="ui-footer mono">A NEW DIGITAL LANGUAGE — 2026</div></div><div class="project-caption"><div><h3>Nova Digital</h3><p>Digital design · UI concept</p></div><span>↗</span></div></a>
+        <a class="project reveal" href="#contact"><div class="art art-poster"><div class="poster-top mono">CULTURE / POSTER SERIES</div><div class="poster-circle"></div><div class="poster-word">MOVE<br>YOUR<br><i>WORLD.</i></div><div class="poster-foot mono">DESIGN IN EVERY DIRECTION</div></div><div class="project-caption"><div><h3>Move Your World</h3><p>Poster design · Typography</p></div><span>↗</span></div></a>
+        <a class="project reveal" href="#contact"><div class="art art-motion"><div class="motion-small mono">MOTION STUDY 04</div><div class="motion-letters">M<br>O<br>V<br>E</div><div class="motion-ribbon"></div><div class="motion-bottom mono">FRAME BY FRAME / 24 FPS</div></div><div class="project-caption"><div><h3>Motion Studies</h3><p>Motion graphics · Animation</p></div><span>↗</span></div></a>
+        <a class="project reveal" href="#contact"><div class="art art-product"><div class="product-top mono">OBJECTS WITH PURPOSE</div><div class="bottle"></div><div class="product-copy">LESS,<br>BUT<br><i>BETTER.</i></div><div class="product-foot mono">PACKAGING / CONCEPT 05</div></div><div class="project-caption"><div><h3>Less, But Better</h3><p>Packaging · Product concept</p></div><span>↗</span></div></a>
+      </div>
+      <p class="concept-note mono">* SELECTED VISUALS ARE CONCEPT PROJECTS CREATED FOR THIS PORTFOLIO.</p>
+    </section>
+
+    <section id="projects" class="featured section">
+      <div class="wrap">
+        <div class="section-kicker mono"><span>02 / FEATURED DETAILS</span><span>ZOOM IN ON THE CRAFT</span></div>
+        <div class="featured-heading"><h2>SMALL DETAILS.<br><span>STRONG IMPACT.</span></h2><p>Every choice has a job — from the first sketch to the final frame.</p></div>
+        <div class="feature-row reveal"><div class="feature-image feature-green"><div class="mini-window"><div class="mini-nav">STUDIO / 001</div><div class="mini-big">MAKE<br>IT<br>MATTER<span>↗</span></div><div class="mini-line"></div><div class="mini-foot">IDENTITY SYSTEM · 2026</div></div></div><div class="feature-copy"><span class="num mono">01</span><h3>A bold identity<br>with room to move.</h3><p>A flexible visual language that holds together across formats, layouts and campaign moments.</p><span class="mono tiny">ART DIRECTION / IDENTITY</span></div></div>
+        <div class="feature-row reverse reveal"><div class="feature-image feature-violet"><div class="screen-stack"><div class="screen screen-back"></div><div class="screen screen-front"><div class="screen-bar"></div><div class="screen-side"></div><div class="screen-main"><i></i><i></i><i></i></div><div class="screen-chip">BUILD / PLAY / REPEAT</div></div></div></div><div class="feature-copy"><span class="num mono">02</span><h3>Digital experiences<br>with a clear point of view.</h3><p>Clean hierarchy, purposeful interactions and a little unexpected energy.</p><span class="mono tiny">DIGITAL DESIGN / UI CONCEPT</span></div></div>
+        <div class="feature-row reveal"><div class="feature-image feature-orange"><div class="poster-mini"><small>CREATIVE CULTURE / NO. 03</small><strong>MAKE<br>ROOM<br>FOR <i>IDEAS.</i></strong><span>AN EXPERIMENT IN TYPE & COLOUR</span></div></div><div class="feature-copy"><span class="num mono">03</span><h3>Type that does<br>more than talk.</h3><p>Expressive typography and contrast designed to communicate before a single word is read.</p><span class="mono tiny">TYPOGRAPHY / CAMPAIGN</span></div></div>
+      </div>
+    </section>
+
+    <section id="prices" class="results section wrap">
+      <div class="section-kicker mono"><span>03 / MY APPROACH</span><span>DESIGN WITH INTENTION</span></div>
+      <h2 class="results-title">GOOD DESIGN<br><span>GETS NOTICED.</span><br>GREAT DESIGN<br>GETS <i>REMEMBERED.</i></h2>
+      <div class="principles">
+        <article class="principle reveal"><span class="mono">01 — CLARITY</span><h3>Make it make sense.</h3><p>Strong ideas start with a clear message. I build visual systems that help people understand what matters.</p><div class="principle-mark">↗</div></article>
+        <article class="principle reveal"><span class="mono">02 — CURIOSITY</span><h3>Try the unexpected.</h3><p>Exploration, play and experimentation turn familiar things into something worth looking at twice.</p><div class="principle-mark">✳</div></article>
+        <article class="principle reveal"><span class="mono">03 — CRAFT</span><h3>Care about the details.</h3><p>From typography to timing, the small decisions are what make the final work feel considered.</p><div class="principle-mark">◌</div></article>
+      </div>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="wrap about-grid"><div class="about-visual"><div class="about-portrait"><span class="mono">SH / CREATIVE PRACTICE</span><div class="portrait-shape">S<span>R</span></div><div class="portrait-label">DESIGN<br>IN PROGRESS.</div></div><div class="about-side mono">ALWAYS LEARNING.<br>ALWAYS MAKING.</div></div><div class="about-copy"><div class="section-kicker mono"><span>04 / A LITTLE ABOUT ME</span></div><h2>DESIGNER BY<br>CHOICE. <span>STORYTELLER</span><br>BY INSTINCT.</h2><p>I’m Shibeeb Rahiman, a graphic designer and motion designer with 2+ years of professional experience across brand identity, digital design, typography and moving image — bringing curiosity and care to each brief.</p><p>My approach combines clear thinking with expressive visuals: work that communicates first, then leaves a feeling behind.</p><div class="skills"><span>Illustrator</span><span>Photoshop</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>DaVinci Resolve</span><span>Audition</span><span>Motion Design</span></div></div></div>
+    </section>
+
+    <section id="experience" class="experience section wrap">
+      <div class="section-kicker mono">
+        <span>05 / CAREER HISTORY</span>
+        <span class="experience-kicker-stat"><span class="kicker-bullet"></span>2+ YEARS IN DESIGN</span>
+      </div>
+
+      <div class="exp-header-row">
+        <div class="exp-header-text">
+          <span class="exp-section-tag">SELECTED ROLES &amp; PRACTICE</span>
+          <h2 class="exp-main-heading">BUILT THROUGH<br><span>EXPERIENCE.</span></h2>
+        </div>
+        <div class="exp-summary-card">
+          <div class="exp-summary-count">2+</div>
+          <div class="exp-summary-meta">
+            <span class="exp-summary-title">YEARS PRACTICE</span>
+            <span class="exp-summary-sub">BRAND · MOTION · PRINT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-list">
+        <!-- 01: Outline Medias -->
+        <article class="exp-item reveal">
+          <div class="exp-item-main">
+            <div class="exp-item-top">
+              <span class="exp-date-pill exp-date-current">
+                <span class="exp-current-dot" aria-hidden="true"></span>2025 — Present
+              </span>
+              <span class="exp-item-num">#01</span>
+            </div>
+
+            <div class="exp-item-title-row">
+              <div class="exp-item-info">
+                <h3 class="exp-role-title">Graphic &amp; Motion Designer</h3>
+                <div class="exp-company-row">
+                  <span class="exp-company-name">Outline Medias</span>
+                  <span class="exp-company-divider">/</span>
+                  <span class="exp-company-focus">Digital &amp; Creative Media</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="exp-item-desc">
+              Directing visual identity systems, motion graphics, promotional assets, and dynamic typography across digital and commercial client campaigns.
+            </p>
+
+            <div class="exp-tag-group">
+              <span class="exp-tag">Brand Identity</span>
+              <span class="exp-tag">Motion Design</span>
+              <span class="exp-tag">After Effects</span>
+              <span class="exp-tag">Illustrator</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02: Educraft -->
+        <article class="exp-item reveal">
+          <div class="exp-item-main">
+            <div class="exp-item-top">
+              <span class="exp-date-pill">2025</span>
+              <span class="exp-item-num">#02</span>
+            </div>
+
+            <div class="exp-item-title-row">
+              <div class="exp-item-info">
+                <h3 class="exp-role-title">Graphic Designer</h3>
+                <div class="exp-company-row">
+                  <span class="exp-company-name">Educraft</span>
+                  <span class="exp-company-divider">/</span>
+                  <span class="exp-company-focus">EdTech &amp; Publishing</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="exp-item-desc">
+              Designed educational publications, curriculum collateral, digital learning materials, and marketing campaigns with high typographic legibility.
+            </p>
+
+            <div class="exp-tag-group">
+              <span class="exp-tag">Editorial Layout</span>
+              <span class="exp-tag">Publication</span>
+              <span class="exp-tag">Photoshop</span>
+              <span class="exp-tag">InDesign</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03: Quality Press -->
+        <article class="exp-item reveal">
+          <div class="exp-item-main">
+            <div class="exp-item-top">
+              <span class="exp-date-pill">2024 — 2025</span>
+              <span class="exp-item-num">#03</span>
+            </div>
+
+            <div class="exp-item-title-row">
+              <div class="exp-item-info">
+                <h3 class="exp-role-title">Graphic Designer</h3>
+                <div class="exp-company-row">
+                  <span class="exp-company-name">Quality Press</span>
+                  <span class="exp-company-divider">/</span>
+                  <span class="exp-company-focus">Print &amp; Production</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="exp-item-desc">
+              Supervised technical prepress workflows, packaging dielines, corporate print collateral, and high-precision color calibration across production presses.
+            </p>
+
+            <div class="exp-tag-group">
+              <span class="exp-tag">Prepress</span>
+              <span class="exp-tag">Print Production</span>
+              <span class="exp-tag">Packaging</span>
+              <span class="exp-tag">Color Calibration</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="playground section wrap" id="playground"><div class="section-kicker mono"><span>06 / A LITTLE PLAYGROUND</span><span>GO ON, TRY IT</span></div><div class="playground-head"><h2>THIS PART<br><span>IS INTERACTIVE.</span></h2><p>Move the shapes around. Click the buttons. Make a little mess.</p></div><div class="playground-stage" id="playgroundStage"><div class="play-shape shape-one" tabindex="0" aria-label="Draggable lime shape">S</div><div class="play-shape shape-two" tabindex="0" aria-label="Draggable violet shape">↗</div><div class="play-shape shape-three" tabindex="0" aria-label="Draggable orange shape">✳</div><div class="playground-message" id="playMessage">NOTHING IS TOO SERIOUS.<br><span>MOVE SOMETHING.</span></div><div class="playground-controls"><button type="button" id="scatterBtn">Scatter things ↗</button><button type="button" id="resetBtn">Reset layout ↺</button></div></div></section>
+    <section class="collage section wrap"><div class="collage-head"><span class="mono">A FEW THINGS I LIKE MAKING</span><h2>LET’S MAKE<br><span>SOMETHING</span><br>MATTER.</h2><a href="#contact" class="round-link">↗</a></div><div class="collage-grid"><div class="collage-tile tile-a">F<span>FORM</span></div><div class="collage-tile tile-b">MOVE<span>TYPE STUDY</span></div><div class="collage-tile tile-c">N<span>NEW IDEAS DAILY</span></div><div class="collage-tile tile-d">LESS.<br>BETTER.<span>OBJECTS / 05</span></div><div class="collage-tile tile-e"><span class="orbit-mini"></span>MAKE<br>IT <i>MATTER.</i></div></div></section>
+
+    <footer id="contact" class="footer section">
+      <div class="wrap">
+        <!-- Center Group: Monumental Heading & Interactive CTAs -->
+        <div class="footer-center-group">
+          <h2>LET’S MAKE<br><span>IT MEAN</span><i> SOMETHING.</i></h2>
+
+          <div class="contact-actions-row">
+            <a href="mailto:shibeebrahman@gmail.com" class="contact-pill-button contact-pill-button-main" id="contactMainBtn" aria-label="Contact Shibeeb Rahiman">
+              Contact
+            </a>
+            <a class="email-link" id="emailCopy" href="mailto:shibeebrahman@gmail.com">
+              <span class="email-text">shibeebrahman@gmail.com</span>
+            </a>
+          </div>
+          <p class="copy-feedback mono" id="copyFeedback" aria-live="polite"></p>
+        </div>
+
+        <!-- Bottom Group: Brand, Navigation Links & Copyright -->
+        <div class="footer-bottom">
+          <a class="brand" href="#top"><span class="brand-name">SHIBEEB<br>RAHIMAN</span></a>
+          <div class="footer-links">
+            <a href="#work">WORK</a>
+            <a href="#about">ABOUT</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="https://wa.me/919207896313" target="_blank" rel="noreferrer">WHATSAPP ↗</a>
+          </div>
+          <span class="mono copyright">© 2026 SHIBEEB RAHIMAN</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <!-- Floating Back to Top Button -->
+  <button type="button" class="back-to-top" id="backToTopBtn" aria-label="Back to top" title="Back to top">
+    <svg class="back-to-top-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+    <span class="back-to-top-text">TOP</span>
+  </button>
+
+  <script src="script.js"></script>
+</body></html>
