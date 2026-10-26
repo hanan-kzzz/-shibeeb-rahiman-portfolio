@@ -287,6 +287,9 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 
 /* ========================================================
    PORTFOLIO SHOWREEL VIDEO CONTROLLER
+
+/* ========================================================
+   PORTFOLIO SHOWREEL AUTOPLAY CONTROLLER
    ======================================================== */
 (function initShowreel() {
   const frame = document.getElementById('showreelFrame');
@@ -300,83 +303,70 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const timeDisplay = document.getElementById('ctrlTime');
   const muteBtn = document.getElementById('ctrlMuteBtn');
   const fsBtn = document.getElementById('ctrlFullscreenBtn');
-  const toast = document.getElementById('videoToast');
 
   if (!frame || !video) return;
 
-  let isSimulating = false;
-  let simProgress = 0;
-  let simInterval = null;
-
-  function hasRealVideo() {
-    const src = video.getAttribute('src') || (video.querySelector('source') && video.querySelector('source').getAttribute('src'));
-    return Boolean(src && src.trim().length > 0);
-  }
-
   function formatTime(sec) {
+    if (!sec || isNaN(sec)) return '00:00';
     const m = Math.floor(sec / 60);
     const s = Math.floor(sec % 60);
     return m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
   }
 
-  let toastTimer = null;
-  function showToast(text, duration) {
-    duration = duration || 4500;
-    if (!toast) return;
-    if (text) {
-      const textSpan = toast.querySelector('.toast-text');
-      if (textSpan) textSpan.innerHTML = text;
-    }
-    toast.classList.add('is-active');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      toast.classList.remove('is-active');
-    }, duration);
+  function markPlaying() {
+    if (overlay) overlay.classList.add('is-hidden');
+    frame.classList.add('is-playing');
+    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
   }
 
-  function togglePlay() {
-    if (hasRealVideo()) {
-      if (video.paused) {
-        video.play().then(() => {
-          overlay.classList.add('is-hidden');
-          frame.classList.add('is-playing');
-          if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
-        }).catch(() => {
-          overlay.classList.add('is-hidden');
-          frame.classList.add('is-playing');
-        });
-      } else {
-        video.pause();
-        frame.classList.remove('is-playing');
-        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
-      }
+  function markPaused() {
+    frame.classList.remove('is-playing');
+    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+  }
+
+  function playVideo() {
+    video.muted = true; // Essential for browser autoplay policy
+    const promise = video.play();
+    if (promise !== undefined) {
+      promise.then(() => {
+        markPlaying();
+      }).catch((err) => {
+        console.warn('Autoplay waiting for user gesture:', err);
+      });
+    }
+  }
+
+  function pauseVideo() {
+    video.pause();
+    markPaused();
+  }
+
+  function togglePlay(e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    if (video.paused) {
+      playVideo();
     } else {
-      // Placeholder demo mode
-      isSimulating = !isSimulating;
-      if (isSimulating) {
-        frame.classList.add('is-playing');
-        overlay.classList.add('is-hidden');
-        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
-        showToast('🎬 Showcase slot active! Replace <code>src=""</code> in <code>index.html</code> with your video file.');
-        clearInterval(simInterval);
-        simInterval = setInterval(() => {
-          simProgress = (simProgress + 0.8) % 100;
-          if (progressBar) progressBar.style.width = simProgress + '%';
-          const currentSec = (simProgress / 100) * 84;
-          if (timeDisplay) timeDisplay.textContent = formatTime(currentSec) + ' / 01:24';
-        }, 100);
-      } else {
-        frame.classList.remove('is-playing');
-        overlay.classList.remove('is-hidden');
-        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
-        clearInterval(simInterval);
-      }
+      pauseVideo();
     }
   }
 
+  // React immediately to native video play & pause events
+  video.addEventListener('play', markPlaying);
+  video.addEventListener('playing', markPlaying);
+  video.addEventListener('pause', markPaused);
+
+  // Click triggers
   if (playBtn) playBtn.addEventListener('click', togglePlay);
   if (ctrlPlayBtn) ctrlPlayBtn.addEventListener('click', togglePlay);
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target.closest('.video-play-btn')) return;
+      togglePlay(e);
+    });
+  }
+  video.addEventListener('click', togglePlay);
 
+  // Time & Progress Bar
   video.addEventListener('timeupdate', () => {
     if (!video.duration) return;
     const pct = (video.currentTime / video.duration) * 100;
@@ -384,35 +374,46 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
   });
 
-  video.addEventListener('ended', () => {
-    frame.classList.remove('is-playing');
-    overlay.classList.remove('is-hidden');
-    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+  video.addEventListener('loadedmetadata', () => {
+    if (timeDisplay && video.duration) {
+      timeDisplay.textContent = '00:00 / ' + formatTime(video.duration);
+    }
   });
 
+  video.addEventListener('ended', () => {
+    markPaused();
+    if (overlay) overlay.classList.remove('is-hidden');
+  });
+
+  // Seeking on progress timeline
   if (progressWrap) {
     progressWrap.addEventListener('click', (e) => {
+      e.stopPropagation();
       const rect = progressWrap.getBoundingClientRect();
       const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      if (hasRealVideo() && video.duration) {
+      if (video.duration) {
         video.currentTime = pos * video.duration;
-      } else {
-        simProgress = pos * 100;
-        if (progressBar) progressBar.style.width = simProgress + '%';
-        if (timeDisplay) timeDisplay.textContent = formatTime(pos * 84) + ' / 01:24';
       }
     });
   }
 
+  // Sound toggle (Unmute / Mute)
   if (muteBtn) {
-    muteBtn.addEventListener('click', () => {
+    muteBtn.setAttribute('title', video.muted ? 'Click to Unmute' : 'Click to Mute');
+    muteBtn.style.opacity = video.muted ? '0.6' : '1';
+
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       video.muted = !video.muted;
-      muteBtn.style.opacity = video.muted ? '0.5' : '1';
+      muteBtn.style.opacity = video.muted ? '0.6' : '1';
+      muteBtn.setAttribute('title', video.muted ? 'Click to Unmute' : 'Click to Mute');
     });
   }
 
+  // Fullscreen toggle
   if (fsBtn) {
-    fsBtn.addEventListener('click', () => {
+    fsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (!document.fullscreenElement) {
         if (frame.requestFullscreen) {
           frame.requestFullscreen();
@@ -425,5 +426,60 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
         }
       }
     });
+  }
+
+  // ========================================================
+  // AUTOPLAY ENGINE: Automatically plays when scrolling to #showreel
+  // ========================================================
+  const reelSection = document.getElementById('showreel');
+
+  function checkVisibilityAndPlay() {
+    if (!reelSection) return;
+    const rect = reelSection.getBoundingClientRect();
+    const inView = (rect.top < window.innerHeight * 0.75) && (rect.bottom > window.innerHeight * 0.25);
+    if (inView) {
+      if (video.paused) {
+        playVideo();
+      }
+    } else {
+      if (!video.paused) {
+        pauseVideo();
+      }
+    }
+  }
+
+  // 1. IntersectionObserver for modern browsers
+  if (reelSection && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          playVideo();
+        } else {
+          if (!video.paused) {
+            pauseVideo();
+          }
+        }
+      });
+    }, {
+      threshold: 0.15 // Triggers as soon as 15% is visible
+    });
+    observer.observe(reelSection);
+  }
+
+  // 2. Scroll listener fallback to ensure 100% reliability
+  window.addEventListener('scroll', checkVisibilityAndPlay, { passive: true });
+
+  // 3. Navigation link click trigger (e.g. clicking "Reel" in nav)
+  document.querySelectorAll('a[href="#showreel"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      setTimeout(() => {
+        playVideo();
+      }, 350);
+    });
+  });
+
+  // 4. Initial check if page opened directly at #showreel
+  if (window.location.hash === '#showreel') {
+    setTimeout(playVideo, 500);
   }
 })();
