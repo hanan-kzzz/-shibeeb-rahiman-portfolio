@@ -137,13 +137,66 @@ if (backToTopBtn) {
 }
 
 document.querySelectorAll('.art').forEach(art=>{art.addEventListener('pointermove',e=>{if(matchMedia('(pointer:fine)').matches){const r=art.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;art.style.transform=`perspective(800px) rotateY(${x*3}deg) rotateX(${-y*3}deg) translateY(-4px)`}});art.addEventListener('pointerleave',()=>art.style.removeProperty('transform'))});
-const stage=document.getElementById('playgroundStage'),shapes=[...document.querySelectorAll('.play-shape')];let dragged=null,offsetX=0,offsetY=0;shapes.forEach(shape=>{shape.addEventListener('pointerdown',e=>{dragged=shape;const r=shape.getBoundingClientRect();offsetX=e.clientX-r.left;offsetY=e.clientY-r.top;shape.setPointerCapture(e.pointerId);shape.style.transition='none';shape.style.zIndex='8'});shape.addEventListener('pointermove',e=>{if(dragged!==shape)return;const r=stage.getBoundingClientRect();let x=e.clientX-r.left-offsetX,y=e.clientY-r.top-offsetY;x=Math.max(0,Math.min(r.width-shape.offsetWidth,x));y=Math.max(0,Math.min(r.height-shape.offsetHeight,y));shape.style.left=x/r.width*100+'%';shape.style.top=y/r.height*100+'%';shape.style.right='auto';shape.style.bottom='auto'});const end=()=>{if(dragged===shape){dragged=null;shape.style.transition='box-shadow .25s,scale .25s';shape.style.zIndex='2';document.getElementById('playMessage').innerHTML='NICE MOVE.<br><span>MAKE IT YOURS.</span>'}};shape.addEventListener('pointerup',end);shape.addEventListener('pointercancel',end)});
+const stage = document.getElementById('playgroundStage');
+const shapes = [...document.querySelectorAll('.play-shape')];
+let dragged = null, offsetX = 0, offsetY = 0;
+
+const defaultLogoPositions = [
+  ['8%', '16%', 'auto', 'auto', 'rotate(-8deg)', 'floatLogo1 6.5s ease-in-out infinite alternate'],
+  ['82%', '14%', 'auto', 'auto', 'rotate(10deg)', 'floatLogo2 7s 0.8s ease-in-out infinite alternate'],
+  ['14%', '60%', 'auto', 'auto', 'rotate(12deg)', 'floatLogo3 6.8s 1.5s ease-in-out infinite alternate'],
+  ['64%', '12%', 'auto', 'auto', 'rotate(6deg)', 'floatLogo6 7.2s 0.4s ease-in-out infinite alternate'],
+  ['78%', '58%', 'auto', 'auto', 'rotate(-10deg)', 'floatLogo4 6.6s 2s ease-in-out infinite alternate'],
+  ['32%', '66%', 'auto', 'auto', 'rotate(-5deg)', 'floatLogo5 7.4s 1.2s ease-in-out infinite alternate']
+];
+
+shapes.forEach(shape => {
+  shape.addEventListener('pointerdown', e => {
+    dragged = shape;
+    const r = shape.getBoundingClientRect();
+    offsetX = e.clientX - r.left;
+    offsetY = e.clientY - r.top;
+    shape.setPointerCapture(e.pointerId);
+    shape.style.transition = 'none';
+    shape.style.animation = 'none';
+    shape.style.zIndex = '12';
+  });
+
+  shape.addEventListener('pointermove', e => {
+    if (dragged !== shape) return;
+    const r = stage.getBoundingClientRect();
+    let x = e.clientX - r.left - offsetX;
+    let y = e.clientY - r.top - offsetY;
+    x = Math.max(0, Math.min(r.width - shape.offsetWidth, x));
+    y = Math.max(0, Math.min(r.height - shape.offsetHeight, y));
+    shape.style.left = (x / r.width * 100) + '%';
+    shape.style.top = (y / r.height * 100) + '%';
+    shape.style.right = 'auto';
+    shape.style.bottom = 'auto';
+  });
+
+  const end = () => {
+    if (dragged === shape) {
+      dragged = null;
+      shape.style.transition = 'box-shadow .25s, transform .25s';
+      shape.style.zIndex = '3';
+      const playMsg = document.getElementById('playMessage');
+      if (playMsg) playMsg.innerHTML = 'NICE MOVE.<br><span>MAKE IT YOURS.</span>';
+    }
+  };
+
+  shape.addEventListener('pointerup', end);
+  shape.addEventListener('pointercancel', end);
+});
+
 const scatterBtn = document.getElementById('scatterBtn');
 if (scatterBtn) {
   scatterBtn.addEventListener('click', () => {
     shapes.forEach(s => {
-      s.style.left = (8 + Math.random() * 75) + '%';
-      s.style.top = (8 + Math.random() * 65) + '%';
+      s.style.animation = 'none';
+      s.style.transition = 'left 0.4s ease, top 0.4s ease, transform 0.4s ease';
+      s.style.left = (6 + Math.random() * 78) + '%';
+      s.style.top = (10 + Math.random() * 62) + '%';
       s.style.right = 'auto';
       s.style.bottom = 'auto';
       s.style.transform = `rotate(${Math.round(Math.random() * 50 - 25)}deg)`;
@@ -152,12 +205,19 @@ if (scatterBtn) {
     if (msg) msg.innerHTML = 'A LITTLE CHAOS.<br><span>LOOKS GOOD.</span>';
   });
 }
+
 const resetBtn = document.getElementById('resetBtn');
 if (resetBtn) {
   resetBtn.addEventListener('click', () => {
-    [['13%', '20%', 'auto', 'auto', 'rotate(-16deg)'], ['auto', '18%', '17%', 'auto', 'rotate(13deg)'], ['28%', 'auto', 'auto', '13%', 'rotate(22deg)']].forEach((p, i) => {
+    defaultLogoPositions.forEach((p, i) => {
       const s = shapes[i];
-      if (s) [s.style.left, s.style.top, s.style.right, s.style.bottom, s.style.transform] = p;
+      if (s) {
+        s.style.transition = 'left 0.5s ease, top 0.5s ease, transform 0.5s ease';
+        [s.style.left, s.style.top, s.style.right, s.style.bottom, s.style.transform] = p.slice(0, 5);
+        setTimeout(() => {
+          if (p[5]) s.style.animation = p[5];
+        }, 500);
+      }
     });
     const msg = document.getElementById('playMessage');
     if (msg) msg.innerHTML = 'NOTHING IS TOO SERIOUS.<br><span>MOVE SOMETHING.</span>';
