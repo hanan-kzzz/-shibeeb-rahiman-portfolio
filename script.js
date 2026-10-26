@@ -281,3 +281,147 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }
   });
 });
+
+
+/* ========================================================
+   PORTFOLIO SHOWREEL VIDEO CONTROLLER
+   ======================================================== */
+(function initShowreel() {
+  const frame = document.getElementById('showreelFrame');
+  const video = document.getElementById('portfolioVideo');
+  const overlay = document.getElementById('videoPosterOverlay');
+  const playBtn = document.getElementById('videoPlayBtn');
+  const ctrlPlayBtn = document.getElementById('ctrlPlayBtn');
+  const ctrlPlayIcon = document.getElementById('ctrlPlayIcon');
+  const progressWrap = document.getElementById('ctrlProgressWrap');
+  const progressBar = document.getElementById('ctrlProgressBar');
+  const timeDisplay = document.getElementById('ctrlTime');
+  const muteBtn = document.getElementById('ctrlMuteBtn');
+  const fsBtn = document.getElementById('ctrlFullscreenBtn');
+  const toast = document.getElementById('videoToast');
+
+  if (!frame || !video) return;
+
+  let isSimulating = false;
+  let simProgress = 0;
+  let simInterval = null;
+
+  function hasRealVideo() {
+    const src = video.getAttribute('src') || (video.querySelector('source') && video.querySelector('source').getAttribute('src'));
+    return Boolean(src && src.trim().length > 0);
+  }
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
+  }
+
+  let toastTimer = null;
+  function showToast(text, duration) {
+    duration = duration || 4500;
+    if (!toast) return;
+    if (text) {
+      const textSpan = toast.querySelector('.toast-text');
+      if (textSpan) textSpan.innerHTML = text;
+    }
+    toast.classList.add('is-active');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-active');
+    }, duration);
+  }
+
+  function togglePlay() {
+    if (hasRealVideo()) {
+      if (video.paused) {
+        video.play().then(() => {
+          overlay.classList.add('is-hidden');
+          frame.classList.add('is-playing');
+          if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
+        }).catch(() => {
+          overlay.classList.add('is-hidden');
+          frame.classList.add('is-playing');
+        });
+      } else {
+        video.pause();
+        frame.classList.remove('is-playing');
+        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+      }
+    } else {
+      // Placeholder demo mode
+      isSimulating = !isSimulating;
+      if (isSimulating) {
+        frame.classList.add('is-playing');
+        overlay.classList.add('is-hidden');
+        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
+        showToast('🎬 Showcase slot active! Replace <code>src=""</code> in <code>index.html</code> with your video file.');
+        clearInterval(simInterval);
+        simInterval = setInterval(() => {
+          simProgress = (simProgress + 0.8) % 100;
+          if (progressBar) progressBar.style.width = simProgress + '%';
+          const currentSec = (simProgress / 100) * 84;
+          if (timeDisplay) timeDisplay.textContent = formatTime(currentSec) + ' / 01:24';
+        }, 100);
+      } else {
+        frame.classList.remove('is-playing');
+        overlay.classList.remove('is-hidden');
+        if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+        clearInterval(simInterval);
+      }
+    }
+  }
+
+  if (playBtn) playBtn.addEventListener('click', togglePlay);
+  if (ctrlPlayBtn) ctrlPlayBtn.addEventListener('click', togglePlay);
+
+  video.addEventListener('timeupdate', () => {
+    if (!video.duration) return;
+    const pct = (video.currentTime / video.duration) * 100;
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
+  });
+
+  video.addEventListener('ended', () => {
+    frame.classList.remove('is-playing');
+    overlay.classList.remove('is-hidden');
+    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+  });
+
+  if (progressWrap) {
+    progressWrap.addEventListener('click', (e) => {
+      const rect = progressWrap.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (hasRealVideo() && video.duration) {
+        video.currentTime = pos * video.duration;
+      } else {
+        simProgress = pos * 100;
+        if (progressBar) progressBar.style.width = simProgress + '%';
+        if (timeDisplay) timeDisplay.textContent = formatTime(pos * 84) + ' / 01:24';
+      }
+    });
+  }
+
+  if (muteBtn) {
+    muteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      muteBtn.style.opacity = video.muted ? '0.5' : '1';
+    });
+  }
+
+  if (fsBtn) {
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        if (frame.requestFullscreen) {
+          frame.requestFullscreen();
+        } else if (frame.webkitRequestFullscreen) {
+          frame.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+  }
+})();

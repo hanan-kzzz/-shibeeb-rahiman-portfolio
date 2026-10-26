@@ -30,6 +30,7 @@
       <nav class="pill-nav-links" id="navlinks" aria-label="Main Navigation">
         <a href="#top" class="pill-nav-item active">Home</a>
         <a href="#work" class="pill-nav-item">Work</a>
+        <a href="#showreel" class="pill-nav-item">Reel</a>
         <a href="#prices" class="pill-nav-item">Prices</a>
         <a href="#projects" class="pill-nav-item">Projects</a>
         <a href="#contact" class="pill-nav-item">Contact</a>
@@ -61,6 +62,7 @@
       <nav class="mobile-nav-list" aria-label="Mobile Navigation">
         <a href="#top" class="mobile-nav-link active">Home</a>
         <a href="#work" class="mobile-nav-link">Work</a>
+        <a href="#showreel" class="mobile-nav-link">Reel</a>
         <a href="#prices" class="mobile-nav-link">Prices</a>
         <a href="#projects" class="mobile-nav-link">Projects</a>
         <a href="#contact" class="mobile-nav-link">Contact</a>
@@ -132,9 +134,115 @@
       <p class="concept-note mono">* SELECTED VISUALS ARE CONCEPT PROJECTS CREATED FOR THIS PORTFOLIO.</p>
     </section>
 
+    <!-- Showreel / Portfolio Video Section -->
+    <section id="showreel" class="showreel-section section wrap reveal">
+      <div class="section-kicker mono">
+        <span>02 / SHOWREEL</span>
+        <span>SELECTED WORKS IN MOTION</span>
+      </div>
+
+      <div class="showreel-intro">
+        <h2>CRAFT IN<br><span>MOTION.</span></h2>
+        <p>A dynamic reel showcasing brand identity systems, motion graphics, and visual direction in action.</p>
+      </div>
+
+      <div class="showreel-container">
+        <div class="showreel-frame" id="showreelFrame">
+          <!-- Ambient backlight glow -->
+          <div class="showreel-glow" aria-hidden="true"></div>
+
+          <!-- Video element (Replace src with your portfolio video path e.g. "portfolio-reel.mp4") -->
+          <video id="portfolioVideo" class="portfolio-video" playsinline preload="metadata">
+            <!-- PLACE YOUR VIDEO FILE HERE: e.g. <source src="portfolio-video.mp4" type="video/mp4"> -->
+            <source src="" type="video/mp4" id="videoSource">
+            Your browser does not support the video tag.
+          </video>
+
+          <!-- Cinematic Poster & Play Trigger Overlay -->
+          <div class="video-poster-overlay" id="videoPosterOverlay">
+            <div class="poster-badge-row">
+              <span class="poster-tag mono"><span class="live-dot"></span> SHOWREEL 2024–2025</span>
+              <span class="poster-spec mono">4K UHD · 60 FPS</span>
+            </div>
+
+            <div class="poster-center-content">
+              <button type="button" class="video-play-btn" id="videoPlayBtn" aria-label="Play Portfolio Showreel">
+                <span class="play-btn-pulse"></span>
+                <span class="play-btn-circle">
+                  <svg class="play-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+                    <polygon points="6,3 20,12 6,21"></polygon>
+                  </svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" style="display:none;">
+                    <rect x="5" y="4" width="4" height="16" rx="1"></rect>
+                    <rect x="15" y="4" width="4" height="16" rx="1"></rect>
+                  </svg>
+                </span>
+              </button>
+              <h3 class="poster-title">SHIBEEB RAHIMAN</h3>
+              <p class="poster-subtitle">BRAND IDENTITY &amp; MOTION DIRECTION</p>
+            </div>
+
+            <div class="poster-foot-row mono">
+              <span>SOUND ON RECOMMENDED</span>
+              <span class="poster-duration">⏱ 01:24</span>
+            </div>
+          </div>
+
+          <!-- Custom Floating Video Controls Bar -->
+          <div class="video-controls-bar" id="videoControlsBar">
+            <button type="button" class="ctrl-btn ctrl-play" id="ctrlPlayBtn" aria-label="Play or Pause">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <polygon points="6,3 20,12 6,21" id="ctrlPlayIcon"></polygon>
+              </svg>
+            </button>
+            <div class="ctrl-progress-wrap" id="ctrlProgressWrap">
+              <div class="ctrl-progress-bar" id="ctrlProgressBar" style="width: 0%;"></div>
+            </div>
+            <span class="ctrl-time mono" id="ctrlTime">00:00 / 01:24</span>
+            <button type="button" class="ctrl-btn ctrl-mute" id="ctrlMuteBtn" aria-label="Mute or Unmute">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+            </button>
+            <button type="button" class="ctrl-btn ctrl-fullscreen" id="ctrlFullscreenBtn" aria-label="Toggle Fullscreen">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Toast notification when clicked without video attached -->
+          <div class="video-toast" id="videoToast" role="status" aria-live="polite">
+            <span class="toast-dot"></span>
+            <span class="toast-text">Showreel slot ready — attach your video anytime in <code>index.html</code></span>
+          </div>
+        </div>
+
+        <!-- Meta specs under the video -->
+        <div class="showreel-meta-grid">
+          <div class="meta-col">
+            <span class="meta-label mono">ROLE &amp; FOCUS</span>
+            <span class="meta-val">Creative Direction, Motion Design &amp; Brand Systems</span>
+          </div>
+          <div class="meta-col">
+            <span class="meta-label mono">TOOLKIT</span>
+            <span class="meta-val">After Effects · Premiere Pro · DaVinci Resolve · Illustrator</span>
+          </div>
+          <div class="meta-col">
+            <span class="meta-label mono">SPECS</span>
+            <span class="meta-val">4K UHD · 60 FPS · 24-bit Audio Master</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
     <section id="projects" class="featured section">
       <div class="wrap">
-        <div class="section-kicker mono"><span>02 / FEATURED DETAILS</span><span>ZOOM IN ON THE CRAFT</span></div>
+        <div class="section-kicker mono"><span>03 / FEATURED DETAILS</span><span>ZOOM IN ON THE CRAFT</span></div>
         <div class="featured-heading"><h2>SMALL DETAILS.<br><span>STRONG IMPACT.</span></h2><p>Every choice has a job — from the first sketch to the final frame.</p></div>
         <div class="feature-row reveal"><div class="feature-image feature-green"><div class="mini-window"><div class="mini-nav">STUDIO / 001</div><div class="mini-big">MAKE<br>IT<br>MATTER<span>↗</span></div><div class="mini-line"></div><div class="mini-foot">IDENTITY SYSTEM · 2026</div></div></div><div class="feature-copy"><span class="num mono">01</span><h3>A bold identity<br>with room to move.</h3><p>A flexible visual language that holds together across formats, layouts and campaign moments.</p><span class="mono tiny">ART DIRECTION / IDENTITY</span></div></div>
         <div class="feature-row reverse reveal"><div class="feature-image feature-violet"><div class="screen-stack"><div class="screen screen-back"></div><div class="screen screen-front"><div class="screen-bar"></div><div class="screen-side"></div><div class="screen-main"><i></i><i></i><i></i></div><div class="screen-chip">BUILD / PLAY / REPEAT</div></div></div></div><div class="feature-copy"><span class="num mono">02</span><h3>Digital experiences<br>with a clear point of view.</h3><p>Clean hierarchy, purposeful interactions and a little unexpected energy.</p><span class="mono tiny">DIGITAL DESIGN / UI CONCEPT</span></div></div>
@@ -143,7 +251,7 @@
     </section>
 
     <section id="prices" class="results section wrap">
-      <div class="section-kicker mono"><span>03 / MY APPROACH</span><span>DESIGN WITH INTENTION</span></div>
+      <div class="section-kicker mono"><span>04 / MY APPROACH</span><span>DESIGN WITH INTENTION</span></div>
       <h2 class="results-title">GOOD DESIGN<br><span>GETS NOTICED.</span><br>GREAT DESIGN<br>GETS <i>REMEMBERED.</i></h2>
       <div class="principles">
         <article class="principle reveal"><span class="mono">01 — CLARITY</span><h3>Make it make sense.</h3><p>Strong ideas start with a clear message. I build visual systems that help people understand what matters.</p><div class="principle-mark">↗</div></article>
@@ -153,7 +261,7 @@
     </section>
 
     <section id="about" class="about section">
-      <div class="wrap about-grid"><div class="about-visual"><div class="about-portrait"><span class="mono">SH / CREATIVE PRACTICE</span><div class="portrait-shape">S<span>R</span></div><div class="portrait-label">DESIGN<br>IN PROGRESS.</div></div><div class="about-side mono">ALWAYS LEARNING.<br>ALWAYS MAKING.</div></div><div class="about-copy"><div class="section-kicker mono"><span>04 / A LITTLE ABOUT ME</span></div><h2>DESIGNER BY<br>CHOICE. <span>STORYTELLER</span><br>BY INSTINCT.</h2><p>I’m Shibeeb Rahiman, a graphic designer and motion designer with 2+ years of professional experience across brand identity, digital design, typography and moving image — bringing curiosity and care to each brief.</p><p>My approach combines clear thinking with expressive visuals: work that communicates first, then leaves a feeling behind.</p><div class="skills"><span>Illustrator</span><span>Photoshop</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>DaVinci Resolve</span><span>Audition</span><span>Motion Design</span></div></div></div>
+      <div class="wrap about-grid"><div class="about-visual"><div class="about-portrait"><span class="mono">SH / CREATIVE PRACTICE</span><div class="portrait-shape">S<span>R</span></div><div class="portrait-label">DESIGN<br>IN PROGRESS.</div></div><div class="about-side mono">ALWAYS LEARNING.<br>ALWAYS MAKING.</div></div><div class="about-copy"><div class="section-kicker mono"><span>05 / A LITTLE ABOUT ME</span></div><h2>DESIGNER BY<br>CHOICE. <span>STORYTELLER</span><br>BY INSTINCT.</h2><p>I’m Shibeeb Rahiman, a graphic designer and motion designer with 2+ years of professional experience across brand identity, digital design, typography and moving image — bringing curiosity and care to each brief.</p><p>My approach combines clear thinking with expressive visuals: work that communicates first, then leaves a feeling behind.</p><div class="skills"><span>Illustrator</span><span>Photoshop</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>DaVinci Resolve</span><span>Audition</span><span>Motion Design</span></div></div></div>
     </section>
 
     <section id="experience" class="experience section wrap">
