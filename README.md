@@ -17,3 +17,17 @@ Hero redesign: rebuilt as a two-column editorial composition on desktop, with th
 
 
 One-frame hero update: desktop hero height and headline scale are adjusted so the title and portrait fit together in the first screen on common desktop/laptop viewports. Small-height screens use a compact variant. Mobile remains responsive and can scroll naturally.
+
+
+## Blog & Insights System (Human-Friendly, GEO & SEO Optimized)
+- Added dedicated `blog.html` featuring three in-depth, human-written design articles covering:
+  1. **Motion Design ROI & Video Conversions** (Targeting brands in Dubai, Bangalore, and Kerala)
+  2. **Brand Identity vs Logo Design Systems in 2026** (GCC luxury & Indian market resonance)
+  3. **Zero-Mistake Packaging Prepress & Dieline Guide** (CMYK, TIC limits, bleed, paper GSM stocks)
+- Integrated an **Insights / Journal preview section** directly inside `index.html` with category tags, read times, and geo-targeting badges.
+- **Search Engine & Generative AI Optimization (GEO & SEO)**:
+  - Validated Schema.org structured data (`Person`, `Blog`, `BlogPosting`, `FAQPage`, `BreadcrumbList`).
+  - Generative Engine Optimization (GEO) summary capsules designed for Perplexity, ChatGPT Search, and Google AI Overviews.
+  - Geo-targeting meta tags (`geo.region`, `geo.placename`, `geo.position`, `ICBM`) targeting Kozhikode, Kerala, India and the GCC/Dubai.
+  - Interactive topic filters (`All`, `Motion Design`, `Brand Identity`, `Print & Packaging`), article link copy tool, and WhatsApp direct CTAs.
+- Keep `blog.html` alongside `index.html`, `styles.css`, `script.js`, and media assets when deploying to Netlify.

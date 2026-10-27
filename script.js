@@ -69,6 +69,7 @@ const trackedSections = [
   { id: 'projects', linkText: 'Projects' },
   { id: 'approach', linkText: 'Approach' },
   { id: 'about', linkText: 'About' },
+  { id: 'insights', linkText: 'Insights' },
   { id: 'contact', linkText: 'Contact' }
 ];
 
