@@ -297,7 +297,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const overlay = document.getElementById('videoPosterOverlay');
   const playBtn = document.getElementById('videoPlayBtn');
   const ctrlPlayBtn = document.getElementById('ctrlPlayBtn');
-  const ctrlPlayIcon = document.getElementById('ctrlPlayIcon');
   const progressWrap = document.getElementById('ctrlProgressWrap');
   const progressBar = document.getElementById('ctrlProgressBar');
   const timeDisplay = document.getElementById('ctrlTime');
@@ -306,6 +305,13 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 
   if (!frame || !video) return;
 
+  const playIcon = ctrlPlayBtn ? ctrlPlayBtn.querySelector('.ctrl-icon-play') : null;
+  const pauseIcon = ctrlPlayBtn ? ctrlPlayBtn.querySelector('.ctrl-icon-pause') : null;
+  const mutedIcon = muteBtn ? muteBtn.querySelector('.ctrl-icon-muted') : null;
+  const unmutedIcon = muteBtn ? muteBtn.querySelector('.ctrl-icon-unmuted') : null;
+
+  let userPaused = false;
+
   function formatTime(sec) {
     if (!sec || isNaN(sec)) return '00:00';
     const m = Math.floor(sec / 60);
@@ -313,47 +319,93 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     return m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
   }
 
-  function markPlaying() {
-    if (overlay) overlay.classList.add('is-hidden');
-    frame.classList.add('is-playing');
-    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '5,4 9,4 9,20 5,20 15,4 19,4 19,20 15,20');
+  function updatePlayPauseUI() {
+    const isPlaying = !video.paused && !video.ended;
+    if (isPlaying) {
+      if (overlay) overlay.classList.add('is-hidden');
+      frame.classList.add('is-playing');
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
+      if (ctrlPlayBtn) {
+        ctrlPlayBtn.setAttribute('title', 'Pause Video');
+        ctrlPlayBtn.setAttribute('aria-label', 'Pause Video');
+      }
+    } else {
+      if (overlay) overlay.classList.remove('is-hidden');
+      frame.classList.remove('is-playing');
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (ctrlPlayBtn) {
+        ctrlPlayBtn.setAttribute('title', 'Resume Video');
+        ctrlPlayBtn.setAttribute('aria-label', 'Resume Video');
+      }
+      const centerPill = overlay ? overlay.querySelector('.play-reel-pill') : null;
+      if (centerPill) {
+        centerPill.textContent = video.currentTime > 0 ? 'RESUME SHOWREEL ↗' : 'PLAY SHOWREEL ↗';
+      }
+    }
   }
 
-  function markPaused() {
-    frame.classList.remove('is-playing');
-    if (ctrlPlayIcon) ctrlPlayIcon.setAttribute('points', '6,3 20,12 6,21');
+  function updateSoundUI() {
+    if (!muteBtn) return;
+    if (video.muted) {
+      // Crossed sound icon (Muted)
+      if (mutedIcon) mutedIcon.style.display = 'block';
+      if (unmutedIcon) unmutedIcon.style.display = 'none';
+      muteBtn.setAttribute('title', 'Click to Unmute');
+      muteBtn.setAttribute('aria-label', 'Click to Unmute');
+    } else {
+      // Uncrossed waves sound icon (Sound On)
+      if (mutedIcon) mutedIcon.style.display = 'none';
+      if (unmutedIcon) unmutedIcon.style.display = 'block';
+      muteBtn.setAttribute('title', 'Click to Mute');
+      muteBtn.setAttribute('aria-label', 'Click to Mute');
+    }
   }
 
   function playVideo() {
-    video.muted = true; // Essential for browser autoplay policy
+    userPaused = false;
     const promise = video.play();
     if (promise !== undefined) {
       promise.then(() => {
-        markPlaying();
+        updatePlayPauseUI();
       }).catch((err) => {
-        console.warn('Autoplay waiting for user gesture:', err);
+        console.warn('Autoplay waiting for user gesture, retrying muted:', err);
+        video.muted = true;
+        updateSoundUI();
+        video.play().then(() => updatePlayPauseUI()).catch(() => {});
       });
     }
   }
 
   function pauseVideo() {
     video.pause();
-    markPaused();
+    updatePlayPauseUI();
   }
 
   function togglePlay(e) {
     if (e && e.stopPropagation) e.stopPropagation();
-    if (video.paused) {
+    if (video.paused || video.ended) {
+      userPaused = false;
       playVideo();
     } else {
+      userPaused = true;
       pauseVideo();
     }
   }
 
-  // React immediately to native video play & pause events
-  video.addEventListener('play', markPlaying);
-  video.addEventListener('playing', markPlaying);
-  video.addEventListener('pause', markPaused);
+  // Event listeners for play/pause
+  video.addEventListener('play', updatePlayPauseUI);
+  video.addEventListener('playing', updatePlayPauseUI);
+  video.addEventListener('pause', updatePlayPauseUI);
+  video.addEventListener('ended', () => {
+    userPaused = false;
+    updatePlayPauseUI();
+    if (overlay) overlay.classList.remove('is-hidden');
+  });
+
+  // Sound event listener
+  video.addEventListener('volumechange', updateSoundUI);
 
   // Click triggers
   if (playBtn) playBtn.addEventListener('click', togglePlay);
@@ -378,11 +430,8 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (timeDisplay && video.duration) {
       timeDisplay.textContent = '00:00 / ' + formatTime(video.duration);
     }
-  });
-
-  video.addEventListener('ended', () => {
-    markPaused();
-    if (overlay) overlay.classList.remove('is-hidden');
+    updateSoundUI();
+    updatePlayPauseUI();
   });
 
   // Seeking on progress timeline
@@ -399,14 +448,10 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 
   // Sound toggle (Unmute / Mute)
   if (muteBtn) {
-    muteBtn.setAttribute('title', video.muted ? 'Click to Unmute' : 'Click to Mute');
-    muteBtn.style.opacity = video.muted ? '0.6' : '1';
-
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       video.muted = !video.muted;
-      muteBtn.style.opacity = video.muted ? '0.6' : '1';
-      muteBtn.setAttribute('title', video.muted ? 'Click to Unmute' : 'Click to Mute');
+      updateSoundUI();
     });
   }
 
@@ -429,12 +474,12 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   }
 
   // ========================================================
-  // AUTOPLAY ENGINE: Automatically plays when scrolling to #showreel
+  // AUTOPLAY: Automatically plays when scrolling to #showreel unless user paused
   // ========================================================
   const reelSection = document.getElementById('showreel');
 
   function checkVisibilityAndPlay() {
-    if (!reelSection) return;
+    if (!reelSection || userPaused) return;
     const rect = reelSection.getBoundingClientRect();
     const inView = (rect.top < window.innerHeight * 0.75) && (rect.bottom > window.innerHeight * 0.25);
     if (inView) {
@@ -453,7 +498,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          playVideo();
+          if (!userPaused) playVideo();
         } else {
           if (!video.paused) {
             pauseVideo();
@@ -461,17 +506,18 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
         }
       });
     }, {
-      threshold: 0.15 // Triggers as soon as 15% is visible
+      threshold: 0.15
     });
     observer.observe(reelSection);
   }
 
-  // 2. Scroll listener fallback to ensure 100% reliability
+  // 2. Scroll listener fallback
   window.addEventListener('scroll', checkVisibilityAndPlay, { passive: true });
 
   // 3. Navigation link click trigger (e.g. clicking "Reel" in nav)
   document.querySelectorAll('a[href="#showreel"]').forEach((link) => {
     link.addEventListener('click', () => {
+      userPaused = false;
       setTimeout(() => {
         playVideo();
       }, 350);
@@ -482,4 +528,8 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   if (window.location.hash === '#showreel') {
     setTimeout(playVideo, 500);
   }
+
+  // Initial UI state setup
+  updateSoundUI();
+  updatePlayPauseUI();
 })();
