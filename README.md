@@ -25,11 +25,13 @@ A high-performance, motion-led creative design portfolio featuring editorial lay
 ├── 503.html                        # HTTP 503 Service Unavailable / Maintenance page
 ├── 403.html                        # HTTP 403 Restricted Access / Forbidden page
 ├── error.html                      # Interactive HTTP Status & Error Simulator Hub
-├── _redirects                      # Netlify routing & 404 redirect rules
-├── blog.html                       # Insights, GEO-targeted design articles & guides
+├── _redirects                      # Render & Netlify clean URLs, 301 redirects & 404 handler
+├── vercel.json                     # Vercel cleanUrls configuration
+├── .htaccess                       # Apache & LiteSpeed clean URL rewrite rules
+├── blog.html                       # Insights, GEO-targeted design articles & guides (/blog)
 ├── favicon.svg                     # Root favicon for legacy browser & crawler discovery
-├── index.html                      # Homepage & curated featured works
-├── projects.html                   # Complete 18-work categorized project archive
+├── index.html                      # Homepage & curated featured works (/)
+├── projects.html                   # Complete 18-work categorized project archive (/projects)
 ├── robots.txt                      # Search engine & AI bot indexing rules
 ├── sitemap.xml                     # XML sitemap with canonical page priority
 └── .gitignore                      # Standard ignores for OS, editor & build artifacts
@@ -38,7 +40,7 @@ A high-performance, motion-led creative design portfolio featuring editorial lay
 ## Deployment
 
 Deploy this folder directly to **Netlify**, **Render**, **GitHub Pages**, or **Vercel**. No compilation or build command required.
-All asset paths use relative linking (`assets/...`), ensuring seamless functionality across local previews and hosted production environments.
+All URLs use extensionless clean URLs (e.g. `/`, `/projects`, `/blog`, `/error`) with automatic 301 redirection from legacy `.html` requests handled across Render, Netlify, Vercel, Apache, and in-browser history.
 
 ## Highlights & Features
 

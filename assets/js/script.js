@@ -1,3 +1,15 @@
+// Clean URLs: Seamlessly remove .html extension from browser address bar
+(function cleanUrlBar() {
+  if (typeof window !== 'undefined' && window.location && window.history && window.history.replaceState) {
+    const pathname = window.location.pathname;
+    if (pathname.endsWith('.html')) {
+      let clean = pathname.replace(/\.html$/, '');
+      if (clean.endsWith('/index')) clean = clean.slice(0, -5) || '/';
+      window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+    }
+  }
+})();
+
 const progress=document.getElementById('progress'),glow=document.querySelector('.pointer-glow');function updateProgress(){const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?window.scrollY/max*100:0)+'%'}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
 // Pill Navbar Mobile Toggle, Backdrop & Dropdown
 const pillToggle = document.getElementById('pillMenuToggle');

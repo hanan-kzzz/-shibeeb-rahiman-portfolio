@@ -1,0 +1,26 @@
+# ==============================================================================
+# Apache / LiteSpeed .htaccess Configuration
+# Clean URLs & Extensionless Routing
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Redirect /index.html directly to root /
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/ [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # 2. Redirect requests with .html extension to clean URL
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html [NC]
+  RewriteRule ^ %1 [R=301,L]
+
+  # 3. Internally resolve clean URL to existing .html file
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^/]+)/?$ $1.html [L]
+</IfModule>
+
+# Custom 404 Error page
+ErrorDocument 404 /404.html

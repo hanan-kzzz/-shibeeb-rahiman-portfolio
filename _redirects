@@ -1,2 +1,27 @@
-# Netlify Error Handling & Redirects
-/*    /404.html   404
+# ==============================================================================
+# Clean URLs & Extensionless Routing (Render & Netlify)
+# ==============================================================================
+
+# 1. 301 Permanent Redirects: Force .html extensions to clean URLs
+/index.html      /             301!
+/projects.html   /projects     301!
+/blog.html       /blog         301!
+/error.html      /error        301!
+/404.html        /404          301!
+/403.html        /403          301!
+/500.html        /500          301!
+/503.html        /503          301!
+/505.html        /505          301!
+
+# 2. 200 Rewrites: Serve underlying HTML files for extensionless clean URLs
+/projects        /projects.html   200
+/blog            /blog.html       200
+/error           /error.html      200
+/404             /404.html        200
+/403             /403.html        200
+/500             /500.html        200
+/503             /503.html        200
+/505             /505.html        200
+
+# 3. Custom 404 Error Handler Catch-All
+/*               /404.html        404
