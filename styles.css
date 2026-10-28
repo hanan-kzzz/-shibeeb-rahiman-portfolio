@@ -4015,3 +4015,16 @@ body{cursor:default}
     justify-content: center;
   }
 }
+
+/* User requested cleanup: Hide badges and counter pills */
+.nav-counter {
+  display: none !important;
+}
+
+.portfolio-badge {
+  display: none !important;
+}
+
+.projects-stats-capsule {
+  display: none !important;
+}
