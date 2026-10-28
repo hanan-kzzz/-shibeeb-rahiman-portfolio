@@ -533,3 +533,116 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   updateSoundUI();
   updatePlayPauseUI();
 })();
+
+
+/* ========================================================
+   PORTFOLIO GALLERY FILTERING & FULLSCREEN LIGHTBOX
+   ======================================================== */
+(function initPortfolioGallery() {
+  const filterPills = document.querySelectorAll('.work-filter-pill');
+  const cards = document.querySelectorAll('.portfolio-card');
+  const lightbox = document.getElementById('projectLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+  const lightboxBadge = document.getElementById('lightboxBadge');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const closeBtn = document.getElementById('lightboxCloseBtn');
+  const backdrop = document.getElementById('lightboxBackdrop');
+  const prevBtn = document.getElementById('lightboxPrevBtn');
+  const nextBtn = document.getElementById('lightboxNextBtn');
+
+  if (!cards.length) return;
+
+  // 1. Category Filtering
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const cat = pill.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (cat === 'all' || itemCat === cat) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 20);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 2. Lightbox Modal
+  if (!lightbox) return;
+
+  let currentIndex = 0;
+  const projectData = Array.from(cards).map(card => ({
+    src: card.getAttribute('data-src') || card.querySelector('img')?.src,
+    title: card.getAttribute('data-title') || card.querySelector('h3')?.textContent,
+    desc: card.getAttribute('data-desc') || card.querySelector('p')?.textContent,
+    badge: card.getAttribute('data-badge') || 'PROJECT',
+  }));
+
+  function openLightbox(index) {
+    currentIndex = (index + projectData.length) % projectData.length;
+    const item = projectData[currentIndex];
+    if (!item) return;
+
+    if (lightboxImg) {
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.title;
+    }
+    if (lightboxTitle) lightboxTitle.textContent = item.title;
+    if (lightboxDesc) lightboxDesc.textContent = item.desc;
+    if (lightboxBadge) lightboxBadge.textContent = item.badge;
+    if (lightboxCounter) {
+      const curNum = (currentIndex + 1).toString().padStart(2, '0');
+      const totalNum = projectData.length.toString().padStart(2, '0');
+      lightboxCounter.textContent = `${curNum} / ${totalNum}`;
+    }
+
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function showNext() {
+    openLightbox(currentIndex + 1);
+  }
+
+  function showPrev() {
+    openLightbox(currentIndex - 1);
+  }
+
+  // Open on card click
+  cards.forEach((card, idx) => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLightbox(idx);
+    });
+  });
+
+  // Controls
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (backdrop) backdrop.addEventListener('click', closeLightbox);
+  if (nextBtn) nextBtn.addEventListener('click', showNext);
+  if (prevBtn) prevBtn.addEventListener('click', showPrev);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+})();
