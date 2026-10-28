@@ -463,31 +463,62 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
   });
 
-  // Target preview frame (00:04) as shown in reference
-  let initialFrameSet = false;
-  function initializePreviewFrame() {
+  // Initialize video timeline display and auto-start playback
+  function initializeVideoPlayback() {
     const dur = video.duration || 46.41;
-    const cur = video.currentTime > 0 ? video.currentTime : 4.0;
+    const cur = video.currentTime || 0;
     if (timeDisplay) {
       timeDisplay.textContent = formatTime(cur) + ' / ' + formatTime(dur);
     }
-    if (progressBar) {
+    if (progressBar && dur > 0) {
       progressBar.style.width = ((cur / dur) * 100) + '%';
-    }
-    if (!initialFrameSet && video.duration && video.paused && !userPaused) {
-      try {
-        if (video.currentTime === 0) {
-          video.currentTime = 4.0;
-        }
-        initialFrameSet = true;
-      } catch (e) {}
     }
     updateSoundUI();
     updatePlayPauseUI();
+
+    // Auto-start playback when metadata is ready
+    if (!userPaused && video.paused) {
+      playVideo();
+    }
   }
 
-  video.addEventListener('loadedmetadata', initializePreviewFrame);
-  if (video.readyState >= 1) initializePreviewFrame();
+  video.addEventListener('loadedmetadata', initializeVideoPlayback);
+  video.addEventListener('canplay', () => {
+    if (!userPaused && video.paused) {
+      playVideo();
+    }
+  });
+  if (video.readyState >= 1) initializeVideoPlayback();
+
+  // Autoplay as soon as the showreel scrolls into view
+  if ('IntersectionObserver' in window) {
+    const reelObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!userPaused && video.paused) {
+            playVideo();
+          }
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.15
+    });
+    reelObserver.observe(frame);
+  }
+
+  // Backup: First user touch or scroll anywhere starts playback if blocked by browser policy
+  const triggerAutoplayOnGesture = () => {
+    if (!userPaused && video.paused) {
+      playVideo();
+    }
+    ['touchstart', 'scroll', 'click', 'keydown'].forEach(evt => {
+      window.removeEventListener(evt, triggerAutoplayOnGesture);
+    });
+  };
+  ['touchstart', 'scroll', 'click', 'keydown'].forEach(evt => {
+    window.addEventListener(evt, triggerAutoplayOnGesture, { passive: true, once: true });
+  });
 
   // Progress timeline seeking
   if (progressWrap) {
@@ -547,15 +578,26 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       scrollToReelFrame();
+      if (!userPaused && video.paused) {
+        playVideo();
+      }
     });
   });
 
   if (window.location.hash === '#showreel') {
-    setTimeout(scrollToReelFrame, 400);
+    setTimeout(() => {
+      scrollToReelFrame();
+      if (!userPaused && video.paused) {
+        playVideo();
+      }
+    }, 400);
   }
 
+  // Auto-play immediately on script execution
+  video.muted = true;
   updateSoundUI();
   updatePlayPauseUI();
+  playVideo();
 })();
 
 /* ========================================================
