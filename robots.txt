@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct search engines & AI bots to the sitemap
+Sitemap: https://shibeebrahiman.design/sitemap.xml

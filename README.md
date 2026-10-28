@@ -24,10 +24,11 @@ One-frame hero update: desktop hero height and headline scale are adjusted so th
   1. **Motion Design ROI & Video Conversions** (Targeting brands in Dubai, Bangalore, and Kerala)
   2. **Brand Identity vs Logo Design Systems in 2026** (GCC luxury & Indian market resonance)
   3. **Zero-Mistake Packaging Prepress & Dieline Guide** (CMYK, TIC limits, bleed, paper GSM stocks)
-- Integrated an **Insights / Journal preview section** directly inside `index.html` with category tags, read times, and geo-targeting badges.
+- The homepage (`index.html`) maintains a clean, minimalist portfolio focus without displaying the blog cards or navbar links.
 - **Search Engine & Generative AI Optimization (GEO & SEO)**:
-  - Validated Schema.org structured data (`Person`, `Blog`, `BlogPosting`, `FAQPage`, `BreadcrumbList`).
+  - `sitemap.xml` and `robots.txt` are configured to index both `index.html` and `blog.html` across Google, Bing, and AI crawlers (GPTBot, PerplexityBot, ClaudeBot).
+  - Validated Schema.org structured data (`Person`, `ProfessionalService`, `Blog`, `BlogPosting`, `FAQPage`, `BreadcrumbList`).
   - Generative Engine Optimization (GEO) summary capsules designed for Perplexity, ChatGPT Search, and Google AI Overviews.
   - Geo-targeting meta tags (`geo.region`, `geo.placename`, `geo.position`, `ICBM`) targeting Kozhikode, Kerala, India and the GCC/Dubai.
   - Interactive topic filters (`All`, `Motion Design`, `Brand Identity`, `Print & Packaging`), article link copy tool, and WhatsApp direct CTAs.
-- Keep `blog.html` alongside `index.html`, `styles.css`, `script.js`, and media assets when deploying to Netlify.
+- Keep `blog.html`, `sitemap.xml`, and `robots.txt` alongside `index.html`, `styles.css`, `script.js`, and media assets when deploying to Netlify.
