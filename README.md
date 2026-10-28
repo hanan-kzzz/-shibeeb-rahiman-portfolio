@@ -25,6 +25,8 @@ A high-performance, motion-led creative design portfolio featuring editorial lay
 ├── 503.html                        # HTTP 503 Service Unavailable / Maintenance page
 ├── 403.html                        # HTTP 403 Restricted Access / Forbidden page
 ├── error.html                      # Interactive HTTP Status & Error Simulator Hub
+├── offline.html                    # Offline & Network Disconnection fallback page
+├── sw.js                           # Progressive Web App Service Worker for offline caching
 ├── _redirects                      # Render & Netlify clean URLs, 301 redirects & 404 handler
 ├── vercel.json                     # Vercel cleanUrls configuration
 ├── .htaccess                       # Apache & LiteSpeed clean URL rewrite rules
@@ -49,4 +51,5 @@ All URLs use extensionless clean URLs (e.g. `/`, `/projects`, `/blog`, `/error`)
 - **Project Archive (`projects.html`)**: Interactive category filtering (`All`, `Ads & Commercial`, `Educraft Trophies`, `Posters & Editorial`) with responsive fullscreen lightbox inspection.
 - **Blog & Design Insights (`blog.html`)**: Deep-dive design articles optimized for Generative Engine Optimization (GEO) and search indexing (Schema.org `Person`, `ProfessionalService`, `BlogPosting`, and `BreadcrumbList`).
 - **Clean Git Tracking**: Duplicate and temporary frame-extraction artifacts removed.
+- **Network Disconnection & Offline Support**: Progressive Web App Service Worker (`sw.js`) intercepts offline connection drops (`ERR_INTERNET_DISCONNECTED`) and seamlessly renders a custom `offline.html` page featuring auto-reconnection detection, offline studio emergency contacts, and an interactive "Catch the Keyframe" mini-game.
 - **Custom Error Experience Suite**: High-impact editorial dark-luxury error pages (`404.html`, `505.html`, `500.html`, `503.html`, `403.html`, and dynamic `error.html` hub) equipped with real-time request diagnostics, quick simulation switchers, and direct navigation back to home or projects.

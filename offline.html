@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10100e">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Primary Meta Tags -->
+  <title>Offline — Network Disconnected | Shibeeb Rahiman</title>
+  <meta name="title" content="Offline — Network Disconnected | Shibeeb Rahiman">
+  <meta name="description" content="Network connection lost. You are currently offline. Standby for auto-reconnection or play the offline keyframe mini-game.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="shortcut icon" href="assets/images/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    /* Offline Mini-Game Container */
+    .offline-game-box {
+      width: 100%;
+      max-width: 680px;
+      margin: 28px auto 0;
+      background: #141411;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      display: none;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .offline-game-box.is-active {
+      display: block;
+      animation: gameFadeIn 0.4s ease-out both;
+    }
+    @keyframes gameFadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .offline-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      background: #0b0b09;
+      border: 1px solid #282823;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0 12px;
+    }
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .game-score-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      color: #93c5fd;
+      padding: 0 4px;
+    }
+    .game-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 999px;
+      color: #fde68a;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 14px;
+    }
+    .game-toggle-btn:hover {
+      background: #f59e0b;
+      color: #10100e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(245, 158, 11, 0.35);
+    }
+    .online-toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #10b981;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45);
+    }
+    .online-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Reconnection Notification Toast -->
+  <div class="online-toast" id="onlineToast">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span>Internet Restored! Reconnecting to studio...</span>
+  </div>
+
+  <div class="progress" id="progress"></div>
+  <div class="pointer-glow" aria-hidden="true"></div>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="pill-nav-backdrop" id="pillNavBackdrop" aria-hidden="true"></div>
+
+  <!-- Floating Pill Navbar -->
+  <header class="pill-nav-container">
+    <div class="pill-nav-bar" id="pillNav">
+      <a class="pill-logo-btn" href="index.html" aria-label="Home" title="Shibeeb Rahiman">
+        <span class="pill-flame-circle">
+          <svg class="pill-flame-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7 2.1C12.4 2 12.1 2.2 12 2.5C11.3 4.5 11 6.2 11.1 7.7C10.4 7.1 9.7 6.3 9.2 5.4C9 5.1 8.6 5 8.3 5.2C7.1 5.9 6.1 6.9 5.3 8.1C4 9.9 3.3 12.1 3.3 14.4C3.3 19.1 7.1 22.9 11.8 22.9C16.5 22.9 20.3 19.1 20.3 14.4C20.3 10.7 18 7.4 14.9 5.7C14.5 4.4 13.8 3.2 12.7 2.1ZM11.8 20.4C9.1 20.4 6.9 18.2 6.9 15.5C6.9 14.1 7.5 12.9 8.4 12C8.5 13.1 8.9 14.1 9.5 15C9.7 15.3 10.1 15.3 10.4 15.1C10.7 14.9 10.7 14.5 10.5 14.2C9.8 13.3 9.4 12.1 9.5 10.9C10.8 12.2 12.5 13.1 14.4 13.1C14.8 13.1 15.1 13.1 15.4 13C15.3 13.9 15 14.7 14.5 15.4C14.3 15.7 14.4 16.1 14.7 16.3C15 16.5 15.3 16.4 15.5 16.1C16.2 15.1 16.6 14 16.7 12.8C16.9 13.5 17 14.3 17 15.1C17 18.2 14.7 20.4 11.8 20.4Z" fill="#3d69ff"/>
+          </svg>
+        </span>
+      </a>
+
+      <nav class="pill-nav-links" id="navlinks" aria-label="Main Navigation">
+        <a href="index.html" class="pill-nav-item">Home</a>
+        <a href="index.html#work" class="pill-nav-item">Selected Work</a>
+        <a href="index.html#showreel" class="pill-nav-item">Reel</a>
+        <a href="projects.html" class="pill-nav-item">Projects</a>
+        <a href="index.html#about" class="pill-nav-item">About</a>
+        <a href="index.html#contact" class="pill-nav-item">Contact</a>
+      </nav>
+
+      <div class="pill-nav-right">
+        <a href="tel:+919207896313" class="pill-email-btn" id="pillEmailBtn" aria-label="Call studio">
+          <span class="pill-email-text">Call Studio</span>
+        </a>
+
+        <button class="pill-menu-toggle" id="pillMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg class="icon-hamburger" viewBox="0 0 24 24" width="18" height="18" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" width="18" height="18" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="pill-mobile-dropdown" id="pillMobileDropdown" aria-hidden="true">
+      <nav class="mobile-nav-list" aria-label="Mobile Navigation">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="index.html#work" class="mobile-nav-link">Selected Work</a>
+        <a href="index.html#showreel" class="mobile-nav-link">Reel</a>
+        <a href="projects.html" class="mobile-nav-link">Projects ↗</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="tel:+919207896313" class="mobile-nav-link">Call +91 92078 96313</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Editorial Online Error Canvas -->
+  <main class="error-hero-canvas">
+    <div class="error-ambient-light amber" aria-hidden="true"></div>
+
+    <div class="error-hero-container">
+      <!-- Live Status Beacon -->
+      <div class="error-live-pill amber">
+        <span class="error-pulse-dot" style="background:#f59e0b; box-shadow:0 0 10px #f59e0b;"></span>
+        <span id="networkBadge">NO INTERNET CONNECTION • OFFLINE CANVAS ACTIVE</span>
+      </div>
+
+      <!-- Monumental Typography -->
+      <div class="error-mega-code glow-amber">OFFLINE</div>
+
+      <!-- Headline -->
+      <h1 class="error-headline">Signal <span class="accent amber">Disconnected</span></h1>
+
+      <!-- Refined Narrative -->
+      <p class="error-narrative">
+        Your device cannot connect to the network right now (<code>ERR_INTERNET_DISCONNECTED</code>). We've loaded the offline emergency studio canvas from your browser cache. This page will automatically reconnect as soon as your Wi-Fi or data returns.
+      </p>
+
+      <!-- Clean Studio Metadata Strip (No Local Paths!) -->
+      <div class="error-studio-strip">
+        <div class="strip-tag">
+          <span class="strip-label">Network:</span>
+          <span class="strip-value" style="color: #f59e0b; font-weight: 600;" id="netStatusText">Disconnected (Offline)</span>
+        </div>
+        <div class="strip-tag">
+          <span class="strip-label">Auto-Reconnect:</span>
+          <span class="strip-value" style="color: #10b981;">Listening Active...</span>
+        </div>
+        <div class="strip-tag">
+          <span class="strip-label">Studio Direct:</span>
+          <span class="strip-value">+91 9207896313</span>
+        </div>
+      </div>
+
+      <!-- Primary Action Buttons -->
+      <div class="error-action-row" style="margin-bottom: 24px;">
+        <button onclick="testConnection();" class="error-btn-primary" id="retryBtn" style="cursor: pointer; background: #f59e0b; border-color: #f59e0b; color: #10100e;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          <span id="retryBtnText">Retry Connection ↺</span>
+        </button>
+
+        <a href="tel:+919207896313" class="error-btn-secondary">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          Call Direct (+91 92078 96313)
+        </a>
+
+        <a href="https://wa.me/919207896313" target="_blank" rel="noreferrer" class="error-btn-whatsapp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.12 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.36C16.32 14.24 15.1 13.64 14.88 13.56C14.65 13.47 14.49 13.43 14.32 13.68C14.16 13.93 13.69 14.48 13.54 14.65C13.4 14.81 13.25 14.83 13 14.71C12.75 14.59 11.95 14.32 11 13.48C10.27 12.82 9.77 12.01 9.63 11.76C9.48 11.51 9.61 11.38 9.74 11.26C9.85 11.14 9.99 10.96 10.12 10.81C10.25 10.66 10.29 10.56 10.37 10.39C10.45 10.23 10.41 10.08 10.35 9.96C10.29 9.84 9.8 8.63 9.59 8.14C9.39 7.66 9.19 7.72 9.04 7.71C8.89 7.7 8.73 7.7 8.56 7.7C8.4 7.7 8.13 7.76 7.9 8.01C7.68 8.26 7.04 8.86 7.04 10.07C7.04 11.29 7.93 12.46 8.05 12.63C8.17 12.79 9.8 15.3 12.28 16.37C12.87 16.63 13.33 16.78 13.69 16.89C14.28 17.08 14.82 17.05 15.25 16.99C15.73 16.92 16.72 16.39 16.93 15.81C17.13 15.22 17.13 14.72 17.07 14.61C17.01 14.51 16.83 14.48 16.57 14.36Z"/>
+          </svg>
+          WhatsApp (Works SMS)
+        </a>
+      </div>
+
+      <!-- Interactive Mini-Game Toggle (Replacing Chrome Dino) -->
+      <button class="game-toggle-btn" id="gameToggleBtn" onclick="toggleMiniGame()">
+        <span>✦ Play "Catch the Keyframe" Mini-Game while waiting</span>
+      </button>
+
+      <!-- Offline Interactive Game Stage -->
+      <div class="offline-game-box" id="offlineGameBox">
+        <div class="game-score-bar">
+          <span>TARGET: CATCH GLOWING KEYFRAMES</span>
+          <span>SCORE: <strong id="gameScore" style="color:#ffffff; font-size:14px;">0</strong></span>
+        </div>
+        <div class="offline-canvas-wrap">
+          <canvas id="gameCanvas" width="640" height="240"></canvas>
+        </div>
+        <span class="mono" style="font-size:10px; color:#8c8b82;">CONTROLS: MOVE MOUSE OR TOUCH TO STEER ARTBOARD</span>
+      </div>
+
+      <!-- Integrated Portfolio Discoveries (High Conversion) -->
+      <div class="error-recommendations-wrap">
+        <div class="error-rec-header">
+          <h2 class="error-rec-title">Cached Studio <span>Highlights</span></h2>
+          <span class="mono" style="color: #8c8b82;">OFFLINE ARCHIVE</span>
+        </div>
+
+        <div class="error-rec-grid">
+          <div class="error-rec-card">
+            <span class="error-rec-tag">Identity Design</span>
+            <h4>Commercial Brand Systems</h4>
+            <p>Comprehensive identity packages, logos, visual standards, and GCC brand guidelines.</p>
+          </div>
+
+          <div class="error-rec-card">
+            <span class="error-rec-tag">3D Product Staging</span>
+            <h4>Educraft Trophy Series</h4>
+            <p>Bespoke laser-cut trophies, golden acrylic shields, and memento craftsmanship.</p>
+          </div>
+
+          <div class="error-rec-card">
+            <span class="error-rec-tag">Motion Design</span>
+            <h4>After Effects Kinetic Systems</h4>
+            <p>High-conversion commercial reels, logo animations, and social video creative direction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Complete Luxury Studio Footer Matching index.html -->
+  <footer id="contact" class="footer section">
+    <div class="wrap">
+      <div class="footer-center-group">
+        <h2>LET’S MAKE<br><span>IT MEAN</span><i> SOMETHING.</i></h2>
+
+        <div class="contact-actions-row">
+          <a href="tel:+919207896313" class="contact-pill-button contact-pill-button-main" id="contactMainBtn" aria-label="Call Shibeeb Rahiman">
+            Call Direct
+          </a>
+          <a class="email-link" href="mailto:shibeebrahman@gmail.com">
+            <span class="email-text">shibeebrahman@gmail.com</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <a class="brand" href="index.html"><span class="brand-name">SHIBEEB<br>RAHIMAN</span></a>
+        <div class="footer-social-links" aria-label="Social Profiles">
+          <a href="https://wa.me/919207896313" target="_blank" rel="noreferrer" class="social-logo-btn" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.12 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.36C16.32 14.24 15.1 13.64 14.88 13.56C14.65 13.47 14.49 13.43 14.32 13.68C14.16 13.93 13.69 14.48 13.54 14.65C13.4 14.81 13.25 14.83 13 14.71C12.75 14.59 11.95 14.32 11 13.48C10.27 12.82 9.77 12.01 9.63 11.76C9.48 11.51 9.61 11.38 9.74 11.26C9.85 11.14 9.99 10.96 10.12 10.81C10.25 10.66 10.29 10.56 10.37 10.39C10.45 10.23 10.41 10.08 10.35 9.96C10.29 9.84 9.8 8.63 9.59 8.14C9.39 7.66 9.19 7.72 9.04 7.71C8.89 7.7 8.73 7.7 8.56 7.7C8.4 7.7 8.13 7.76 7.9 8.01C7.68 8.26 7.04 8.86 7.04 10.07C7.04 11.29 7.93 12.46 8.05 12.63C8.17 12.79 9.8 15.3 12.28 16.37C12.87 16.63 13.33 16.78 13.69 16.89C14.28 17.08 14.82 17.05 15.25 16.99C15.73 16.92 16.72 16.39 16.93 15.81C17.13 15.22 17.13 14.72 17.07 14.61C17.01 14.51 16.83 14.48 16.57 14.36Z"/>
+            </svg>
+          </a>
+          <a href="https://www.behance.net" target="_blank" rel="noreferrer" class="social-logo-btn" aria-label="Behance" title="Behance">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="social-logo-btn" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+            </svg>
+          </a>
+        </div>
+        <span class="mono copyright">© 2026 SHIBEEB RAHIMAN</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
+  <script>
+    // Real-Time Online / Offline Detection
+    function handleOnline() {
+      const toast = document.getElementById('onlineToast');
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
+      }
+    }
+
+    window.addEventListener('online', handleOnline);
+
+    function testConnection() {
+      const btnText = document.getElementById('retryBtnText');
+      if (btnText) btnText.textContent = 'Pinging Server...';
+      
+      fetch('favicon.svg?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' })
+        .then(() => {
+          handleOnline();
+        })
+        .catch(() => {
+          setTimeout(() => {
+            if (btnText) btnText.textContent = 'Still Offline • Try Again ↺';
+          }, 800);
+        });
+    }
+
+    // Interactive "Catch the Keyframe" Mini-Game
+    let gameRunning = false;
+    let score = 0;
+    let canvas, ctx;
+    let player = { x: 300, y: 200, width: 44, height: 14 };
+    let items = [];
+    let animationId = null;
+
+    function toggleMiniGame() {
+      const box = document.getElementById('offlineGameBox');
+      const btn = document.getElementById('gameToggleBtn');
+      if (box.classList.contains('is-active')) {
+        box.classList.remove('is-active');
+        btn.querySelector('span').textContent = '✦ Play "Catch the Keyframe" Mini-Game while waiting';
+        gameRunning = false;
+        cancelAnimationFrame(animationId);
+      } else {
+        box.classList.add('is-active');
+        btn.querySelector('span').textContent = '✕ Close Mini-Game';
+        initGame();
+      }
+    }
+
+    function initGame() {
+      canvas = document.getElementById('gameCanvas');
+      ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = 240;
+      score = 0;
+      document.getElementById('gameScore').textContent = '0';
+      items = [];
+      gameRunning = true;
+      player.x = canvas.width / 2 - player.width / 2;
+
+      // Mouse & touch control
+      const handleMove = (clientX) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = clientX - rect.left;
+        player.x = Math.max(0, Math.min(canvas.width - player.width, mouseX - player.width / 2));
+      };
+
+      canvas.addEventListener('mousemove', (e) => handleMove(e.clientX));
+      canvas.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) handleMove(e.touches[0].clientX);
+      }, { passive: true });
+
+      loop();
+    }
+
+    function loop() {
+      if (!gameRunning) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Spawn items
+      if (Math.random() < 0.04) {
+        items.push({
+          x: Math.random() * (canvas.width - 20) + 10,
+          y: -10,
+          size: 14,
+          speed: 2 + Math.random() * 2.5,
+          color: Math.random() > 0.25 ? '#3d69ff' : '#f59e0b'
+        });
+      }
+
+      // Draw player artboard paddle
+      ctx.fillStyle = '#f1eee5';
+      ctx.shadowColor = '#3d69ff';
+      ctx.shadowBlur = 12;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+      ctx.shadowBlur = 0;
+
+      // Update and draw items
+      for (let i = items.length - 1; i >= 0; i--) {
+        const it = items[i];
+        it.y += it.speed;
+
+        // Draw diamond keyframe
+        ctx.save();
+        ctx.translate(it.x, it.y);
+        ctx.rotate(Math.PI / 4);
+        ctx.fillStyle = it.color;
+        ctx.fillRect(-it.size / 2, -it.size / 2, it.size, it.size);
+        ctx.restore();
+
+        // Collision check
+        if (
+          it.y + it.size / 2 >= player.y &&
+          it.y - it.size / 2 <= player.y + player.height &&
+          it.x >= player.x &&
+          it.x <= player.x + player.width
+        ) {
+          items.splice(i, 1);
+          score += 10;
+          document.getElementById('gameScore').textContent = score;
+          continue;
+        }
+
+        if (it.y > canvas.height + 20) {
+          items.splice(i, 1);
+        }
+      }
+
+      animationId = requestAnimationFrame(loop);
+    }
+  </script>
+</body>
+</html>

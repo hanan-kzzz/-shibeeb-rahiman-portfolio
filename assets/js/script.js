@@ -669,3 +669,75 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (e.key === 'ArrowLeft') showPrev();
   });
 })();
+
+
+// ==========================================================================
+// Service Worker Registration & Live Network Offline Detector
+// ==========================================================================
+(function initServiceWorkerAndNetwork() {
+  // Register Service Worker for offline support
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .catch(() => {
+          navigator.serviceWorker.register('sw.js').catch(() => {});
+        });
+    });
+  }
+
+  // Floating Offline Network Banner
+  function createNetworkBanner() {
+    let banner = document.getElementById('offlineNetworkBanner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'offlineNetworkBanner';
+      banner.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(120px);
+        background: rgba(22, 22, 19, 0.94);
+        border: 1px solid #f59e0b;
+        color: #fde68a;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-family: 'DM Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 10000;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+      `;
+      banner.innerHTML = `
+        <span style="width:7px; height:7px; border-radius:50%; background:#f59e0b; box-shadow:0 0 10px #f59e0b; display:inline-block;"></span>
+        <span id="offlineBannerText">Network Connection Lost • Offline</span>
+        <a href="offline.html" style="color:#ffffff; text-decoration:underline; margin-left:4px;">Offline Canvas ↗</a>
+      `;
+      document.body.appendChild(banner);
+    }
+    return banner;
+  }
+
+  window.addEventListener('offline', () => {
+    const banner = createNetworkBanner();
+    banner.style.borderColor = '#f59e0b';
+    banner.querySelector('span').style.background = '#f59e0b';
+    document.getElementById('offlineBannerText').textContent = 'Network Connection Lost • Offline';
+    banner.style.transform = 'translateX(-50%) translateY(0)';
+  });
+
+  window.addEventListener('online', () => {
+    const banner = createNetworkBanner();
+    banner.style.borderColor = '#10b981';
+    banner.querySelector('span').style.background = '#10b981';
+    document.getElementById('offlineBannerText').textContent = '✓ Back Online! Reconnected';
+    setTimeout(() => {
+      banner.style.transform = 'translateX(-50%) translateY(120px)';
+    }, 2800);
+  });
+})();

@@ -6,12 +6,14 @@ Disallow: /500
 Disallow: /503
 Disallow: /403
 Disallow: /error
+Disallow: /offline
 Disallow: /404.html
 Disallow: /505.html
 Disallow: /500.html
 Disallow: /503.html
 Disallow: /403.html
 Disallow: /error.html
+Disallow: /offline.html
 
 # Direct search engines & AI bots to the sitemap
 Sitemap: https://shibeeb-portfolio.onrender.com/sitemap.xml
