@@ -295,7 +295,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const frame = document.getElementById('showreelFrame');
   const video = document.getElementById('portfolioVideo');
   const overlay = document.getElementById('videoPosterOverlay');
-  const playBtn = document.getElementById('videoPlayBtn');
+  const loader = document.getElementById('videoLoadingIndicator');
   const ctrlPlayBtn = document.getElementById('ctrlPlayBtn');
   const progressWrap = document.getElementById('ctrlProgressWrap');
   const progressBar = document.getElementById('ctrlProgressBar');
@@ -311,6 +311,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const unmutedIcon = muteBtn ? muteBtn.querySelector('.ctrl-icon-unmuted') : null;
 
   let userPaused = false;
+  let controlsTimeout = null;
 
   function formatTime(sec) {
     if (!sec || isNaN(sec)) return '00:00';
@@ -319,29 +320,50 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     return m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
   }
 
+  function showLoader() {
+    if (loader) loader.classList.add('is-visible');
+  }
+
+  function hideLoader() {
+    if (loader) loader.classList.remove('is-visible');
+  }
+
+  function wakeControls() {
+    frame.classList.add('controls-active');
+    clearTimeout(controlsTimeout);
+    if (!video.paused && !video.ended) {
+      controlsTimeout = setTimeout(() => {
+        frame.classList.remove('controls-active');
+      }, 2500);
+    }
+  }
+
+  frame.addEventListener('mousemove', wakeControls);
+  frame.addEventListener('touchstart', wakeControls, { passive: true });
+
   function updatePlayPauseUI() {
     const isPlaying = !video.paused && !video.ended;
     if (isPlaying) {
       if (overlay) overlay.classList.add('is-hidden');
       frame.classList.add('is-playing');
+      frame.classList.remove('is-paused');
       if (playIcon) playIcon.style.display = 'none';
       if (pauseIcon) pauseIcon.style.display = 'block';
       if (ctrlPlayBtn) {
         ctrlPlayBtn.setAttribute('title', 'Pause Video');
         ctrlPlayBtn.setAttribute('aria-label', 'Pause Video');
       }
+      wakeControls();
     } else {
-      if (overlay) overlay.classList.remove('is-hidden');
       frame.classList.remove('is-playing');
+      frame.classList.add('is-paused');
+      frame.classList.add('controls-active');
+      clearTimeout(controlsTimeout);
       if (playIcon) playIcon.style.display = 'block';
       if (pauseIcon) pauseIcon.style.display = 'none';
       if (ctrlPlayBtn) {
         ctrlPlayBtn.setAttribute('title', 'Resume Video');
         ctrlPlayBtn.setAttribute('aria-label', 'Resume Video');
-      }
-      const centerPill = overlay ? overlay.querySelector('.play-reel-pill') : null;
-      if (centerPill) {
-        centerPill.textContent = video.currentTime > 0 ? 'RESUME SHOWREEL ↗' : 'PLAY SHOWREEL ↗';
       }
     }
   }
@@ -349,13 +371,11 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   function updateSoundUI() {
     if (!muteBtn) return;
     if (video.muted) {
-      // Crossed sound icon (Muted)
       if (mutedIcon) mutedIcon.style.display = 'block';
       if (unmutedIcon) unmutedIcon.style.display = 'none';
       muteBtn.setAttribute('title', 'Click to Unmute');
       muteBtn.setAttribute('aria-label', 'Click to Unmute');
     } else {
-      // Uncrossed waves sound icon (Sound On)
       if (mutedIcon) mutedIcon.style.display = 'none';
       if (unmutedIcon) unmutedIcon.style.display = 'block';
       muteBtn.setAttribute('title', 'Click to Mute');
@@ -369,8 +389,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (promise !== undefined) {
       promise.then(() => {
         updatePlayPauseUI();
-      }).catch((err) => {
-        console.warn('Autoplay waiting for user gesture, retrying muted:', err);
+      }).catch(() => {
         video.muted = true;
         updateSoundUI();
         video.play().then(() => updatePlayPauseUI()).catch(() => {});
@@ -394,28 +413,34 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }
   }
 
-  // Event listeners for play/pause
+  // Loading and buffer events
+  video.addEventListener('loadstart', () => {
+    if (video.readyState < 3) showLoader();
+  });
+  video.addEventListener('waiting', showLoader);
+  video.addEventListener('seeking', showLoader);
+  video.addEventListener('canplay', hideLoader);
+  video.addEventListener('canplaythrough', hideLoader);
+  video.addEventListener('playing', () => {
+    hideLoader();
+    updatePlayPauseUI();
+  });
+  video.addEventListener('pause', () => {
+    hideLoader();
+    updatePlayPauseUI();
+  });
+  video.addEventListener('seeked', hideLoader);
+  video.addEventListener('error', hideLoader);
+
   video.addEventListener('play', updatePlayPauseUI);
-  video.addEventListener('playing', updatePlayPauseUI);
-  video.addEventListener('pause', updatePlayPauseUI);
   video.addEventListener('ended', () => {
     userPaused = false;
     updatePlayPauseUI();
-    if (overlay) overlay.classList.remove('is-hidden');
   });
 
-  // Sound event listener
   video.addEventListener('volumechange', updateSoundUI);
 
-  // Click triggers
-  if (playBtn) playBtn.addEventListener('click', togglePlay);
   if (ctrlPlayBtn) ctrlPlayBtn.addEventListener('click', togglePlay);
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target.closest('.video-play-btn')) return;
-      togglePlay(e);
-    });
-  }
   video.addEventListener('click', togglePlay);
 
   // Time & Progress Bar
@@ -426,15 +451,33 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
   });
 
-  video.addEventListener('loadedmetadata', () => {
-    if (timeDisplay && video.duration) {
-      timeDisplay.textContent = '00:00 / ' + formatTime(video.duration);
+  // Target preview frame (00:04) as shown in reference
+  let initialFrameSet = false;
+  function initializePreviewFrame() {
+    const dur = video.duration || 46.41;
+    const cur = video.currentTime > 0 ? video.currentTime : 4.0;
+    if (timeDisplay) {
+      timeDisplay.textContent = formatTime(cur) + ' / ' + formatTime(dur);
+    }
+    if (progressBar) {
+      progressBar.style.width = ((cur / dur) * 100) + '%';
+    }
+    if (!initialFrameSet && video.duration && video.paused && !userPaused) {
+      try {
+        if (video.currentTime === 0) {
+          video.currentTime = 4.0;
+        }
+        initialFrameSet = true;
+      } catch (e) {}
     }
     updateSoundUI();
     updatePlayPauseUI();
-  });
+  }
 
-  // Seeking on progress timeline
+  video.addEventListener('loadedmetadata', initializePreviewFrame);
+  if (video.readyState >= 1) initializePreviewFrame();
+
+  // Progress timeline seeking
   if (progressWrap) {
     progressWrap.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -446,7 +489,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     });
   }
 
-  // Sound toggle (Unmute / Mute)
+  // Sound toggle
   if (muteBtn) {
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -473,67 +516,35 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     });
   }
 
-  // ========================================================
-  // AUTOPLAY: Automatically plays when scrolling to #showreel unless user paused
-  // ========================================================
-  const reelSection = document.getElementById('showreel');
-
-  function checkVisibilityAndPlay() {
-    if (!reelSection || userPaused) return;
-    const rect = reelSection.getBoundingClientRect();
-    const inView = (rect.top < window.innerHeight * 0.75) && (rect.bottom > window.innerHeight * 0.25);
-    if (inView) {
-      if (video.paused) {
-        playVideo();
-      }
-    } else {
-      if (!video.paused) {
-        pauseVideo();
-      }
+  // Smooth scroll directly to center the showreel frame under the navbar
+  function scrollToReelFrame() {
+    const target = document.getElementById('showreelFrame') || document.getElementById('showreel');
+    if (target) {
+      const navContainer = document.querySelector('.pill-nav-container');
+      const navOffset = navContainer ? (navContainer.offsetHeight + 18) : 80;
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: 'smooth'
+      });
     }
   }
 
-  // 1. IntersectionObserver for modern browsers
-  if (reelSection && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!userPaused) playVideo();
-        } else {
-          if (!video.paused) {
-            pauseVideo();
-          }
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-    observer.observe(reelSection);
-  }
-
-  // 2. Scroll listener fallback
-  window.addEventListener('scroll', checkVisibilityAndPlay, { passive: true });
-
-  // 3. Navigation link click trigger (e.g. clicking "Reel" in nav)
+  // Navigation click trigger for "Reel"
   document.querySelectorAll('a[href="#showreel"]').forEach((link) => {
-    link.addEventListener('click', () => {
-      userPaused = false;
-      setTimeout(() => {
-        playVideo();
-      }, 350);
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToReelFrame();
     });
   });
 
-  // 4. Initial check if page opened directly at #showreel
   if (window.location.hash === '#showreel') {
-    setTimeout(playVideo, 500);
+    setTimeout(scrollToReelFrame, 400);
   }
 
-  // Initial UI state setup
   updateSoundUI();
   updatePlayPauseUI();
 })();
-
 
 /* ========================================================
    PORTFOLIO GALLERY FILTERING & FULLSCREEN LIGHTBOX

@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Shibeeb Rahiman — Graphic & Motion Designer">
   <meta property="og:description" content="Creating visual identities, digital experiences, motion graphics and packaging across Kerala, Dubai, and worldwide.">
-  <meta property="og:image" content="shibeeb-portrait.png">
+  <meta property="og:image" content="assets/images/shibeeb-portrait.png">
 
   <!-- JSON-LD Structured Data for Local SEO & E-E-A-T -->
   <script type="application/ld+json">
@@ -33,7 +33,7 @@
         "name": "Shibeeb Rahiman",
         "jobTitle": "Graphic & Motion Designer",
         "description": "Graphic designer and motion designer creating brand identity systems, moving images, and print packaging for businesses in Kerala, Dubai (UAE), and globally.",
-        "image": "shibeeb-portrait.png",
+        "image": "assets/images/shibeeb-portrait.png",
         "telephone": "+919207896313",
         "email": "shibeebrahman@gmail.com",
         "address": {
@@ -45,15 +45,14 @@
         "sameAs": [
           "https://wa.me/919207896313",
           "https://www.behance.net",
-          "https://www.linkedin.com",
-          "https://www.instagram.com"
+          "https://www.linkedin.com"
         ]
       },
       {
         "@type": "ProfessionalService",
         "@id": "https://shibeeb-portfolio.onrender.com/#service",
         "name": "Shibeeb Rahiman — Graphic & Motion Design Studio",
-        "image": "shibeeb-portrait.png",
+        "image": "assets/images/shibeeb-portrait.png",
         "telephone": "+919207896313",
         "email": "shibeebrahman@gmail.com",
         "areaServed": [
@@ -76,12 +75,12 @@
     ]
   }
   </script>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="shortcut icon" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="shortcut icon" href="assets/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <div class="progress" id="progress"></div><div class="pointer-glow" aria-hidden="true"></div>
@@ -155,22 +154,44 @@
         <div class="folio-hero-body">
           <!-- Left: Greeting & Monumental Title -->
           <div class="folio-hero-left">
-            <span class="folio-greeting">Hey, I'm a</span>
-            <h1 class="folio-main-title">Creative<br>Designer</h1>
+            <span class="folio-greeting"><span class="greeting-pulse" aria-hidden="true"></span>Hey, I'm a</span>
+            <h1 class="folio-main-title">Creative<br><span class="hero-title-accent">Designer</span></h1>
           </div>
 
           <!-- Center: High-Fidelity Cinematic Portrait Cutout -->
           <div class="folio-hero-center" id="heroPortraitStage">
             <div class="portrait-glow-halo" aria-hidden="true"></div>
-            <img class="folio-portrait-img" id="folioPortraitImg" src="shibeeb-portrait.png" alt="Shibeeb Rahiman — Creative Graphic &amp; Motion Designer" fetchpriority="high">
+            <!-- Mobile Floating Glass Badges -->
+            <div class="hero-mobile-chip chip-left mobile-only" aria-hidden="true">
+              <span class="chip-sparkle">✦</span>
+              <span>Brand &amp; Motion</span>
+            </div>
+            <div class="hero-mobile-chip chip-right mobile-only" aria-hidden="true">
+              <span class="chip-dot"></span>
+              <span>Available for Work</span>
+            </div>
+            <img class="folio-portrait-img" id="folioPortraitImg" src="assets/images/shibeeb-portrait.png" alt="Shibeeb Rahiman — Creative Graphic &amp; Motion Designer" fetchpriority="high">
           </div>
 
           <!-- Right: Statement & Conversion Narrative -->
           <div class="folio-hero-right">
+            <div class="statement-accent-bar mobile-only" aria-hidden="true"></div>
             <h2 class="folio-statement-title">Great design should feel invisible.</h2>
             <p class="folio-statement-desc">
               From logo to visual language, I build brands that connect, convert, and command attention.
             </p>
+            <div class="hero-mobile-actions mobile-only">
+              <a href="#work" class="hero-mobile-btn primary">
+                <span>View Selected Work</span>
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+              </a>
+              <a href="#contact" class="hero-mobile-btn secondary">
+                <span>Let's Talk</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -213,9 +234,9 @@
       </div><!-- Curated 6-Project Showcase -->
       <div class="portfolio-grid" id="portfolioGrid">
         <!-- 1: YAS Sports Promo -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="0" data-src="projects/posters/yas-sports-shoes-promo.jpg" data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
+        <article class="portfolio-card reveal" data-category="ads" data-index="0" data-src="assets/images/posters/yas-sports-shoes-promo.jpg" data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
           <div class="portfolio-img-box">
-            <img src="projects/posters/yas-sports-shoes-promo.jpg" alt="YAS Sports 50% Off Footwear Campaign" loading="lazy">
+            <img src="assets/images/posters/yas-sports-shoes-promo.jpg" alt="YAS Sports 50% Off Footwear Campaign" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -228,9 +249,9 @@
         </article>
 
         <!-- 2: Educraft Sahodaya Memento -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="1" data-src="projects/posters/educraft-sahodaya-memento.png" data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
+        <article class="portfolio-card reveal" data-category="educraft" data-index="1" data-src="assets/images/posters/educraft-sahodaya-memento.png" data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
           <div class="portfolio-img-box">
-            <img src="projects/posters/educraft-sahodaya-memento.png" alt="Malappuram Sahodaya Award Ceremony Memento" loading="lazy">
+            <img src="assets/images/posters/educraft-sahodaya-memento.png" alt="Malappuram Sahodaya Award Ceremony Memento" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -243,9 +264,9 @@
         </article>
 
         <!-- 3: Sachin Tendulkar Tribute -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="2" data-src="projects/posters/sachin-tendulkar-god-of-cricket.jpg" data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
+        <article class="portfolio-card reveal" data-category="posters" data-index="2" data-src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
           <div class="portfolio-img-box">
-            <img src="projects/posters/sachin-tendulkar-god-of-cricket.jpg" alt="Sachin Tendulkar God of Cricket Typography Poster" loading="lazy">
+            <img src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" alt="Sachin Tendulkar God of Cricket Typography Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -258,9 +279,9 @@
         </article>
 
         <!-- 4: Mahindra Thar Automotive -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="3" data-src="projects/posters/mahindra-thar-automotive-poster.jpg" data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
+        <article class="portfolio-card reveal" data-category="posters" data-index="3" data-src="assets/images/posters/mahindra-thar-automotive-poster.jpg" data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
           <div class="portfolio-img-box">
-            <img src="projects/posters/mahindra-thar-automotive-poster.jpg" alt="Mahindra Thar Automotive Concept Poster" loading="lazy">
+            <img src="assets/images/posters/mahindra-thar-automotive-poster.jpg" alt="Mahindra Thar Automotive Concept Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -273,9 +294,9 @@
         </article>
 
         <!-- 5: Educraft Podium Championship -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="4" data-src="projects/posters/educraft-podium-trophies.png" data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd &amp; 3rd place podium · Polished acrylic &amp; gold">
+        <article class="portfolio-card reveal" data-category="educraft" data-index="4" data-src="assets/images/posters/educraft-podium-trophies.png" data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd &amp; 3rd place podium · Polished acrylic &amp; gold">
           <div class="portfolio-img-box">
-            <img src="projects/posters/educraft-podium-trophies.png" alt="Educraft Podium Championship Series Trophies" loading="lazy">
+            <img src="assets/images/posters/educraft-podium-trophies.png" alt="Educraft Podium Championship Series Trophies" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -288,9 +309,9 @@
         </article>
 
         <!-- 6: MN LY Fashion Hub -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="5" data-src="projects/posters/mnly-fashion-hub-launch.jpg" data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
+        <article class="portfolio-card reveal" data-category="ads" data-index="5" data-src="assets/images/posters/mnly-fashion-hub-launch.jpg" data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
           <div class="portfolio-img-box">
-            <img src="projects/posters/mnly-fashion-hub-launch.jpg" alt="MN LY Fashion Hub Retail Launch Poster" loading="lazy">
+            <img src="assets/images/posters/mnly-fashion-hub-launch.jpg" alt="MN LY Fashion Hub Retail Launch Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
           </div>
           <div class="project-caption">
@@ -322,32 +343,24 @@
           <!-- Ambient backlight glow -->
           <div class="showreel-glow" aria-hidden="true"></div>
 
-          <!-- Video element (Replace src with your portfolio video path e.g. "portfolio-reel.mp4") -->
+          <!-- Video Loading / Buffering Indicator -->
+          <div class="video-loading-indicator" id="videoLoadingIndicator" aria-live="polite" aria-label="Loading showreel video">
+            <div class="video-spinner-wrapper">
+              <div class="video-spinner-ring"></div>
+              <div class="video-spinner-pulse"></div>
+            </div>
+            <span class="video-loading-text mono">LOADING REEL</span>
+          </div>
+
           <!-- Showreel Video Element with Native Autoplay -->
-          <video id="portfolioVideo" class="portfolio-video" src="projects/video/shibeeb-cv.mp4" autoplay playsinline muted loop preload="auto" poster="projects/posters/poster1.jpeg">
-            <source src="projects/video/shibeeb-cv.mp4" type="video/mp4">
-            <source src="projects/video/shibeeb cv.mp4" type="video/mp4">
+          <video id="portfolioVideo" class="portfolio-video" src="assets/videos/shibeeb-cv.mp4" playsinline muted loop preload="auto" poster="assets/images/posters/reel-frame.jpg">
+            <source src="assets/videos/shibeeb-cv.mp4" type="video/mp4">
+
             Your browser does not support the video tag.
           </video>
 
-          <!-- Cinematic Play Trigger Overlay -->
-          <div class="video-poster-overlay" id="videoPosterOverlay">
-            <div class="reel-center-trigger">
-              <button type="button" class="video-play-btn" id="videoPlayBtn" aria-label="Play Portfolio Showreel">
-                <span class="play-btn-pulse"></span>
-                <span class="play-btn-circle">
-                  <svg class="play-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                    <polygon points="6,3 20,12 6,21"></polygon>
-                  </svg>
-                  <svg class="pause-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display:none;">
-                    <rect x="5" y="4" width="4" height="16" rx="1"></rect>
-                    <rect x="15" y="4" width="4" height="16" rx="1"></rect>
-                  </svg>
-                </span>
-              </button>
-              <span class="play-reel-pill mono">PLAY SHOWREEL ↗</span>
-            </div>
-          </div>
+          <!-- Clean video poster overlay (non-obstructive) -->
+          <div class="video-poster-overlay is-hidden" id="videoPosterOverlay"></div>
 
           <!-- Custom Floating Video Controls Bar -->
           <div class="video-controls-bar" id="videoControlsBar">
@@ -398,9 +411,54 @@
       <div class="wrap">
         <div class="section-kicker mono"><span>03 / FEATURED DETAILS</span><span>ZOOM IN ON THE CRAFT</span></div>
         <div class="featured-heading"><h2>SMALL DETAILS.<br><span>STRONG IMPACT.</span></h2><p>Every choice has a job — from the first sketch to the final frame.</p></div>
-        <div class="feature-row reveal"><div class="feature-image feature-green"><div class="mini-window"><div class="mini-nav">STUDIO / 001</div><div class="mini-big">MAKE<br>IT<br>MATTER<span>↗</span></div><div class="mini-line"></div><div class="mini-foot">IDENTITY SYSTEM · 2026</div></div></div><div class="feature-copy"><span class="num mono">01</span><h3>A bold identity<br>with room to move.</h3><p>A flexible visual language that holds together across formats, layouts and campaign moments.</p><span class="mono tiny">ART DIRECTION / IDENTITY</span></div></div>
-        <div class="feature-row reverse reveal"><div class="feature-image feature-violet"><div class="screen-stack"><div class="screen screen-back"></div><div class="screen screen-front"><div class="screen-bar"></div><div class="screen-side"></div><div class="screen-main"><i></i><i></i><i></i></div><div class="screen-chip">BUILD / PLAY / REPEAT</div></div></div></div><div class="feature-copy"><span class="num mono">02</span><h3>Digital experiences<br>with a clear point of view.</h3><p>Clean hierarchy, purposeful interactions and a little unexpected energy.</p><span class="mono tiny">DIGITAL DESIGN / UI CONCEPT</span></div></div>
-        <div class="feature-row reveal"><div class="feature-image feature-orange"><div class="poster-mini"><small>CREATIVE CULTURE / NO. 03</small><strong>MAKE<br>ROOM<br>FOR <i>IDEAS.</i></strong><span>AN EXPERIMENT IN TYPE & COLOUR</span></div></div><div class="feature-copy"><span class="num mono">03</span><h3>Type that does<br>more than talk.</h3><p>Expressive typography and contrast designed to communicate before a single word is read.</p><span class="mono tiny">TYPOGRAPHY / CAMPAIGN</span></div></div>
+
+        <!-- 01: OffLimits Footwear Artwork Stage -->
+        <div class="feature-row reveal">
+          <div class="feature-image feature-stage-blue">
+            <div class="floating-project-card card-tilt-left">
+              <img src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" alt="OffLimits Cricket Shoes Commercial Campaign" class="floating-card-img" loading="lazy">
+              <div class="card-glass-pill mono">OFFLIMITS · 2025</div>
+            </div>
+          </div>
+          <div class="feature-copy">
+            <span class="num mono">01</span>
+            <h3>A bold campaign<br>with room to move.</h3>
+            <p>Commercial product advertising crafted with explosive turf particle physics, athletic typographic hierarchy, and studio pedestal lighting.</p>
+            <span class="mono tiny">COMMERCIAL DIRECTION / FOOTWEAR AD</span>
+          </div>
+        </div>
+
+        <!-- 02: Educraft Golden Oval Awards Stage -->
+        <div class="feature-row reverse reveal">
+          <div class="feature-image feature-stage-amber">
+            <div class="floating-project-card card-tilt-right">
+              <img src="assets/images/posters/educraft-golden-oval-mementos.png" alt="Educraft Golden Oval Recognition Awards" class="floating-card-img" loading="lazy">
+              <div class="card-glass-pill mono">EDUCRAFT · 3D STAGING</div>
+            </div>
+          </div>
+          <div class="feature-copy">
+            <span class="num mono">02</span>
+            <h3>Precision mementos<br>staged in luxury 3D.</h3>
+            <p>Photorealistic 3D product modeling, beveled black acrylic pedestals, and laser-crafted metallic gold laurels designed for academic and corporate ceremonies.</p>
+            <span class="mono tiny">3D PRODUCT STAGING / AWARDS</span>
+          </div>
+        </div>
+
+        <!-- 03: Move Your World Editorial Stage -->
+        <div class="feature-row reveal">
+          <div class="feature-image feature-stage-purple">
+            <div class="floating-project-card card-tilt-left">
+              <img src="assets/images/posters/move-your-world-poster.jpeg" alt="Move Your World Conceptual Design Poster" class="floating-card-img" loading="lazy">
+              <div class="card-glass-pill mono">MOVE YOUR WORLD · POSTER</div>
+            </div>
+          </div>
+          <div class="feature-copy">
+            <span class="num mono">03</span>
+            <h3>Type that does<br>more than talk.</h3>
+            <p>Conceptual surrealism merging cosmic photography with bold Swiss typography and experimental layout direction designed to communicate before a single word is read.</p>
+            <span class="mono tiny">TYPOGRAPHY / EDITORIAL POSTER</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -631,11 +689,6 @@
                 <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12.004-5.378 12.004-12.004C24.017 5.367 18.641 0 12.017 0z"/>
               </svg>
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" class="social-logo-btn" aria-label="Instagram" title="Instagram">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
           </div>
           <span class="mono copyright">© 2026 SHIBEEB RAHIMAN</span>
         </div>
@@ -679,5 +732,5 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="assets/js/script.js"></script>
 </body></html>

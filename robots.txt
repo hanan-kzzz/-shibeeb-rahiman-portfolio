@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /404.html
+Disallow: /505.html
+Disallow: /500.html
+Disallow: /503.html
+Disallow: /403.html
+Disallow: /error.html
 
 # Direct search engines & AI bots to the sitemap
 Sitemap: https://shibeeb-portfolio.onrender.com/sitemap.xml
