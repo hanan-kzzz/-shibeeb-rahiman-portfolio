@@ -329,16 +329,26 @@
     <!-- Showreel / Portfolio Video Section -->
     <section id="showreel" class="showreel-section section wrap reveal">
       <div class="section-kicker mono">
-        <span>02 / SHOWREEL</span>
+        <span>02 / MOTION &amp; REELS</span>
         <span>SELECTED WORKS IN MOTION</span>
       </div>
 
       <div class="showreel-intro">
         <h2>MOTION<br><span>IN ACTION.</span></h2>
-        <p>A curated reel of brand identities, motion studies, and visual direction built for screen.</p>
+        <p>A curated gallery of commercial automotive films, brand showreels, and social motion studies built for screen.</p>
       </div>
 
       <div class="showreel-container">
+        <!-- Cinema Screen Header Bar -->
+        <div class="showreel-header-row">
+          <div class="showreel-now-playing">
+            <span class="showreel-pulse-dot" aria-hidden="true"></span>
+            <span class="showreel-active-tag mono" id="showreelActiveTag">MAIN SHOWREEL</span>
+            <h3 class="showreel-active-title" id="showreelActiveTitle">Showreel 2026 — Motion In Action</h3>
+          </div>
+          <span class="showreel-active-desc mono" id="showreelActiveDesc">00:30 · BRAND &amp; MOTION DIRECTION</span>
+        </div>
+
         <div class="showreel-frame" id="showreelFrame">
           <!-- Ambient backlight glow -->
           <div class="showreel-glow" aria-hidden="true"></div>
@@ -353,8 +363,8 @@
           </div>
 
           <!-- Showreel Video Element with Native Autoplay -->
-          <video id="portfolioVideo" class="portfolio-video" src="assets/videos/shibeeb-cv.mp4" autoplay playsinline muted loop preload="auto" poster="assets/images/posters/reel-frame.jpg">
-            <source src="assets/videos/shibeeb-cv.mp4" type="video/mp4">
+          <video id="portfolioVideo" class="portfolio-video" src="assets/videos/shibeeb-showreel.mp4" autoplay playsinline muted loop preload="auto" poster="assets/images/posters/showreel-thumb.jpg">
+            <source src="assets/videos/shibeeb-showreel.mp4" type="video/mp4">
 
             Your browser does not support the video tag.
           </video>
@@ -378,7 +388,7 @@
             <div class="ctrl-progress-wrap" id="ctrlProgressWrap">
               <div class="ctrl-progress-bar" id="ctrlProgressBar" style="width: 0%;"></div>
             </div>
-            <span class="ctrl-time mono" id="ctrlTime">00:00 / 01:24</span>
+            <span class="ctrl-time mono" id="ctrlTime">00:00 / 00:30</span>
             <button type="button" class="ctrl-btn ctrl-mute" id="ctrlMuteBtn" aria-label="Unmute Video" title="Click to Unmute">
               <!-- Crossed Mute Icon (shown when muted: speaker with cross X) -->
               <svg class="ctrl-icon-muted" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -399,8 +409,73 @@
               </svg>
             </button>
           </div>
+        </div>
 
+        <!-- Video Showcase Playlist Grid -->
+        <div class="video-playlist-grid" id="videoPlaylistGrid" role="tablist" aria-label="Motion portfolio playlist">
+          <!-- 01: Showreel 2026 -->
+          <button type="button" class="video-track-card is-active" data-video-src="assets/videos/shibeeb-showreel.mp4" data-poster="assets/images/posters/showreel-thumb.jpg" data-title="Showreel 2026 — Motion In Action" data-tag="MAIN SHOWREEL" data-desc="00:30 · BRAND &amp; MOTION DIRECTION" role="tab" aria-selected="true">
+            <div class="video-track-thumb-box">
+              <img src="assets/images/posters/showreel-thumb.jpg" alt="Showreel 2026" loading="lazy">
+              <span class="video-track-play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+              </span>
+              <span class="video-track-duration mono">00:30</span>
+            </div>
+            <div class="video-track-meta">
+              <span class="video-track-tag mono">01 · MAIN REEL</span>
+              <h4 class="video-track-title">Showreel 2026</h4>
+              <p class="video-track-desc">Brand identities, kinetic typography &amp; 3D pacing</p>
+            </div>
+          </button>
 
+          <!-- 02: Mahindra Thar 4K -->
+          <button type="button" class="video-track-card" data-video-src="assets/videos/cinematic-car-reel.mp4" data-poster="assets/images/posters/car-video-thumb.jpg" data-title="Mahindra Thar — 4K Automotive Motion" data-tag="AUTOMOTIVE 4K" data-desc="00:58 · CINEMATIC DIRT TRAIL COMPOSITE" role="tab" aria-selected="false">
+            <div class="video-track-thumb-box">
+              <img src="assets/images/posters/car-video-thumb.jpg" alt="Mahindra Thar 4K" loading="lazy">
+              <span class="video-track-play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+              </span>
+              <span class="video-track-duration mono">00:58</span>
+            </div>
+            <div class="video-track-meta">
+              <span class="video-track-tag mono">02 · AUTOMOTIVE</span>
+              <h4 class="video-track-title">Mahindra Thar 4K</h4>
+              <p class="video-track-desc">Off-road physics, dirt particles &amp; engine rhythm</p>
+            </div>
+          </button>
+
+          <!-- 03: Social Motion Reel -->
+          <button type="button" class="video-track-card" data-video-src="assets/videos/social-motion-reel.mp4" data-poster="assets/images/posters/final-out-thumb.jpg" data-title="Vertical Motion — Social &amp; Campaign Cuts" data-tag="SOCIAL REEL" data-desc="00:24 · HIGH-RETENTION MOBILE REEL" role="tab" aria-selected="false">
+            <div class="video-track-thumb-box">
+              <img src="assets/images/posters/final-out-thumb.jpg" alt="Social Motion Reel" loading="lazy">
+              <span class="video-track-play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+              </span>
+              <span class="video-track-duration mono">00:24</span>
+            </div>
+            <div class="video-track-meta">
+              <span class="video-track-tag mono">03 · SOCIAL CUT</span>
+              <h4 class="video-track-title">Vertical Social Reel</h4>
+              <p class="video-track-desc">Fast-paced mobile transitions &amp; campaign pacing</p>
+            </div>
+          </button>
+
+          <!-- 04: Brand Overview -->
+          <button type="button" class="video-track-card" data-video-src="assets/videos/shibeeb-cv.mp4" data-poster="assets/images/posters/reel-frame.jpg" data-title="Portfolio Interactive CV Reel" data-tag="BRAND OVERVIEW" data-desc="00:46 · PORTFOLIO HIGHLIGHTS &amp; DESIGN" role="tab" aria-selected="false">
+            <div class="video-track-thumb-box">
+              <img src="assets/images/posters/reel-frame.jpg" alt="Portfolio CV Reel" loading="lazy">
+              <span class="video-track-play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+              </span>
+              <span class="video-track-duration mono">00:46</span>
+            </div>
+            <div class="video-track-meta">
+              <span class="video-track-tag mono">04 · PORTFOLIO REEL</span>
+              <h4 class="video-track-title">Creative Showcase CV</h4>
+              <p class="video-track-desc">Curated brand identity design &amp; motion graphics</p>
+            </div>
+          </button>
         </div>
       </div>
     </section>

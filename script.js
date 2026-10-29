@@ -593,6 +593,49 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }, 400);
   }
 
+  // Video Playlist / Showcase Track Switching
+  const playlistCards = document.querySelectorAll('.video-track-card');
+  const activeTitle = document.getElementById('showreelActiveTitle');
+  const activeTag = document.getElementById('showreelActiveTag');
+  const activeDesc = document.getElementById('showreelActiveDesc');
+
+  playlistCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-video-src');
+      const poster = card.getAttribute('data-poster');
+      const title = card.getAttribute('data-title');
+      const tag = card.getAttribute('data-tag');
+      const desc = card.getAttribute('data-desc');
+
+      if (!src || video.src.includes(src)) return;
+
+      playlistCards.forEach(c => {
+        c.classList.remove('is-active');
+        c.setAttribute('aria-selected', 'false');
+      });
+      card.classList.add('is-active');
+      card.setAttribute('aria-selected', 'true');
+
+      if (activeTitle && title) activeTitle.textContent = title;
+      if (activeTag && tag) activeTag.textContent = tag;
+      if (activeDesc && desc) activeDesc.textContent = desc;
+
+      showLoader();
+      if (progressBar) progressBar.style.width = '0%';
+      if (timeDisplay) timeDisplay.textContent = '00:00 / --:--';
+
+      video.pause();
+      video.src = src;
+      if (poster) video.poster = poster;
+      const sourceEl = video.querySelector('source');
+      if (sourceEl) sourceEl.src = src;
+
+      video.load();
+      userPaused = false;
+      playVideo();
+    });
+  });
+
   // Auto-play immediately on script execution
   video.muted = true;
   updateSoundUI();
@@ -608,6 +651,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const cards = document.querySelectorAll('.portfolio-card');
   const lightbox = document.getElementById('projectLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxVideo = document.getElementById('lightboxVideo');
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxDesc = document.getElementById('lightboxDesc');
   const lightboxBadge = document.getElementById('lightboxBadge');
@@ -647,6 +691,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   let currentIndex = 0;
   const projectData = Array.from(cards).map(card => ({
     src: card.getAttribute('data-src') || card.querySelector('img')?.src,
+    videoSrc: card.getAttribute('data-video-src') || null,
     title: card.getAttribute('data-title') || card.querySelector('h3')?.textContent,
     desc: card.getAttribute('data-desc') || card.querySelector('p')?.textContent,
     badge: card.getAttribute('data-badge') || 'PROJECT',
@@ -657,10 +702,24 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     const item = projectData[currentIndex];
     if (!item) return;
 
-    if (lightboxImg) {
-      lightboxImg.src = item.src;
-      lightboxImg.alt = item.title;
+    if (item.videoSrc && lightboxVideo) {
+      if (lightboxImg) lightboxImg.style.display = 'none';
+      lightboxVideo.style.display = 'block';
+      lightboxVideo.src = item.videoSrc;
+      lightboxVideo.play().catch(() => {});
+    } else {
+      if (lightboxVideo) {
+        lightboxVideo.pause();
+        lightboxVideo.src = '';
+        lightboxVideo.style.display = 'none';
+      }
+      if (lightboxImg) {
+        lightboxImg.style.display = 'block';
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.title;
+      }
     }
+
     if (lightboxTitle) lightboxTitle.textContent = item.title;
     if (lightboxDesc) lightboxDesc.textContent = item.desc;
     if (lightboxBadge) lightboxBadge.textContent = item.badge;
@@ -676,6 +735,10 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   }
 
   function closeLightbox() {
+    if (lightboxVideo) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+    }
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';

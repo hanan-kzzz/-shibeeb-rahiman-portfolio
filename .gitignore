@@ -32,3 +32,8 @@ tmp/
 *.tmp
 assets/images/posters/test_*.jpg
 assets/images/posters/frame_*.jpg
+
+# Heavy raw video master files (>100MB blocked by GitHub)
+assets/videos/car_video_high_quality_4k.mp4
+assets/videos/SHIBEEB SHOW REEL.mp4
+assets/videos/final out.mp4
