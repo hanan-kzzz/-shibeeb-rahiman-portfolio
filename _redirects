@@ -5,6 +5,7 @@
 # 1. 301 Permanent Redirects: Force .html extensions to clean URLs
 /index.html      /             301!
 /projects.html   /projects     301!
+/case.html       /case         301!
 /blog.html       /blog         301!
 /error.html      /error        301!
 /404.html        /404          301!
@@ -15,6 +16,7 @@
 
 # 2. 200 Rewrites: Serve underlying HTML files for extensionless clean URLs
 /projects        /projects.html   200
+/case            /case.html       200
 /blog            /blog.html       200
 /error           /error.html      200
 /404             /404.html        200

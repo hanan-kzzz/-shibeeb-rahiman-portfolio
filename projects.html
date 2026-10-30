@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://shibeeb-portfolio.onrender.com/projects">
   <meta property="og:title" content="All Projects &amp; Visual Systems (20 Works) — Shibeeb Rahiman">
-  <meta property="og:description" content="Browse 20 client campaigns, 3D product stagings, and editorial typography posters with interactive category filters and high-res lightbox.">
+  <meta property="og:description" content="Browse 43 client campaigns, 3D product stagings, and editorial typography posters with interactive category filters and high-res lightbox.">
   <meta property="og:image" content="assets/images/shibeeb-portrait.png">
 
   <!-- Twitter -->
@@ -45,6 +45,7 @@
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/diana-projects.css">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -137,14 +138,103 @@
   </header>
 
   <main class="projects-page-wrap wrap">
-    <!-- Top Action Breadcrumb Bar -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-      <a href="/" class="projects-back-btn">
+        <!-- Diana Etuk Header Bar: Navigation, Ambient Audio Toggle & View Switcher -->
+    <div class="diana-top-bar">
+      <a href="/" class="projects-back-btn" aria-label="Back to homepage">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <span>BACK TO HOMEPAGE</span>
       </a>
-      
+
+      <div class="diana-top-actions">
+        <!-- Diana Etuk Ambient Sound Pill -->
+        <button type="button" class="diana-sound-pill" id="dianaSoundToggle" aria-label="Toggle ambient audio experience">
+          <span class="diana-sound-bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span id="dianaSoundLabel">SOUND: OFF</span>
+        </button>
+
+        <!-- Segmented Dual-View Mode Switcher -->
+        <div class="diana-view-switcher" role="tablist" aria-label="Project view mode">
+          <button type="button" class="diana-view-btn active" data-view="showcase" aria-label="Editorial Showcase View">
+            <span>✦ SHOWCASE</span>
+          </button>
+          <button type="button" class="diana-view-btn" data-view="grid" aria-label="Archive Grid View">
+            <span>⊞ GRID ARCHIVE</span>
+          </button>
+        </div>
+      </div>
     </div>
+
+    <!-- Diana Etuk Signature Showcase Slider Section -->
+    <section class="diana-showcase-section" id="dianaShowcaseSection" aria-label="Featured Works Showcase">
+      <div class="diana-showcase-stage">
+        <div class="diana-showcase-grid">
+          <!-- Left: Narrative & Typography -->
+          <div class="diana-showcase-narrative">
+            <div class="diana-showcase-meta-row">
+              <span class="diana-index-badge" id="dianaShowcaseIndex">01 / 43</span>
+              <span class="diana-year-badge" id="dianaShowcaseYear">2026</span>
+              <span class="diana-category-badge" id="dianaShowcaseCategory">AUTOMOTIVE · 4K VFX</span>
+            </div>
+            <h2 class="diana-showcase-title" id="dianaShowcaseTitle">
+              Mahindra Thar — <br><span>4K Automotive Motion</span>
+            </h2>
+            <p class="diana-showcase-premise" id="dianaShowcasePremise">
+              Off-road vehicle dynamics, procedural dirt particle simulation &amp; cinematic dusk composite.
+            </p>
+            <div class="diana-showcase-actions">
+              <button type="button" class="diana-cta-explore" id="dianaCtaExplore">
+                <span>EXPLORE CASE STUDY</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </button>
+              <button type="button" class="diana-cta-secondary" id="dianaNextBtnSecondary" onclick="document.getElementById('dianaNextBtn').click()">
+                <span>NEXT WORK →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Cinematic Media Viewport -->
+          <div class="diana-showcase-media" id="dianaShowcaseMedia" role="button" tabindex="0" aria-label="Open project case study">
+            <img class="diana-showcase-img" id="dianaShowcaseImg" src="assets/images/posters/showreel-thumb.jpg" alt="Featured Project" loading="eager">
+            <video class="diana-showcase-video" id="dianaShowcaseVideo" muted loop playsinline style="display:none;"></video>
+            <div class="diana-play-badge" id="dianaShowcasePlayBadge" style="display:none;" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            </div>
+            <div class="diana-media-overlay-pill" id="dianaShowcaseMediaPill">
+              <span>EXPLORE CASE STUDY</span> ↗
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Navigation & Progress Track -->
+        <div class="diana-showcase-nav-bar">
+          <div class="diana-slider-arrows">
+            <button type="button" class="diana-arrow-btn" id="dianaPrevBtn" aria-label="Previous Project">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" class="diana-arrow-btn" id="dianaNextBtn" aria-label="Next Project">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <div class="diana-progress-track">
+            <div class="diana-progress-bar" id="dianaProgressBar"></div>
+          </div>
+
+          <span class="diana-quick-jump mono" id="dianaQuickJump">PROJECT 01 OF 43</span>
+        </div>
+
+        <!-- Bottom Horizontal Thumbnail Jump Strip -->
+        <div class="diana-thumb-strip-wrap">
+          <span class="diana-thumb-strip-label mono">SELECT ANY PROJECT TO PREVIEW (43 WORKS)</span>
+          <div class="diana-thumb-strip" id="dianaThumbStrip"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Archive Grid Section (Toggleable) -->
+    <section class="diana-grid-section is-hidden" id="dianaGridSection">
 
     <!-- Elevated Page Header & Capsule Stats -->
     <div class="projects-header-grid">
@@ -168,7 +258,7 @@
           <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
         </svg>
         <span>All Works</span>
-        <span class="tab-count">20</span>
+        <span class="tab-count">43</span>
       </button>
       <button type="button" class="work-filter-pill" data-filter="educraft">
         <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -179,14 +269,14 @@
           <path d="M8 20h8"></path>
         </svg>
         <span>3D &amp; Trophies · Educraft</span>
-        <span class="tab-count">7</span>
+        <span class="tab-count">8</span>
       </button>
       <button type="button" class="work-filter-pill" data-filter="ads">
         <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
         </svg>
         <span>Commercial &amp; Ads</span>
-        <span class="tab-count">3</span>
+        <span class="tab-count">20</span>
       </button>
       <button type="button" class="work-filter-pill" data-filter="posters">
         <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -197,7 +287,7 @@
           <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
         </svg>
         <span>Posters &amp; Editorial</span>
-        <span class="tab-count">6</span>
+        <span class="tab-count">11</span>
       </button>
       <button type="button" class="work-filter-pill" data-filter="motion">
         <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -208,7 +298,7 @@
       </button>
     </div>
 
-    <!-- Full 20 Project Grid -->
+    <!-- Full 43 Project Grid -->
     <div class="portfolio-grid" id="portfolioGrid">
         <!-- Motion 1: Showreel 2026 -->
         <article class="portfolio-card reveal" data-category="motion" data-index="0" data-src="assets/images/posters/showreel-thumb.jpg" data-video-src="assets/videos/shibeeb-showreel.mp4" data-title="Showreel 2026 — Motion In Action" data-badge="SHOWREEL · 00:30" data-desc="Brand identities, kinetic typography &amp; 3D pacing">
@@ -224,9 +314,7 @@
             <span class="card-arrow" aria-hidden="true">▶</span>
           </div>
         </article>
-
-        <!-- Motion 2: Mahindra Thar 4K -->
-        <article class="portfolio-card reveal" data-category="motion" data-index="1" data-src="assets/images/posters/car-video-thumb.jpg" data-video-src="assets/videos/cinematic-car-reel.mp4" data-title="Mahindra Thar — 4K Automotive Motion" data-badge="AUTOMOTIVE · 00:58" data-desc="Off-road physics, dirt particles &amp; cinematic composite">
+<article class="portfolio-card reveal" data-category="motion" data-index="1" data-src="assets/images/posters/car-video-thumb.jpg" data-video-src="assets/videos/cinematic-car-reel.mp4" data-title="Mahindra Thar — 4K Automotive Motion" data-badge="AUTOMOTIVE · 00:58" data-desc="Off-road physics, dirt particles &amp; cinematic composite">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/car-video-thumb.jpg" alt="Mahindra Thar 4K Automotive Reel" loading="lazy">
             <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
@@ -239,9 +327,7 @@
             <span class="card-arrow" aria-hidden="true">▶</span>
           </div>
         </article>
-
-        <!-- Motion 3: Vertical Social Reel -->
-        <article class="portfolio-card reveal" data-category="motion" data-index="2" data-src="assets/images/posters/final-out-thumb.jpg" data-video-src="assets/videos/social-motion-reel.mp4" data-title="Vertical Motion — Social &amp; Campaign Cuts" data-badge="SOCIAL REEL · 00:24" data-desc="Fast-paced mobile transitions &amp; campaign pacing">
+<article class="portfolio-card reveal" data-category="motion" data-index="2" data-src="assets/images/posters/final-out-thumb.jpg" data-video-src="assets/videos/social-motion-reel.mp4" data-title="Vertical Motion — Social &amp; Campaign Cuts" data-badge="SOCIAL REEL · 00:24" data-desc="Fast-paced mobile transitions &amp; campaign pacing">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/final-out-thumb.jpg" alt="Vertical Motion Campaign Cut" loading="lazy">
             <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
@@ -254,9 +340,7 @@
             <span class="card-arrow" aria-hidden="true">▶</span>
           </div>
         </article>
-
-        <!-- Motion 4: Portfolio Interactive CV -->
-        <article class="portfolio-card reveal" data-category="motion" data-index="3" data-src="assets/images/posters/reel-frame.jpg" data-video-src="assets/videos/shibeeb-cv.mp4" data-title="Portfolio Interactive CV Reel" data-badge="PORTFOLIO · 00:46" data-desc="Curated brand identity design &amp; motion graphics">
+<article class="portfolio-card reveal" data-category="motion" data-index="3" data-src="assets/images/posters/reel-frame.jpg" data-video-src="assets/videos/shibeeb-cv.mp4" data-title="Portfolio Interactive CV Reel" data-badge="PORTFOLIO · 00:46" data-desc="Curated brand identity design &amp; motion graphics">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/reel-frame.jpg" alt="Portfolio Interactive CV Reel" loading="lazy">
             <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
@@ -269,9 +353,7 @@
             <span class="card-arrow" aria-hidden="true">▶</span>
           </div>
         </article>
-
-        <!-- 1: YAS Sports — Footwear Promo -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="0" data-src="assets/images/posters/yas-sports-shoes-promo.jpg" data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
+<article class="portfolio-card reveal" data-category="ads" data-index="4" data-src="assets/images/posters/yas-sports-shoes-promo.jpg" data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/yas-sports-shoes-promo.jpg" alt="YAS Sports 50% Off Footwear Campaign" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -284,9 +366,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 2: Malappuram Sahodaya Memento -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="1" data-src="assets/images/posters/educraft-sahodaya-memento.png" data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
+<article class="portfolio-card reveal" data-category="educraft" data-index="5" data-src="assets/images/posters/educraft-sahodaya-memento.png" data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-sahodaya-memento.png" alt="Malappuram Sahodaya Award Ceremony Memento" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -299,9 +379,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 3: Sachin Tendulkar Tribute -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="2" data-src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
+<article class="portfolio-card reveal" data-category="posters" data-index="6" data-src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" alt="Sachin Tendulkar God of Cricket Typography Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -314,9 +392,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 4: OffLimits Cricket Spikes -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="3" data-src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" data-title="OffLimits Cricket Spikes" data-badge="COMMERCIAL AD" data-desc="Performance footwear launch · Dynamic turf particles">
+<article class="portfolio-card reveal" data-category="ads" data-index="7" data-src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" data-title="OffLimits Cricket Spikes" data-badge="COMMERCIAL AD" data-desc="Performance footwear launch · Dynamic turf particles">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" alt="OffLimits Cricket Shoes Commercial Campaign" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -329,9 +405,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 5: Championship Series Trophies -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="4" data-src="assets/images/posters/educraft-podium-trophies.png" data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd & 3rd place podium · Polished acrylic & gold">
+<article class="portfolio-card reveal" data-category="educraft" data-index="8" data-src="assets/images/posters/educraft-podium-trophies.png" data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd & 3rd place podium · Polished acrylic & gold">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-podium-trophies.png" alt="Educraft Podium Championship Series Trophies" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -344,9 +418,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 6: Mahindra Thar: Explore The Impossible -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="5" data-src="assets/images/posters/mahindra-thar-automotive-poster.jpg" data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
+<article class="portfolio-card reveal" data-category="posters" data-index="9" data-src="assets/images/posters/mahindra-thar-automotive-poster.jpg" data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/mahindra-thar-automotive-poster.jpg" alt="Mahindra Thar Automotive Concept Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -359,9 +431,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 7: MN LY Menswear Fashion Hub -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="6" data-src="assets/images/posters/mnly-fashion-hub-launch.jpg" data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
+<article class="portfolio-card reveal" data-category="ads" data-index="10" data-src="assets/images/posters/mnly-fashion-hub-launch.jpg" data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/mnly-fashion-hub-launch.jpg" alt="MN LY Fashion Hub Retail Launch Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -374,9 +444,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 8: Move Your World -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="7" data-src="assets/images/posters/move-your-world-poster.jpeg" data-title="Move Your World" data-badge="EDITORIAL POSTER" data-desc="Astronaut & planetary cosmic collage · Swiss type">
+<article class="portfolio-card reveal" data-category="posters" data-index="11" data-src="assets/images/posters/move-your-world-poster.jpeg" data-title="Move Your World" data-badge="EDITORIAL POSTER" data-desc="Astronaut & planetary cosmic collage · Swiss type">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/move-your-world-poster.jpeg" alt="Move Your World Conceptual Design Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -389,9 +457,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 9: MSAT 2024 Excellence Award -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="8" data-src="assets/images/posters/educraft-msat-excellence-award.png" data-title="MSAT 2024 Excellence Award" data-badge="AWARD DESIGN · EDUCRAFT" data-desc="Star & wing gold insignia · Laser-cut clear acrylic">
+<article class="portfolio-card reveal" data-category="educraft" data-index="12" data-src="assets/images/posters/educraft-msat-excellence-award.png" data-title="MSAT 2024 Excellence Award" data-badge="AWARD DESIGN · EDUCRAFT" data-desc="Star & wing gold insignia · Laser-cut clear acrylic">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-msat-excellence-award.png" alt="MSAT 2024 Academic Excellence Award Memento" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -404,9 +470,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 10: World Population Day -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="9" data-src="assets/images/posters/world-population-day-poster.jpg" data-title="World Population Day" data-badge="AWARENESS POSTER" data-desc="Minimalist continuous line-art · Planetary demographic">
+<article class="portfolio-card reveal" data-category="posters" data-index="13" data-src="assets/images/posters/world-population-day-poster.jpg" data-title="World Population Day" data-badge="AWARENESS POSTER" data-desc="Minimalist continuous line-art · Planetary demographic">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/world-population-day-poster.jpg" alt="World Population Day Conceptual Line Art Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -419,9 +483,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 11: Rotary Cricket League Set -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="10" data-src="assets/images/posters/educraft-rotary-cricket-awards.png" data-title="Rotary Cricket League Set" data-badge="SPORTS TROPHIES · EDUCRAFT" data-desc="Bowler & batsman cutouts on frosted trophy bases">
+<article class="portfolio-card reveal" data-category="educraft" data-index="14" data-src="assets/images/posters/educraft-rotary-cricket-awards.png" data-title="Rotary Cricket League Set" data-badge="SPORTS TROPHIES · EDUCRAFT" data-desc="Bowler & batsman cutouts on frosted trophy bases">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-rotary-cricket-awards.png" alt="Rotary Cricket League Custom Tournament Trophies" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -434,9 +496,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 12: Best Batsman Golden Sculpture -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="11" data-src="assets/images/posters/educraft-best-batsman-award.png" data-title="Best Batsman Golden Sculpture" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Dynamic batsman swing statue on stepped pedestal">
+<article class="portfolio-card reveal" data-category="educraft" data-index="15" data-src="assets/images/posters/educraft-best-batsman-award.png" data-title="Best Batsman Golden Sculpture" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Dynamic batsman swing statue on stepped pedestal">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-best-batsman-award.png" alt="Educraft Best Batsman Golden Cricket Trophy" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -449,9 +509,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 13: Leadership & Service Citations -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="12" data-src="assets/images/posters/educraft-leadership-acrylic-plaque.png" data-title="Leadership & Service Citations" data-badge="CORPORATE AWARDS" data-desc="Custom red acrylic & marble luxury corporate set">
+<article class="portfolio-card reveal" data-category="educraft" data-index="16" data-src="assets/images/posters/educraft-leadership-acrylic-plaque.png" data-title="Leadership & Service Citations" data-badge="CORPORATE AWARDS" data-desc="Custom red acrylic & marble luxury corporate set">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-leadership-acrylic-plaque.png" alt="Educraft Corporate Leadership Recognition Plaques" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -464,9 +522,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 14: Hijra New Year Desert Journey -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="13" data-src="assets/images/posters/hijra-new-year-poster.jpg" data-title="Hijra New Year Desert Journey" data-badge="CULTURAL DESIGN" data-desc="Monochrome caravan photography · Olive Arabic typography">
+<article class="portfolio-card reveal" data-category="posters" data-index="17" data-src="assets/images/posters/hijra-new-year-poster.jpg" data-title="Hijra New Year Desert Journey" data-badge="CULTURAL DESIGN" data-desc="Monochrome caravan photography · Olive Arabic typography">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/hijra-new-year-poster.jpg" alt="Happy New Hijra Year Desert Journey Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -479,9 +535,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 15: ALFIA Student's Memento -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="14" data-src="assets/images/posters/educraft-arabic-calligraphy-memento.png" data-title="ALFIA Student's Memento" data-badge="ARABIC TYPE · EDUCRAFT" data-desc="Geometric Kufic calligraphy · Timber & gloss acrylic plaque">
+<article class="portfolio-card reveal" data-category="educraft" data-index="18" data-src="assets/images/posters/educraft-arabic-calligraphy-memento.png" data-title="ALFIA Student's Memento" data-badge="ARABIC TYPE · EDUCRAFT" data-desc="Geometric Kufic calligraphy · Timber & gloss acrylic plaque">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/educraft-arabic-calligraphy-memento.png" alt="ALFIA Arabic Calligraphy Wood & Acrylic Memento" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -494,9 +548,7 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-
-        <!-- 16: Explore The World -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="15" data-src="assets/images/posters/explore-the-world-travel-poster.jpg" data-title="Explore The World" data-badge="TRAVEL POSTER" data-desc="3D character mascot · Dynamic cartographic travel poster">
+<article class="portfolio-card reveal" data-category="posters" data-index="19" data-src="assets/images/posters/explore-the-world-travel-poster.jpg" data-title="Explore The World" data-badge="TRAVEL POSTER" data-desc="3D character mascot · Dynamic cartographic travel poster">
           <div class="portfolio-img-box">
             <img src="assets/images/posters/explore-the-world-travel-poster.jpg" alt="Explore The World 3D Travel Character Poster" loading="lazy">
             <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
@@ -509,7 +561,330 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
         </article>
-    </div>
+        <!-- Project 20: Plymarc Excellence Plaque -->
+        <article class="portfolio-card reveal" data-category="educraft" data-index="20" data-src="assets/images/posters/educraft-plymarc-wooden-plaque.png" data-title="Plymarc Excellence Plaque" data-badge="3D PRODUCT • EDUCRAFT" data-desc="Hexagonal wooden trophy • 3D podium presentation">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/educraft-plymarc-wooden-plaque.png" alt="Plymarc Excellence Award Plaque" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Plymarc Excellence Plaque</h3>
+              <p>Hexagonal wooden trophy • 3D podium presentation</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 21: Mercedes G-Class Portal -->
+        <article class="portfolio-card reveal" data-category="posters" data-index="21" data-src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg" data-title="Mercedes G-Class Portal" data-badge="PHOTO MANIPULATION" data-desc="Surreal 3D breakout • Automotive portal manipulation">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg" alt="Mercedes G-Class The Best or Nothing Photo Manipulation" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Mercedes G-Class Portal</h3>
+              <p>Surreal 3D breakout • Automotive portal manipulation</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 22: Nightfall Quarantine Zone -->
+        <article class="portfolio-card reveal" data-category="posters" data-index="22" data-src="assets/images/posters/dystopian-matte-painting-concept.jpg" data-title="Nightfall Quarantine Zone" data-badge="MATTE PAINTING" data-desc="Cinematic concept art • Post-apocalyptic environment">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/dystopian-matte-painting-concept.jpg" alt="Nightfall Quarantine Zone Matte Painting" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Nightfall Quarantine Zone</h3>
+              <p>Cinematic concept art • Post-apocalyptic environment</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 23: Thomas Shelby Tribute -->
+        <article class="portfolio-card reveal" data-category="posters" data-index="23" data-src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg" data-title="Thomas Shelby Tribute" data-badge="SMUDGE ART" data-desc="Digital smudge painting • Cinematic Peaky Blinders portrait">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg" alt="Thomas Shelby Peaky Blinders Smudge Art" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Thomas Shelby Tribute</h3>
+              <p>Digital smudge painting • Cinematic Peaky Blinders portrait</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 24: Fast X: Dominic Toretto -->
+        <article class="portfolio-card reveal" data-category="posters" data-index="24" data-src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg" data-title="Fast X: Dominic Toretto" data-badge="VECTOR ART" data-desc="Monochrome vector tribute • Dodge Charger silhouette">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg" alt="Fast X Dominic Toretto Vector Art" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Fast X: Dominic Toretto</h3>
+              <p>Monochrome vector tribute • Dodge Charger silhouette</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 25: Finding — Children's Book -->
+        <article class="portfolio-card reveal" data-category="posters" data-index="25" data-src="assets/images/posters/finding-vector-illustration.jpg" data-title="Finding — Children's Book" data-badge="VECTOR ILLUSTRATION" data-desc="Storybook illustration • Vibrant jungle explorer scene">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/finding-vector-illustration.jpg" alt="Finding Childrens Book Vector Illustration" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Finding — Children's Book</h3>
+              <p>Storybook illustration • Vibrant jungle explorer scene</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 26: Jalamithra × Spider-Man -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="26" data-src="assets/images/posters/jalamithra-water-purifier-ad.jpg" data-title="Jalamithra × Spider-Man" data-badge="COMMERCIAL AD" data-desc="Superhero commercial • Night skyscraper web composite">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/jalamithra-water-purifier-ad.jpg" alt="Jalamithra Spider-Man Commercial Campaign" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Jalamithra × Spider-Man</h3>
+              <p>Superhero commercial • Night skyscraper web composite</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 27: Jalamithra Eid Campaign -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="27" data-src="assets/images/posters/jalamithra-eid-mubarak-ad.png" data-title="Jalamithra Eid Campaign" data-badge="FESTIVE AD" data-desc="Holiday product promo • Modern architectural staging">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/jalamithra-eid-mubarak-ad.png" alt="Jalamithra Eid Mubarak Campaign" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Jalamithra Eid Campaign</h3>
+              <p>Holiday product promo • Modern architectural staging</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 28: Jalamithra Pure Living -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="28" data-src="assets/images/posters/jalamithra-pure-living-ad.jpg" data-title="Jalamithra Pure Living" data-badge="COMMERCIAL AD" data-desc="Natural water filtration • Crystal pouring dynamics">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/jalamithra-pure-living-ad.jpg" alt="Jalamithra Pure Living Water Filter Ad" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Jalamithra Pure Living</h3>
+              <p>Natural water filtration • Crystal pouring dynamics</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 29: Jalamithra Product Lineup -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="29" data-src="assets/images/posters/jalamithra-product-lineup-ad.jpg" data-title="Jalamithra Product Lineup" data-badge="PRODUCT AD" data-desc="Filtration range • Brand ambassador endorsement">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/jalamithra-product-lineup-ad.jpg" alt="Jalamithra Product Lineup Advertisement" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Jalamithra Product Lineup</h3>
+              <p>Filtration range • Brand ambassador endorsement</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 30: Jalamithra UFO Concept -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="30" data-src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg" data-title="Jalamithra UFO Concept" data-badge="CREATIVE AD" data-desc="Sci-fi commercial • Tractor beam delivery composite">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg" alt="Jalamithra Extraterrestrial UFO Concept" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Jalamithra UFO Concept</h3>
+              <p>Sci-fi commercial • Tractor beam delivery composite</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 31: CK Arabic Luxury Fragrance -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="31" data-src="assets/images/posters/ck-luxury-perfume-product-ad.jpg" data-title="CK Arabic Luxury Fragrance" data-badge="PRODUCT AD" data-desc="Perfume studio staging • Rope tension & warm lighting">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/ck-luxury-perfume-product-ad.jpg" alt="CK Arabic Luxury Perfume Commercial Staging" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>CK Arabic Luxury Fragrance</h3>
+              <p>Perfume studio staging • Rope tension & warm lighting</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 32: Manly Perfume Campaign -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="32" data-src="assets/images/posters/manly-perfume-commercial-ad.jpg" data-title="Manly Perfume Campaign" data-badge="COMMERCIAL AD" data-desc="Gentleman's lifestyle • Luxury watch & amber glow">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/manly-perfume-commercial-ad.jpg" alt="Manly Perfume Lifestyle Commercial Campaign" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Manly Perfume Campaign</h3>
+              <p>Gentleman's lifestyle • Luxury watch & amber glow</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 33: Hello Money Remittance -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="33" data-src="assets/images/posters/hello-money-remittance-ad.jpg" data-title="Hello Money Remittance" data-badge="FINTECH AD" data-desc="Oman-to-India transfer • Glowing currency arch">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/hello-money-remittance-ad.jpg" alt="Hello Money Remittance Campaign Ad" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Hello Money Remittance</h3>
+              <p>Oman-to-India transfer • Glowing currency arch</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 34: Dugue Crimson Staging -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="34" data-src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg" data-title="Dugue Crimson Staging" data-badge="3D PRODUCT" data-desc="Crimson monochromatic • Bottle & luxury box staging">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg" alt="Dugue Luxury Perfume 3D Staging" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Dugue Crimson Staging</h3>
+              <p>Crimson monochromatic • Bottle & luxury box staging</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 35: Dugue Gold Edition -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="35" data-src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg" data-title="Dugue Gold Edition" data-badge="3D PRODUCT" data-desc="Floating luxury mockup • Gold flacon & minimalist box">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg" alt="Dugue Gold Edition Perfume Mockup" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Dugue Gold Edition</h3>
+              <p>Floating luxury mockup • Gold flacon & minimalist box</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 36: Dugue Obsidian & Magma -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="36" data-src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg" data-title="Dugue Obsidian & Magma" data-badge="3D PRODUCT" data-desc="Volcanic obsidian rock • Internal crimson glow staging">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg" alt="Dugue Obsidian and Magma Perfume Staging" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Dugue Obsidian & Magma</h3>
+              <p>Volcanic obsidian rock • Internal crimson glow staging</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 37: OffLimits Store Danglers -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="37" data-src="assets/images/posters/offlimits-retail-dangler-mockup.png" data-title="OffLimits Store Danglers" data-badge="RETAIL BRANDING" data-desc="Hanging store danglers • 50% Off campaign mockup">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/offlimits-retail-dangler-mockup.png" alt="OffLimits Footwear Retail Danglers Mockup" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>OffLimits Store Danglers</h3>
+              <p>Hanging store danglers • 50% Off campaign mockup</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 38: Arena Tri-Fold Brochure -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="38" data-src="assets/images/posters/arena-motion-graphics-brochure.jpg" data-title="Arena Tri-Fold Brochure" data-badge="PRINT DESIGN" data-desc="Admissions brochure • Dynamic motion design layout">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/arena-motion-graphics-brochure.jpg" alt="Arena Motion Graphics Tri-Fold Brochure" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Arena Tri-Fold Brochure</h3>
+              <p>Admissions brochure • Dynamic motion design layout</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 39: Emirates Catering Iftar -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="39" data-src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg" data-title="Emirates Catering Iftar" data-badge="HOSPITALITY AD" data-desc="Ramadan catering • Traditional feast spread & lantern glow">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg" alt="Emirates Events and Catering Iftar Feast" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Emirates Catering Iftar</h3>
+              <p>Ramadan catering • Traditional feast spread & lantern glow</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 40: MN LY Grand Opening -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="40" data-src="assets/images/posters/mnly-grand-opening-launch-poster.jpg" data-title="MN LY Grand Opening" data-badge="EVENT POSTER" data-desc="Fashion hub launch • Editorial model & guest lineup">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/mnly-grand-opening-launch-poster.jpg" alt="MN LY Fashion Hub Grand Opening Event Poster" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>MN LY Grand Opening</h3>
+              <p>Fashion hub launch • Editorial model & guest lineup</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 41: Free Style Women's Fashion -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="41" data-src="assets/images/posters/freestyle-women-clothing-ad.jpg" data-title="Free Style Women's Fashion" data-badge="FASHION AD" data-desc="Apparel catalog • Festive women & kids collection">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/freestyle-women-clothing-ad.jpg" alt="Free Style Women Clothing Advertisement" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Free Style Women's Fashion</h3>
+              <p>Apparel catalog • Festive women & kids collection</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        <!-- Project 42: Free Style Visiting Card -->
+        <article class="portfolio-card reveal" data-category="ads" data-index="42" data-src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg" data-title="Free Style Visiting Card" data-badge="VISITING CARD" data-desc="Fashion boutique identity • Double-sided visiting card">
+          <div class="portfolio-img-box">
+            <img src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg" alt="Free Style Women Clothing Visiting Card" loading="lazy">
+            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
+          </div>
+          <div class="project-caption">
+            <div>
+              <h3>Free Style Visiting Card</h3>
+              <p>Fashion boutique identity • Double-sided visiting card</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </article>
+        </div>
+    </section>
   </main>
 
   <!-- Master Footer -->
@@ -597,6 +972,8 @@
       </div>
     </div>
   </div>
+
+  <script src="assets/js/diana-projects.js"></script>
 
   <script src="assets/js/script.js"></script>
 </body>

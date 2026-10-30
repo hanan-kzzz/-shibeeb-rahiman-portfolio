@@ -4077,6 +4077,25 @@ body{cursor:default}
 .work-explore-pill-btn:hover .explore-pill-arrow {
   transform: translate(2px, -2px);
 }
+.work-cta-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin: 50px auto 0 auto !important;
+  width: 100% !important;
+}
+
+.work-explore-pill-btn {
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .work-cta-wrap {
+    margin-top: 36px !important;
+  }
+}
+
 
 /* Enhanced Projects.html UI */
 .projects-page-wrap {
