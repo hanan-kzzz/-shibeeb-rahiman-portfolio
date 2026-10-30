@@ -593,19 +593,14 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }, 400);
   }
 
-  // Video Playlist / Showcase Track Switching
+  // Video Playlist / Showcase Track Switching (Supports Horizontal & Vertical 9:16)
   const playlistCards = document.querySelectorAll('.video-track-card');
-  const activeTitle = document.getElementById('showreelActiveTitle');
-  const activeTag = document.getElementById('showreelActiveTag');
-  const activeDesc = document.getElementById('showreelActiveDesc');
 
   playlistCards.forEach(card => {
     card.addEventListener('click', () => {
       const src = card.getAttribute('data-video-src');
       const poster = card.getAttribute('data-poster');
-      const title = card.getAttribute('data-title');
-      const tag = card.getAttribute('data-tag');
-      const desc = card.getAttribute('data-desc');
+      const isVertical = card.getAttribute('data-is-vertical') === 'true';
 
       if (!src || video.src.includes(src)) return;
 
@@ -616,9 +611,12 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       card.classList.add('is-active');
       card.setAttribute('aria-selected', 'true');
 
-      if (activeTitle && title) activeTitle.textContent = title;
-      if (activeTag && tag) activeTag.textContent = tag;
-      if (activeDesc && desc) activeDesc.textContent = desc;
+      // Seamlessly toggle vertical phone format for Vertical Social Reel only
+      if (isVertical) {
+        frame.classList.add('is-vertical');
+      } else {
+        frame.classList.remove('is-vertical');
+      }
 
       showLoader();
       if (progressBar) progressBar.style.width = '0%';
