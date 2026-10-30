@@ -33,7 +33,7 @@ A high-performance, motion-led creative design portfolio featuring editorial lay
 ├── blog.html                       # Insights, GEO-targeted design articles & guides (/blog)
 ├── favicon.svg                     # Root favicon for legacy browser & crawler discovery
 ├── index.html                      # Homepage & curated featured works (/)
-├── projects.html                   # Complete 18-work categorized project archive (/projects)
+├── projects.html                   # Complete 20-work categorized project archive (/projects)
 ├── robots.txt                      # Search engine & AI bot indexing rules
 ├── sitemap.xml                     # XML sitemap with canonical page priority
 └── .gitignore                      # Standard ignores for OS, editor & build artifacts
