@@ -2093,6 +2093,15 @@ body{cursor:default}
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.footer-action-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: clamp(30px, 4.5vh, 50px) !important;
+}
+
 .contact-actions-row {
   display: flex;
   align-items: center;
