@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <base href="/">
+  <script>
+    if (window.location.protocol === 'file:') {
+      var b = document.querySelector('base');
+      if (b) {
+        var p = window.location.pathname.replace(/\\/g, '/');
+        b.href = p.indexOf('/projects/') !== -1 ? '../' : './';
+      }
+    }
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10100e">
   
   <!-- Primary Meta Tags -->
-  <title>All Projects &amp; Visual Systems (20 Works) — Shibeeb Rahiman | Graphic &amp; Motion Designer</title>
-  <meta name="title" content="All Projects &amp; Visual Systems (20 Works) — Shibeeb Rahiman | Graphic &amp; Motion Designer">
-  <meta name="description" content="Explore all 20 commercial brand campaigns & motion films, 3D product &amp; trophy stagings for Educraft, and conceptual typography posters designed by Shibeeb Rahiman (Kerala &amp; Dubai).">
+  <title>Our Projects — Shibeeb Rahiman | Graphic &amp; Motion Designer</title>
+  <meta name="title" content="Our Projects — Shibeeb Rahiman | Graphic &amp; Motion Designer">
+  <meta name="description" content="Explore commercial brand campaigns, 3D product staging, and editorial typography designed to command attention by Shibeeb Rahiman (Kerala &amp; Dubai).">
   <meta name="keywords" content="graphic designer portfolio, 3D product staging, educraft awards mementos, commercial poster design, motion designer kerala, brand identity designer dubai, sports typography poster">
   <meta name="author" content="Shibeeb Rahiman">
   <link rel="canonical" href="https://shibeeb-portfolio.onrender.com/projects">
@@ -17,22 +26,9 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://shibeeb-portfolio.onrender.com/projects">
-  <meta property="og:title" content="All Projects &amp; Visual Systems (20 Works) — Shibeeb Rahiman">
-  <meta property="og:description" content="Browse 43 client campaigns, 3D product stagings, and editorial typography posters with interactive category filters and high-res lightbox.">
+  <meta property="og:title" content="Our Projects — Shibeeb Rahiman">
+  <meta property="og:description" content="Browse 43 client campaigns, 3D product stagings, motion films, and editorial typography posters.">
   <meta property="og:image" content="assets/images/shibeeb-portrait.png">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://shibeeb-portfolio.onrender.com/projects">
-  <meta property="twitter:title" content="All Projects &amp; Visual Systems (20 Works) — Shibeeb Rahiman">
-  <meta property="twitter:description" content="Commercial campaigns, 3D product &amp; trophy staging, motion films, and posters by Shibeeb Rahiman.">
-  <meta property="twitter:image" content="assets/images/shibeeb-portrait.png">
-
-  <!-- Geo & Local SEO -->
-  <meta name="geo.region" content="IN-KL">
-  <meta name="geo.placename" content="Kozhikode, Kerala, India">
-  <meta name="geo.position" content="11.2588;75.7804">
-  <meta name="ICBM" content="11.2588, 75.7804">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
@@ -41,11 +37,11 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/diana-projects.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=6">
+  <link rel="stylesheet" href="assets/css/xfolio-projects.css?v=4">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -67,14 +63,18 @@
         "@type": "CollectionPage",
         "@id": "https://shibeeb-portfolio.onrender.com/projects#collection",
         "url": "https://shibeeb-portfolio.onrender.com/projects",
-        "name": "Complete Project Archive (20 Works) — Shibeeb Rahiman",
-        "description": "Comprehensive gallery of 20 design projects spanning motion graphics, 3D trophy staging, commercial retail campaigns, and typography posters.",
-        "isPartOf": { "@type": "WebSite", "url": "https://shibeeb-portfolio.onrender.com/" },
-        "about": { "@id": "https://shibeeb-portfolio.onrender.com/#shibeeb-rahiman" }
+        "name": "Our Projects (43 Works) — Shibeeb Rahiman",
+        "description": "Comprehensive gallery of 43 design projects spanning motion graphics, 3D trophy staging, commercial retail campaigns, and typography posters."
       }
     ]
   }
   </script>
+
+  <style>
+    /* Critical fallback styles to prevent FOUC / oversized SVG before CSS loads */
+    .pill-flame-svg { width: 22px !important; height: 22px !important; max-width: 22px !important; display: block !important; }
+    .pill-flame-circle { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+  </style>
 </head>
 <body class="theme-obsidian">
   <div class="progress" id="progress"></div>
@@ -84,25 +84,25 @@
   <!-- Floating Pill Navbar -->
   <header class="pill-nav-container">
     <div class="pill-nav-bar" id="pillNav">
-      <a class="pill-logo-btn" href="/" aria-label="Home" title="Shibeeb Rahiman">
+      <a class="pill-logo-btn" href="index.html" aria-label="Home" title="Shibeeb Rahiman">
         <span class="pill-flame-circle">
-          <svg class="pill-flame-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="pill-flame-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;max-width:22px;max-height:22px;display:block;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7 2.1C12.4 2 12.1 2.2 12 2.5C11.3 4.5 11 6.2 11.1 7.7C10.4 7.1 9.7 6.3 9.2 5.4C9 5.1 8.6 5 8.3 5.2C7.1 5.9 6.1 6.9 5.3 8.1C4 9.9 3.3 12.1 3.3 14.4C3.3 19.1 7.1 22.9 11.8 22.9C16.5 22.9 20.3 19.1 20.3 14.4C20.3 10.7 18 7.4 14.9 5.7C14.5 4.4 13.8 3.2 12.7 2.1ZM11.8 20.4C9.1 20.4 6.9 18.2 6.9 15.5C6.9 14.1 7.5 12.9 8.4 12C8.5 13.1 8.9 14.1 9.5 15C9.7 15.3 10.1 15.3 10.4 15.1C10.7 14.9 10.7 14.5 10.5 14.2C9.8 13.3 9.4 12.1 9.5 10.9C10.8 12.2 12.5 13.1 14.4 13.1C14.8 13.1 15.1 13.1 15.4 13C15.3 13.9 15 14.7 14.5 15.4C14.3 15.7 14.4 16.1 14.7 16.3C15 16.5 15.3 16.4 15.5 16.1C16.2 15.1 16.6 14 16.7 12.8C16.9 13.5 17 14.3 17 15.1C17 18.2 14.7 20.4 11.8 20.4Z" fill="#3d69ff"/>
           </svg>
         </span>
       </a>
 
       <nav class="pill-nav-links" id="navlinks" aria-label="Main Navigation">
-        <a href="/" class="pill-nav-item">Home</a>
-        <a href="/#work" class="pill-nav-item">Selected Work</a>
-        <a href="/#showreel" class="pill-nav-item">Reel</a>
-        <a href="/projects" class="pill-nav-item active">Projects</a>
-        <a href="/#about" class="pill-nav-item">About</a>
-        <a href="#contact" class="pill-nav-item">Contact</a>
+        <a href="index.html" class="pill-nav-item">Home</a>
+        <a href="index.html#work" class="pill-nav-item">Selected Work</a>
+        <a href="index.html#showreel" class="pill-nav-item">Reel</a>
+        <a href="projects.html" class="pill-nav-item active">Projects</a>
+        <a href="index.html#about" class="pill-nav-item">About</a>
+        <a href="index.html#contact" class="pill-nav-item">Contact</a>
       </nav>
 
       <div class="pill-nav-right">
-        <a href="/#contact" class="pill-email-btn" id="pillEmailBtn" aria-label="Let's talk">
+        <a href="index.html#contact" class="pill-email-btn" id="pillEmailBtn" aria-label="Let's talk">
           <span class="pill-email-text" id="pillEmailText">Let's talk</span>
         </a>
 
@@ -122,14 +122,14 @@
     <!-- Mobile Dropdown Menu -->
     <div class="pill-mobile-dropdown" id="pillMobileDropdown" aria-hidden="true">
       <nav class="mobile-nav-list" aria-label="Mobile Navigation">
-        <a href="/" class="mobile-nav-link">Home</a>
-        <a href="/#work" class="mobile-nav-link">Selected Work</a>
-        <a href="/#showreel" class="mobile-nav-link">Reel</a>
-        <a href="/projects" class="mobile-nav-link active">Projects ↗</a>
-        <a href="/#about" class="mobile-nav-link">About</a>
-        <a href="/#contact" class="mobile-nav-link">Contact</a>
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="index.html#work" class="mobile-nav-link">Selected Work</a>
+        <a href="index.html#showreel" class="mobile-nav-link">Reel</a>
+        <a href="projects.html" class="mobile-nav-link active">Projects ↗</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#contact" class="mobile-nav-link">Contact</a>
         <div class="mobile-nav-divider"></div>
-        <a href="/#contact" class="mobile-talk-cta">
+        <a href="index.html#contact" class="mobile-talk-cta">
           <span>Let's talk</span>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -137,766 +137,1178 @@
     </div>
   </header>
 
-  <main class="projects-page-wrap wrap">
-        <!-- Diana Etuk Header Bar: Navigation, Ambient Audio Toggle & View Switcher -->
-    <div class="diana-top-bar">
-      <a href="/" class="projects-back-btn" aria-label="Back to homepage">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>BACK TO HOMEPAGE</span>
-      </a>
-
-      <div class="diana-top-actions">
-        <!-- Diana Etuk Ambient Sound Pill -->
-        <button type="button" class="diana-sound-pill" id="dianaSoundToggle" aria-label="Toggle ambient audio experience">
-          <span class="diana-sound-bars" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </span>
-          <span id="dianaSoundLabel">SOUND: OFF</span>
-        </button>
-
-        <!-- Segmented Dual-View Mode Switcher -->
-        <div class="diana-view-switcher" role="tablist" aria-label="Project view mode">
-          <button type="button" class="diana-view-btn active" data-view="showcase" aria-label="Editorial Showcase View">
-            <span>✦ SHOWCASE</span>
-          </button>
-          <button type="button" class="diana-view-btn" data-view="grid" aria-label="Archive Grid View">
-            <span>⊞ GRID ARCHIVE</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Diana Etuk Signature Showcase Slider Section -->
-    <section class="diana-showcase-section" id="dianaShowcaseSection" aria-label="Featured Works Showcase">
-      <div class="diana-showcase-stage">
-        <div class="diana-showcase-grid">
-          <!-- Left: Narrative & Typography -->
-          <div class="diana-showcase-narrative">
-            <div class="diana-showcase-meta-row">
-              <span class="diana-index-badge" id="dianaShowcaseIndex">01 / 43</span>
-              <span class="diana-year-badge" id="dianaShowcaseYear">2026</span>
-              <span class="diana-category-badge" id="dianaShowcaseCategory">AUTOMOTIVE · 4K VFX</span>
-            </div>
-            <h2 class="diana-showcase-title" id="dianaShowcaseTitle">
-              Mahindra Thar — <br><span>4K Automotive Motion</span>
-            </h2>
-            <p class="diana-showcase-premise" id="dianaShowcasePremise">
-              Off-road vehicle dynamics, procedural dirt particle simulation &amp; cinematic dusk composite.
-            </p>
-            <div class="diana-showcase-actions">
-              <button type="button" class="diana-cta-explore" id="dianaCtaExplore">
-                <span>EXPLORE CASE STUDY</span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
-              </button>
-              <button type="button" class="diana-cta-secondary" id="dianaNextBtnSecondary" onclick="document.getElementById('dianaNextBtn').click()">
-                <span>NEXT WORK →</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Right: Cinematic Media Viewport -->
-          <div class="diana-showcase-media" id="dianaShowcaseMedia" role="button" tabindex="0" aria-label="Open project case study">
-            <img class="diana-showcase-img" id="dianaShowcaseImg" src="assets/images/posters/showreel-thumb.jpg" alt="Featured Project" loading="eager">
-            <video class="diana-showcase-video" id="dianaShowcaseVideo" muted loop playsinline style="display:none;"></video>
-            <div class="diana-play-badge" id="dianaShowcasePlayBadge" style="display:none;" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-            </div>
-            <div class="diana-media-overlay-pill" id="dianaShowcaseMediaPill">
-              <span>EXPLORE CASE STUDY</span> ↗
-            </div>
-          </div>
-        </div>
-
-        <!-- Slider Navigation & Progress Track -->
-        <div class="diana-showcase-nav-bar">
-          <div class="diana-slider-arrows">
-            <button type="button" class="diana-arrow-btn" id="dianaPrevBtn" aria-label="Previous Project">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            </button>
-            <button type="button" class="diana-arrow-btn" id="dianaNextBtn" aria-label="Next Project">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-
-          <div class="diana-progress-track">
-            <div class="diana-progress-bar" id="dianaProgressBar"></div>
-          </div>
-
-          <span class="diana-quick-jump mono" id="dianaQuickJump">PROJECT 01 OF 43</span>
-        </div>
-
-        <!-- Bottom Horizontal Thumbnail Jump Strip -->
-        <div class="diana-thumb-strip-wrap">
-          <span class="diana-thumb-strip-label mono">SELECT ANY PROJECT TO PREVIEW (43 WORKS)</span>
-          <div class="diana-thumb-strip" id="dianaThumbStrip"></div>
-        </div>
+  <main class="xfolio-page-wrap">
+    <!-- ====================================================================
+         1. Xfolio Banner & Breadcrumb Header Section
+         ==================================================================== -->
+    <section class="xfolio-banner">
+      <div class="xfolio-banner-content">
+        <h1 class="xfolio-banner-title">Our <span>Projects</span></h1>
+        <nav aria-label="breadcrumb">
+          <ol class="xfolio-breadcrumb-nav">
+            <li class="xfolio-breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="xfolio-breadcrumb-separator" aria-hidden="true"></li>
+            <li class="xfolio-breadcrumb-item active" aria-current="page">
+              Our Projects
+            </li>
+          </ol>
+        </nav>
       </div>
     </section>
 
-    <!-- Archive Grid Section (Toggleable) -->
-    <section class="diana-grid-section is-hidden" id="dianaGridSection">
-
-    <!-- Elevated Page Header & Capsule Stats -->
-    <div class="projects-header-grid">
-      <div class="projects-header-left">
-        <div class="archive-live-pill">
-          <span class="pulse-dot"></span>
-          <span>ARCHIVE 2024–2026 · COMMERCIAL &amp; EDITORIAL</span>
+    <!-- ====================================================================
+         2. Xfolio 2-Column Portfolio Grid Section
+         ==================================================================== -->
+    <section class="xfolio-portfolio-section wrap">
+      <!-- Section Header -->
+      <div class="xfolio-section-header">
+        <div class="xfolio-header-left">
+          <span class="xfolio-sub-title">LATEST PORTFOLIO</span>
+          <h2 class="xfolio-header-title">Innovative Projects &amp;<br>Visual <span>Solutions</span></h2>
         </div>
-        <h1>ALL PROJECTS &amp;<br>VISUAL <span>SYSTEMS.</span></h1>
-        <p class="projects-lead-text">A comprehensive body of work spanning commercial brand advertising, 3D product &amp; trophy staging for Educraft, and conceptual typographic posters created for brands across Kerala and the GCC.</p>
+        <div class="xfolio-header-right">
+          <p class="xfolio-header-desc">
+            Explore commercial brand campaigns, 3D product stagings for Educraft, and cinematic motion graphics crafted to command attention and convert.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- Category Filter Tabs with SVG Icons and Count Badges -->
-    <div class="work-filter-bar" role="tablist" aria-label="Filter works by category">
-      <button type="button" class="work-filter-pill active" data-filter="all">
-        <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
-          <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
-          <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
-          <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
-        </svg>
-        <span>All Works</span>
-        <span class="tab-count">43</span>
-      </button>
-      <button type="button" class="work-filter-pill" data-filter="educraft">
-        <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-          <path d="M4 4h16v6a6 6 0 0 1-12 0V4z"></path>
-          <path d="M12 16v4"></path>
-          <path d="M8 20h8"></path>
-        </svg>
-        <span>3D &amp; Trophies · Educraft</span>
-        <span class="tab-count">8</span>
-      </button>
-      <button type="button" class="work-filter-pill" data-filter="ads">
-        <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-        </svg>
-        <span>Commercial &amp; Ads</span>
-        <span class="tab-count">20</span>
-      </button>
-      <button type="button" class="work-filter-pill" data-filter="posters">
-        <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
-          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
-          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
-          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
-          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
-        </svg>
-        <span>Posters &amp; Editorial</span>
-        <span class="tab-count">11</span>
-      </button>
-      <button type="button" class="work-filter-pill" data-filter="motion">
-        <svg class="filter-tab-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-        <span>Motion &amp; Video</span>
-        <span class="tab-count">4</span>
-      </button>
-    </div>
+      <!-- Category Filter Tabs -->
+      <div class="xfolio-filter-bar" role="tablist" aria-label="Filter projects by category">
+        <button type="button" class="xfolio-filter-pill active" data-filter="all">
+          <span>All Works</span>
+          <span class="pill-count">43</span>
+        </button>
+        <button type="button" class="xfolio-filter-pill" data-filter="ads">
+          <span>Commercial &amp; Ads</span>
+          <span class="pill-count">20</span>
+        </button>
+        <button type="button" class="xfolio-filter-pill" data-filter="educraft">
+          <span>3D &amp; Educraft</span>
+          <span class="pill-count">8</span>
+        </button>
+        <button type="button" class="xfolio-filter-pill" data-filter="posters">
+          <span>Posters &amp; Editorial</span>
+          <span class="pill-count">11</span>
+        </button>
+        <button type="button" class="xfolio-filter-pill" data-filter="motion">
+          <span>Motion &amp; Video</span>
+          <span class="pill-count">4</span>
+        </button>
+      </div>
 
-    <!-- Full 43 Project Grid -->
-    <div class="portfolio-grid" id="portfolioGrid">
-        <!-- Motion 1: Showreel 2026 -->
-        <article class="portfolio-card reveal" data-category="motion" data-index="0" data-src="assets/images/posters/showreel-thumb.jpg" data-video-src="assets/videos/shibeeb-showreel.mp4" data-title="Showreel 2026 — Motion In Action" data-badge="SHOWREEL · 00:30" data-desc="Brand identities, kinetic typography &amp; 3D pacing">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/showreel-thumb.jpg" alt="Showreel 2026 Motion Direction" loading="lazy">
-            <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Showreel 2026 — Motion In Action</h3>
-              <p>Brand identities, kinetic typography &amp; 3D pacing</p>
+      <!-- Xfolio 2-Column Grid -->
+      <div class="portfolio-two-grid" id="xfolioGrid">
+        
+        <!-- Project 1: Showreel 2026 — Motion In Action -->
+        <article class="portfolio-two__single" data-category="motion" data-index="0" data-src="assets/images/posters/showreel-thumb.jpg" data-video-src="assets/videos/shibeeb-showreel.mp4" data-title="Showreel 2026 — Motion In Action" data-badge="SHOWREEL · 00:30" data-desc="Brand identities, kinetic typography &amp; 3D pacing">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Showreel 2026 — Motion In Action">
+            <div class="img-wrap">
+              <img src="assets/images/posters/showreel-thumb.jpg" alt="Showreel 2026 — Motion In Action" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">▶</span>
+            <div class="video-indicator-badge">
+           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+           <span>VIDEO</span>
+         </div>
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                <span>WATCH REEL</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Showreel 2026 — Motion In Action</a></h4>
+              <p class="content-desc">Brand identities, kinetic typography &amp; 3D pacing</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">MOTION GRAPHICS</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="motion" data-index="1" data-src="assets/images/posters/car-video-thumb.jpg" data-video-src="assets/videos/cinematic-car-reel.mp4" data-title="Mahindra Thar — 4K Automotive Motion" data-badge="AUTOMOTIVE · 00:58" data-desc="Off-road physics, dirt particles &amp; cinematic composite">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/car-video-thumb.jpg" alt="Mahindra Thar 4K Automotive Reel" loading="lazy">
-            <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Mahindra Thar — 4K Automotive Motion</h3>
-              <p>Off-road physics, dirt particles &amp; cinematic composite</p>
+
+        <!-- Project 2: Mahindra Thar — 4K Automotive Motion -->
+        <article class="portfolio-two__single" data-category="motion" data-index="1" data-src="assets/images/posters/car-video-thumb.jpg" data-video-src="assets/videos/cinematic-car-reel.mp4" data-title="Mahindra Thar — 4K Automotive Motion" data-badge="AUTOMOTIVE · 00:58" data-desc="Off-road physics, dirt particles &amp; cinematic composite">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Mahindra Thar — 4K Automotive Motion">
+            <div class="img-wrap">
+              <img src="assets/images/posters/car-video-thumb.jpg" alt="Mahindra Thar — 4K Automotive Motion" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">▶</span>
+            <div class="video-indicator-badge">
+           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+           <span>VIDEO</span>
+         </div>
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                <span>WATCH REEL</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Mahindra Thar — 4K Automotive Motion</a></h4>
+              <p class="content-desc">Off-road physics, dirt particles &amp; cinematic composite</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">MOTION GRAPHICS</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="motion" data-index="2" data-src="assets/images/posters/final-out-thumb.jpg" data-video-src="assets/videos/social-motion-reel.mp4" data-title="Vertical Motion — Social &amp; Campaign Cuts" data-badge="SOCIAL REEL · 00:24" data-desc="Fast-paced mobile transitions &amp; campaign pacing">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/final-out-thumb.jpg" alt="Vertical Motion Campaign Cut" loading="lazy">
-            <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Vertical Motion — Social &amp; Campaign Cuts</h3>
-              <p>Fast-paced mobile transitions &amp; campaign pacing</p>
+
+        <!-- Project 3: Vertical Motion — Social &amp; Campaign Cuts -->
+        <article class="portfolio-two__single" data-category="motion" data-index="2" data-src="assets/images/posters/final-out-thumb.jpg" data-video-src="assets/videos/social-motion-reel.mp4" data-title="Vertical Motion — Social &amp; Campaign Cuts" data-badge="SOCIAL REEL · 00:24" data-desc="Fast-paced mobile transitions &amp; campaign pacing">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Vertical Motion — Social &amp; Campaign Cuts">
+            <div class="img-wrap">
+              <img src="assets/images/posters/final-out-thumb.jpg" alt="Vertical Motion — Social &amp; Campaign Cuts" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">▶</span>
+            <div class="video-indicator-badge">
+           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+           <span>VIDEO</span>
+         </div>
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                <span>WATCH REEL</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Vertical Motion — Social &amp; Campaign Cuts</a></h4>
+              <p class="content-desc">Fast-paced mobile transitions &amp; campaign pacing</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">MOTION GRAPHICS</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="motion" data-index="3" data-src="assets/images/posters/reel-frame.jpg" data-video-src="assets/videos/shibeeb-cv.mp4" data-title="Portfolio Interactive CV Reel" data-badge="PORTFOLIO · 00:46" data-desc="Curated brand identity design &amp; motion graphics">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/reel-frame.jpg" alt="Portfolio Interactive CV Reel" loading="lazy">
-            <div class="portfolio-zoom-hint mono">WATCH FILM ▶</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Portfolio Interactive CV Reel</h3>
-              <p>Curated brand identity design &amp; motion graphics</p>
+
+        <!-- Project 4: Portfolio Interactive CV Reel -->
+        <article class="portfolio-two__single" data-category="motion" data-index="3" data-src="assets/images/posters/reel-frame.jpg" data-video-src="assets/videos/shibeeb-cv.mp4" data-title="Portfolio Interactive CV Reel" data-badge="PORTFOLIO · 00:46" data-desc="Curated brand identity design &amp; motion graphics">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Portfolio Interactive CV Reel">
+            <div class="img-wrap">
+              <img src="assets/images/posters/reel-frame.jpg" alt="Portfolio Interactive CV Reel" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">▶</span>
+            <div class="video-indicator-badge">
+           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+           <span>VIDEO</span>
+         </div>
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                <span>WATCH REEL</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Portfolio Interactive CV Reel</a></h4>
+              <p class="content-desc">Curated brand identity design &amp; motion graphics</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">MOTION GRAPHICS</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="ads" data-index="4" data-src="assets/images/posters/yas-sports-shoes-promo.jpg" data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/yas-sports-shoes-promo.jpg" alt="YAS Sports 50% Off Footwear Campaign" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>YAS Sports — Footwear Promo</h3>
-              <p>Social campaign · 3D product pedestal staging</p>
+
+        <!-- Project 5: YAS Sports — Footwear Promo -->
+        <article class="portfolio-two__single" data-category="ads" data-index="4" data-src="assets/images/posters/yas-sports-shoes-promo.jpg"  data-title="YAS Sports — Footwear Promo" data-badge="COMMERCIAL AD" data-desc="Social campaign · 3D product pedestal staging">
+          <div class="thumb" tabindex="0" role="button" aria-label="View YAS Sports — Footwear Promo">
+            <div class="img-wrap">
+              <img src="assets/images/posters/yas-sports-shoes-promo.jpg" alt="YAS Sports — Footwear Promo" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">YAS Sports — Footwear Promo</a></h4>
+              <p class="content-desc">Social campaign · 3D product pedestal staging</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="5" data-src="assets/images/posters/educraft-sahodaya-memento.png" data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-sahodaya-memento.png" alt="Malappuram Sahodaya Award Ceremony Memento" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Malappuram Sahodaya Memento</h3>
-              <p>Award ceremony plaque · Fluid 3D podium rendering</p>
+
+        <!-- Project 6: Malappuram Sahodaya Memento -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="5" data-src="assets/images/posters/educraft-sahodaya-memento.png"  data-title="Malappuram Sahodaya Memento" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Award ceremony plaque · Fluid 3D podium rendering">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Malappuram Sahodaya Memento">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-sahodaya-memento.png" alt="Malappuram Sahodaya Memento" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Malappuram Sahodaya Memento</a></h4>
+              <p class="content-desc">Award ceremony plaque · Fluid 3D podium rendering</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="6" data-src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" alt="Sachin Tendulkar God of Cricket Typography Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Sachin Tendulkar Tribute</h3>
-              <p>Monochrome triptych study · Celebratory typography</p>
+
+        <!-- Project 7: Sachin Tendulkar Tribute -->
+        <article class="portfolio-two__single" data-category="posters" data-index="6" data-src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg"  data-title="Sachin Tendulkar Tribute" data-badge="SPORTS POSTER" data-desc="Monochrome triptych study · Celebratory typography">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Sachin Tendulkar Tribute">
+            <div class="img-wrap">
+              <img src="assets/images/posters/sachin-tendulkar-god-of-cricket.jpg" alt="Sachin Tendulkar Tribute" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Sachin Tendulkar Tribute</a></h4>
+              <p class="content-desc">Monochrome triptych study · Celebratory typography</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="ads" data-index="7" data-src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" data-title="OffLimits Cricket Spikes" data-badge="COMMERCIAL AD" data-desc="Performance footwear launch · Dynamic turf particles">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" alt="OffLimits Cricket Shoes Commercial Campaign" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>OffLimits Cricket Spikes</h3>
-              <p>Performance footwear launch · Dynamic turf particles</p>
+
+        <!-- Project 8: OffLimits Cricket Spikes -->
+        <article class="portfolio-two__single" data-category="ads" data-index="7" data-src="assets/images/posters/offlimits-cricket-shoes-ad.jpg"  data-title="OffLimits Cricket Spikes" data-badge="COMMERCIAL AD" data-desc="Performance footwear launch · Dynamic turf particles">
+          <div class="thumb" tabindex="0" role="button" aria-label="View OffLimits Cricket Spikes">
+            <div class="img-wrap">
+              <img src="assets/images/posters/offlimits-cricket-shoes-ad.jpg" alt="OffLimits Cricket Spikes" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">OffLimits Cricket Spikes</a></h4>
+              <p class="content-desc">Performance footwear launch · Dynamic turf particles</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="8" data-src="assets/images/posters/educraft-podium-trophies.png" data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd & 3rd place podium · Polished acrylic & gold">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-podium-trophies.png" alt="Educraft Podium Championship Series Trophies" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Championship Series Trophies</h3>
-              <p>1st, 2nd & 3rd place podium · Polished acrylic & gold</p>
+
+        <!-- Project 9: Championship Series Trophies -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="8" data-src="assets/images/posters/educraft-podium-trophies.png"  data-title="Championship Series Trophies" data-badge="3D STAGING · EDUCRAFT" data-desc="1st, 2nd & 3rd place podium · Polished acrylic & gold">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Championship Series Trophies">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-podium-trophies.png" alt="Championship Series Trophies" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Championship Series Trophies</a></h4>
+              <p class="content-desc">1st, 2nd & 3rd place podium · Polished acrylic & gold</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="9" data-src="assets/images/posters/mahindra-thar-automotive-poster.jpg" data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/mahindra-thar-automotive-poster.jpg" alt="Mahindra Thar Automotive Concept Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Mahindra Thar: Explore The Impossible</h3>
-              <p>Cinematic off-road composite · High-energy dirt trail</p>
+
+        <!-- Project 10: Mahindra Thar: Explore The Impossible -->
+        <article class="portfolio-two__single" data-category="posters" data-index="9" data-src="assets/images/posters/mahindra-thar-automotive-poster.jpg"  data-title="Mahindra Thar: Explore The Impossible" data-badge="AUTOMOTIVE POSTER" data-desc="Cinematic off-road composite · High-energy dirt trail">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Mahindra Thar: Explore The Impossible">
+            <div class="img-wrap">
+              <img src="assets/images/posters/mahindra-thar-automotive-poster.jpg" alt="Mahindra Thar: Explore The Impossible" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Mahindra Thar: Explore The Impossible</a></h4>
+              <p class="content-desc">Cinematic off-road composite · High-energy dirt trail</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="ads" data-index="10" data-src="assets/images/posters/mnly-fashion-hub-launch.jpg" data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/mnly-fashion-hub-launch.jpg" alt="MN LY Fashion Hub Retail Launch Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>MN LY Menswear Fashion Hub</h3>
-              <p>Retail fashion launch · Modern warm neutral layout</p>
+
+        <!-- Project 11: MN LY Menswear Fashion Hub -->
+        <article class="portfolio-two__single" data-category="ads" data-index="10" data-src="assets/images/posters/mnly-fashion-hub-launch.jpg"  data-title="MN LY Menswear Fashion Hub" data-badge="BRAND LAUNCH" data-desc="Retail fashion launch · Modern warm neutral layout">
+          <div class="thumb" tabindex="0" role="button" aria-label="View MN LY Menswear Fashion Hub">
+            <div class="img-wrap">
+              <img src="assets/images/posters/mnly-fashion-hub-launch.jpg" alt="MN LY Menswear Fashion Hub" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">MN LY Menswear Fashion Hub</a></h4>
+              <p class="content-desc">Retail fashion launch · Modern warm neutral layout</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="11" data-src="assets/images/posters/move-your-world-poster.jpeg" data-title="Move Your World" data-badge="EDITORIAL POSTER" data-desc="Astronaut & planetary cosmic collage · Swiss type">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/move-your-world-poster.jpeg" alt="Move Your World Conceptual Design Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Move Your World</h3>
-              <p>Astronaut & planetary cosmic collage · Swiss type</p>
+
+        <!-- Project 12: Move Your World -->
+        <article class="portfolio-two__single" data-category="posters" data-index="11" data-src="assets/images/posters/move-your-world-poster.jpeg"  data-title="Move Your World" data-badge="EDITORIAL POSTER" data-desc="Astronaut & planetary cosmic collage · Swiss type">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Move Your World">
+            <div class="img-wrap">
+              <img src="assets/images/posters/move-your-world-poster.jpeg" alt="Move Your World" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Move Your World</a></h4>
+              <p class="content-desc">Astronaut & planetary cosmic collage · Swiss type</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="12" data-src="assets/images/posters/educraft-msat-excellence-award.png" data-title="MSAT 2024 Excellence Award" data-badge="AWARD DESIGN · EDUCRAFT" data-desc="Star & wing gold insignia · Laser-cut clear acrylic">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-msat-excellence-award.png" alt="MSAT 2024 Academic Excellence Award Memento" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>MSAT 2024 Excellence Award</h3>
-              <p>Star & wing gold insignia · Laser-cut clear acrylic</p>
+
+        <!-- Project 13: MSAT 2024 Excellence Award -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="12" data-src="assets/images/posters/educraft-msat-excellence-award.png"  data-title="MSAT 2024 Excellence Award" data-badge="AWARD DESIGN · EDUCRAFT" data-desc="Star & wing gold insignia · Laser-cut clear acrylic">
+          <div class="thumb" tabindex="0" role="button" aria-label="View MSAT 2024 Excellence Award">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-msat-excellence-award.png" alt="MSAT 2024 Excellence Award" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">MSAT 2024 Excellence Award</a></h4>
+              <p class="content-desc">Star & wing gold insignia · Laser-cut clear acrylic</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="13" data-src="assets/images/posters/world-population-day-poster.jpg" data-title="World Population Day" data-badge="AWARENESS POSTER" data-desc="Minimalist continuous line-art · Planetary demographic">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/world-population-day-poster.jpg" alt="World Population Day Conceptual Line Art Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>World Population Day</h3>
-              <p>Minimalist continuous line-art · Planetary demographic</p>
+
+        <!-- Project 14: World Population Day -->
+        <article class="portfolio-two__single" data-category="posters" data-index="13" data-src="assets/images/posters/world-population-day-poster.jpg"  data-title="World Population Day" data-badge="AWARENESS POSTER" data-desc="Minimalist continuous line-art · Planetary demographic">
+          <div class="thumb" tabindex="0" role="button" aria-label="View World Population Day">
+            <div class="img-wrap">
+              <img src="assets/images/posters/world-population-day-poster.jpg" alt="World Population Day" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">World Population Day</a></h4>
+              <p class="content-desc">Minimalist continuous line-art · Planetary demographic</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="14" data-src="assets/images/posters/educraft-rotary-cricket-awards.png" data-title="Rotary Cricket League Set" data-badge="SPORTS TROPHIES · EDUCRAFT" data-desc="Bowler & batsman cutouts on frosted trophy bases">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-rotary-cricket-awards.png" alt="Rotary Cricket League Custom Tournament Trophies" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Rotary Cricket League Set</h3>
-              <p>Bowler & batsman cutouts on frosted trophy bases</p>
+
+        <!-- Project 15: Rotary Cricket League Set -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="14" data-src="assets/images/posters/educraft-rotary-cricket-awards.png"  data-title="Rotary Cricket League Set" data-badge="SPORTS TROPHIES · EDUCRAFT" data-desc="Bowler & batsman cutouts on frosted trophy bases">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Rotary Cricket League Set">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-rotary-cricket-awards.png" alt="Rotary Cricket League Set" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Rotary Cricket League Set</a></h4>
+              <p class="content-desc">Bowler & batsman cutouts on frosted trophy bases</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="15" data-src="assets/images/posters/educraft-best-batsman-award.png" data-title="Best Batsman Golden Sculpture" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Dynamic batsman swing statue on stepped pedestal">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-best-batsman-award.png" alt="Educraft Best Batsman Golden Cricket Trophy" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Best Batsman Golden Sculpture</h3>
-              <p>Dynamic batsman swing statue on stepped pedestal</p>
+
+        <!-- Project 16: Best Batsman Golden Sculpture -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="15" data-src="assets/images/posters/educraft-best-batsman-award.png"  data-title="Best Batsman Golden Sculpture" data-badge="3D PRODUCT · EDUCRAFT" data-desc="Dynamic batsman swing statue on stepped pedestal">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Best Batsman Golden Sculpture">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-best-batsman-award.png" alt="Best Batsman Golden Sculpture" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Best Batsman Golden Sculpture</a></h4>
+              <p class="content-desc">Dynamic batsman swing statue on stepped pedestal</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="16" data-src="assets/images/posters/educraft-leadership-acrylic-plaque.png" data-title="Leadership & Service Citations" data-badge="CORPORATE AWARDS" data-desc="Custom red acrylic & marble luxury corporate set">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-leadership-acrylic-plaque.png" alt="Educraft Corporate Leadership Recognition Plaques" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Leadership & Service Citations</h3>
-              <p>Custom red acrylic & marble luxury corporate set</p>
+
+        <!-- Project 17: Leadership & Service Citations -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="16" data-src="assets/images/posters/educraft-leadership-acrylic-plaque.png"  data-title="Leadership & Service Citations" data-badge="CORPORATE AWARDS" data-desc="Custom red acrylic & marble luxury corporate set">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Leadership & Service Citations">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-leadership-acrylic-plaque.png" alt="Leadership & Service Citations" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Leadership & Service Citations</a></h4>
+              <p class="content-desc">Custom red acrylic & marble luxury corporate set</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="17" data-src="assets/images/posters/hijra-new-year-poster.jpg" data-title="Hijra New Year Desert Journey" data-badge="CULTURAL DESIGN" data-desc="Monochrome caravan photography · Olive Arabic typography">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/hijra-new-year-poster.jpg" alt="Happy New Hijra Year Desert Journey Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Hijra New Year Desert Journey</h3>
-              <p>Monochrome caravan photography · Olive Arabic typography</p>
+
+        <!-- Project 18: Hijra New Year Desert Journey -->
+        <article class="portfolio-two__single" data-category="posters" data-index="17" data-src="assets/images/posters/hijra-new-year-poster.jpg"  data-title="Hijra New Year Desert Journey" data-badge="CULTURAL DESIGN" data-desc="Monochrome caravan photography · Olive Arabic typography">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Hijra New Year Desert Journey">
+            <div class="img-wrap">
+              <img src="assets/images/posters/hijra-new-year-poster.jpg" alt="Hijra New Year Desert Journey" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Hijra New Year Desert Journey</a></h4>
+              <p class="content-desc">Monochrome caravan photography · Olive Arabic typography</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="educraft" data-index="18" data-src="assets/images/posters/educraft-arabic-calligraphy-memento.png" data-title="ALFIA Student's Memento" data-badge="ARABIC TYPE · EDUCRAFT" data-desc="Geometric Kufic calligraphy · Timber & gloss acrylic plaque">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-arabic-calligraphy-memento.png" alt="ALFIA Arabic Calligraphy Wood & Acrylic Memento" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>ALFIA Student's Memento</h3>
-              <p>Geometric Kufic calligraphy · Timber & gloss acrylic plaque</p>
+
+        <!-- Project 19: ALFIA Student's Memento -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="18" data-src="assets/images/posters/educraft-arabic-calligraphy-memento.png"  data-title="ALFIA Student's Memento" data-badge="ARABIC TYPE · EDUCRAFT" data-desc="Geometric Kufic calligraphy · Timber & gloss acrylic plaque">
+          <div class="thumb" tabindex="0" role="button" aria-label="View ALFIA Student's Memento">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-arabic-calligraphy-memento.png" alt="ALFIA Student's Memento" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">ALFIA Student's Memento</a></h4>
+              <p class="content-desc">Geometric Kufic calligraphy · Timber & gloss acrylic plaque</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-<article class="portfolio-card reveal" data-category="posters" data-index="19" data-src="assets/images/posters/explore-the-world-travel-poster.jpg" data-title="Explore The World" data-badge="TRAVEL POSTER" data-desc="3D character mascot · Dynamic cartographic travel poster">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/explore-the-world-travel-poster.jpg" alt="Explore The World 3D Travel Character Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Explore The World</h3>
-              <p>3D character mascot · Dynamic cartographic travel poster</p>
+
+        <!-- Project 20: Explore The World -->
+        <article class="portfolio-two__single" data-category="posters" data-index="19" data-src="assets/images/posters/explore-the-world-travel-poster.jpg"  data-title="Explore The World" data-badge="TRAVEL POSTER" data-desc="3D character mascot · Dynamic cartographic travel poster">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Explore The World">
+            <div class="img-wrap">
+              <img src="assets/images/posters/explore-the-world-travel-poster.jpg" alt="Explore The World" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Explore The World</a></h4>
+              <p class="content-desc">3D character mascot · Dynamic cartographic travel poster</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 20: Plymarc Excellence Plaque -->
-        <article class="portfolio-card reveal" data-category="educraft" data-index="20" data-src="assets/images/posters/educraft-plymarc-wooden-plaque.png" data-title="Plymarc Excellence Plaque" data-badge="3D PRODUCT • EDUCRAFT" data-desc="Hexagonal wooden trophy • 3D podium presentation">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/educraft-plymarc-wooden-plaque.png" alt="Plymarc Excellence Award Plaque" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Plymarc Excellence Plaque</h3>
-              <p>Hexagonal wooden trophy • 3D podium presentation</p>
+
+        <!-- Project 21: Plymarc Excellence Plaque -->
+        <article class="portfolio-two__single" data-category="educraft" data-index="20" data-src="assets/images/posters/educraft-plymarc-wooden-plaque.png"  data-title="Plymarc Excellence Plaque" data-badge="3D PRODUCT • EDUCRAFT" data-desc="Hexagonal wooden trophy • 3D podium presentation">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Plymarc Excellence Plaque">
+            <div class="img-wrap">
+              <img src="assets/images/posters/educraft-plymarc-wooden-plaque.png" alt="Plymarc Excellence Plaque" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Plymarc Excellence Plaque</a></h4>
+              <p class="content-desc">Hexagonal wooden trophy • 3D podium presentation</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">3D · EDUCRAFT</span>
+            </div>
           </div>
         </article>
-        <!-- Project 21: Mercedes G-Class Portal -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="21" data-src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg" data-title="Mercedes G-Class Portal" data-badge="PHOTO MANIPULATION" data-desc="Surreal 3D breakout • Automotive portal manipulation">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg" alt="Mercedes G-Class The Best or Nothing Photo Manipulation" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Mercedes G-Class Portal</h3>
-              <p>Surreal 3D breakout • Automotive portal manipulation</p>
+
+        <!-- Project 22: Mercedes G-Class Portal -->
+        <article class="portfolio-two__single" data-category="posters" data-index="21" data-src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg"  data-title="Mercedes G-Class Portal" data-badge="PHOTO MANIPULATION" data-desc="Surreal 3D breakout • Automotive portal manipulation">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Mercedes G-Class Portal">
+            <div class="img-wrap">
+              <img src="assets/images/posters/mercedes-benz-g-class-manipulation.jpg" alt="Mercedes G-Class Portal" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Mercedes G-Class Portal</a></h4>
+              <p class="content-desc">Surreal 3D breakout • Automotive portal manipulation</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 22: Nightfall Quarantine Zone -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="22" data-src="assets/images/posters/dystopian-matte-painting-concept.jpg" data-title="Nightfall Quarantine Zone" data-badge="MATTE PAINTING" data-desc="Cinematic concept art • Post-apocalyptic environment">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/dystopian-matte-painting-concept.jpg" alt="Nightfall Quarantine Zone Matte Painting" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Nightfall Quarantine Zone</h3>
-              <p>Cinematic concept art • Post-apocalyptic environment</p>
+
+        <!-- Project 23: Nightfall Quarantine Zone -->
+        <article class="portfolio-two__single" data-category="posters" data-index="22" data-src="assets/images/posters/dystopian-matte-painting-concept.jpg"  data-title="Nightfall Quarantine Zone" data-badge="MATTE PAINTING" data-desc="Cinematic concept art • Post-apocalyptic environment">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Nightfall Quarantine Zone">
+            <div class="img-wrap">
+              <img src="assets/images/posters/dystopian-matte-painting-concept.jpg" alt="Nightfall Quarantine Zone" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Nightfall Quarantine Zone</a></h4>
+              <p class="content-desc">Cinematic concept art • Post-apocalyptic environment</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 23: Thomas Shelby Tribute -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="23" data-src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg" data-title="Thomas Shelby Tribute" data-badge="SMUDGE ART" data-desc="Digital smudge painting • Cinematic Peaky Blinders portrait">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg" alt="Thomas Shelby Peaky Blinders Smudge Art" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Thomas Shelby Tribute</h3>
-              <p>Digital smudge painting • Cinematic Peaky Blinders portrait</p>
+
+        <!-- Project 24: Thomas Shelby Tribute -->
+        <article class="portfolio-two__single" data-category="posters" data-index="23" data-src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg"  data-title="Thomas Shelby Tribute" data-badge="SMUDGE ART" data-desc="Digital smudge painting • Cinematic Peaky Blinders portrait">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Thomas Shelby Tribute">
+            <div class="img-wrap">
+              <img src="assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg" alt="Thomas Shelby Tribute" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Thomas Shelby Tribute</a></h4>
+              <p class="content-desc">Digital smudge painting • Cinematic Peaky Blinders portrait</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 24: Fast X: Dominic Toretto -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="24" data-src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg" data-title="Fast X: Dominic Toretto" data-badge="VECTOR ART" data-desc="Monochrome vector tribute • Dodge Charger silhouette">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg" alt="Fast X Dominic Toretto Vector Art" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Fast X: Dominic Toretto</h3>
-              <p>Monochrome vector tribute • Dodge Charger silhouette</p>
+
+        <!-- Project 25: Fast X: Dominic Toretto -->
+        <article class="portfolio-two__single" data-category="posters" data-index="24" data-src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg"  data-title="Fast X: Dominic Toretto" data-badge="VECTOR ART" data-desc="Monochrome vector tribute • Dodge Charger silhouette">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Fast X: Dominic Toretto">
+            <div class="img-wrap">
+              <img src="assets/images/posters/fast-x-dom-toretto-vector-art.jpg" alt="Fast X: Dominic Toretto" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Fast X: Dominic Toretto</a></h4>
+              <p class="content-desc">Monochrome vector tribute • Dodge Charger silhouette</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 25: Finding — Children's Book -->
-        <article class="portfolio-card reveal" data-category="posters" data-index="25" data-src="assets/images/posters/finding-vector-illustration.jpg" data-title="Finding — Children's Book" data-badge="VECTOR ILLUSTRATION" data-desc="Storybook illustration • Vibrant jungle explorer scene">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/finding-vector-illustration.jpg" alt="Finding Childrens Book Vector Illustration" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Finding — Children's Book</h3>
-              <p>Storybook illustration • Vibrant jungle explorer scene</p>
+
+        <!-- Project 26: Finding — Children's Book -->
+        <article class="portfolio-two__single" data-category="posters" data-index="25" data-src="assets/images/posters/finding-vector-illustration.jpg"  data-title="Finding — Children's Book" data-badge="VECTOR ILLUSTRATION" data-desc="Storybook illustration • Vibrant jungle explorer scene">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Finding — Children's Book">
+            <div class="img-wrap">
+              <img src="assets/images/posters/finding-vector-illustration.jpg" alt="Finding — Children's Book" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Finding — Children's Book</a></h4>
+              <p class="content-desc">Storybook illustration • Vibrant jungle explorer scene</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">POSTER ART</span>
+            </div>
           </div>
         </article>
-        <!-- Project 26: Jalamithra × Spider-Man -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="26" data-src="assets/images/posters/jalamithra-water-purifier-ad.jpg" data-title="Jalamithra × Spider-Man" data-badge="COMMERCIAL AD" data-desc="Superhero commercial • Night skyscraper web composite">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/jalamithra-water-purifier-ad.jpg" alt="Jalamithra Spider-Man Commercial Campaign" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Jalamithra × Spider-Man</h3>
-              <p>Superhero commercial • Night skyscraper web composite</p>
+
+        <!-- Project 27: Jalamithra × Spider-Man -->
+        <article class="portfolio-two__single" data-category="ads" data-index="26" data-src="assets/images/posters/jalamithra-water-purifier-ad.jpg"  data-title="Jalamithra × Spider-Man" data-badge="COMMERCIAL AD" data-desc="Superhero commercial • Night skyscraper web composite">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Jalamithra × Spider-Man">
+            <div class="img-wrap">
+              <img src="assets/images/posters/jalamithra-water-purifier-ad.jpg" alt="Jalamithra × Spider-Man" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Jalamithra × Spider-Man</a></h4>
+              <p class="content-desc">Superhero commercial • Night skyscraper web composite</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 27: Jalamithra Eid Campaign -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="27" data-src="assets/images/posters/jalamithra-eid-mubarak-ad.png" data-title="Jalamithra Eid Campaign" data-badge="FESTIVE AD" data-desc="Holiday product promo • Modern architectural staging">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/jalamithra-eid-mubarak-ad.png" alt="Jalamithra Eid Mubarak Campaign" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Jalamithra Eid Campaign</h3>
-              <p>Holiday product promo • Modern architectural staging</p>
+
+        <!-- Project 28: Jalamithra Eid Campaign -->
+        <article class="portfolio-two__single" data-category="ads" data-index="27" data-src="assets/images/posters/jalamithra-eid-mubarak-ad.png"  data-title="Jalamithra Eid Campaign" data-badge="FESTIVE AD" data-desc="Holiday product promo • Modern architectural staging">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Jalamithra Eid Campaign">
+            <div class="img-wrap">
+              <img src="assets/images/posters/jalamithra-eid-mubarak-ad.png" alt="Jalamithra Eid Campaign" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Jalamithra Eid Campaign</a></h4>
+              <p class="content-desc">Holiday product promo • Modern architectural staging</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 28: Jalamithra Pure Living -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="28" data-src="assets/images/posters/jalamithra-pure-living-ad.jpg" data-title="Jalamithra Pure Living" data-badge="COMMERCIAL AD" data-desc="Natural water filtration • Crystal pouring dynamics">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/jalamithra-pure-living-ad.jpg" alt="Jalamithra Pure Living Water Filter Ad" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Jalamithra Pure Living</h3>
-              <p>Natural water filtration • Crystal pouring dynamics</p>
+
+        <!-- Project 29: Jalamithra Pure Living -->
+        <article class="portfolio-two__single" data-category="ads" data-index="28" data-src="assets/images/posters/jalamithra-pure-living-ad.jpg"  data-title="Jalamithra Pure Living" data-badge="COMMERCIAL AD" data-desc="Natural water filtration • Crystal pouring dynamics">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Jalamithra Pure Living">
+            <div class="img-wrap">
+              <img src="assets/images/posters/jalamithra-pure-living-ad.jpg" alt="Jalamithra Pure Living" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Jalamithra Pure Living</a></h4>
+              <p class="content-desc">Natural water filtration • Crystal pouring dynamics</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 29: Jalamithra Product Lineup -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="29" data-src="assets/images/posters/jalamithra-product-lineup-ad.jpg" data-title="Jalamithra Product Lineup" data-badge="PRODUCT AD" data-desc="Filtration range • Brand ambassador endorsement">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/jalamithra-product-lineup-ad.jpg" alt="Jalamithra Product Lineup Advertisement" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Jalamithra Product Lineup</h3>
-              <p>Filtration range • Brand ambassador endorsement</p>
+
+        <!-- Project 30: Jalamithra Product Lineup -->
+        <article class="portfolio-two__single" data-category="ads" data-index="29" data-src="assets/images/posters/jalamithra-product-lineup-ad.jpg"  data-title="Jalamithra Product Lineup" data-badge="PRODUCT AD" data-desc="Filtration range • Brand ambassador endorsement">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Jalamithra Product Lineup">
+            <div class="img-wrap">
+              <img src="assets/images/posters/jalamithra-product-lineup-ad.jpg" alt="Jalamithra Product Lineup" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Jalamithra Product Lineup</a></h4>
+              <p class="content-desc">Filtration range • Brand ambassador endorsement</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 30: Jalamithra UFO Concept -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="30" data-src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg" data-title="Jalamithra UFO Concept" data-badge="CREATIVE AD" data-desc="Sci-fi commercial • Tractor beam delivery composite">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg" alt="Jalamithra Extraterrestrial UFO Concept" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Jalamithra UFO Concept</h3>
-              <p>Sci-fi commercial • Tractor beam delivery composite</p>
+
+        <!-- Project 31: Jalamithra UFO Concept -->
+        <article class="portfolio-two__single" data-category="ads" data-index="30" data-src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg"  data-title="Jalamithra UFO Concept" data-badge="CREATIVE AD" data-desc="Sci-fi commercial • Tractor beam delivery composite">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Jalamithra UFO Concept">
+            <div class="img-wrap">
+              <img src="assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg" alt="Jalamithra UFO Concept" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Jalamithra UFO Concept</a></h4>
+              <p class="content-desc">Sci-fi commercial • Tractor beam delivery composite</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 31: CK Arabic Luxury Fragrance -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="31" data-src="assets/images/posters/ck-luxury-perfume-product-ad.jpg" data-title="CK Arabic Luxury Fragrance" data-badge="PRODUCT AD" data-desc="Perfume studio staging • Rope tension & warm lighting">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/ck-luxury-perfume-product-ad.jpg" alt="CK Arabic Luxury Perfume Commercial Staging" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>CK Arabic Luxury Fragrance</h3>
-              <p>Perfume studio staging • Rope tension & warm lighting</p>
+
+        <!-- Project 32: CK Arabic Luxury Fragrance -->
+        <article class="portfolio-two__single" data-category="ads" data-index="31" data-src="assets/images/posters/ck-luxury-perfume-product-ad.jpg"  data-title="CK Arabic Luxury Fragrance" data-badge="PRODUCT AD" data-desc="Perfume studio staging • Rope tension & warm lighting">
+          <div class="thumb" tabindex="0" role="button" aria-label="View CK Arabic Luxury Fragrance">
+            <div class="img-wrap">
+              <img src="assets/images/posters/ck-luxury-perfume-product-ad.jpg" alt="CK Arabic Luxury Fragrance" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">CK Arabic Luxury Fragrance</a></h4>
+              <p class="content-desc">Perfume studio staging • Rope tension & warm lighting</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 32: Manly Perfume Campaign -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="32" data-src="assets/images/posters/manly-perfume-commercial-ad.jpg" data-title="Manly Perfume Campaign" data-badge="COMMERCIAL AD" data-desc="Gentleman's lifestyle • Luxury watch & amber glow">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/manly-perfume-commercial-ad.jpg" alt="Manly Perfume Lifestyle Commercial Campaign" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Manly Perfume Campaign</h3>
-              <p>Gentleman's lifestyle • Luxury watch & amber glow</p>
+
+        <!-- Project 33: Manly Perfume Campaign -->
+        <article class="portfolio-two__single" data-category="ads" data-index="32" data-src="assets/images/posters/manly-perfume-commercial-ad.jpg"  data-title="Manly Perfume Campaign" data-badge="COMMERCIAL AD" data-desc="Gentleman's lifestyle • Luxury watch & amber glow">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Manly Perfume Campaign">
+            <div class="img-wrap">
+              <img src="assets/images/posters/manly-perfume-commercial-ad.jpg" alt="Manly Perfume Campaign" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Manly Perfume Campaign</a></h4>
+              <p class="content-desc">Gentleman's lifestyle • Luxury watch & amber glow</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 33: Hello Money Remittance -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="33" data-src="assets/images/posters/hello-money-remittance-ad.jpg" data-title="Hello Money Remittance" data-badge="FINTECH AD" data-desc="Oman-to-India transfer • Glowing currency arch">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/hello-money-remittance-ad.jpg" alt="Hello Money Remittance Campaign Ad" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Hello Money Remittance</h3>
-              <p>Oman-to-India transfer • Glowing currency arch</p>
+
+        <!-- Project 34: Hello Money Remittance -->
+        <article class="portfolio-two__single" data-category="ads" data-index="33" data-src="assets/images/posters/hello-money-remittance-ad.jpg"  data-title="Hello Money Remittance" data-badge="FINTECH AD" data-desc="Oman-to-India transfer • Glowing currency arch">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Hello Money Remittance">
+            <div class="img-wrap">
+              <img src="assets/images/posters/hello-money-remittance-ad.jpg" alt="Hello Money Remittance" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Hello Money Remittance</a></h4>
+              <p class="content-desc">Oman-to-India transfer • Glowing currency arch</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 34: Dugue Crimson Staging -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="34" data-src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg" data-title="Dugue Crimson Staging" data-badge="3D PRODUCT" data-desc="Crimson monochromatic • Bottle & luxury box staging">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg" alt="Dugue Luxury Perfume 3D Staging" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Dugue Crimson Staging</h3>
-              <p>Crimson monochromatic • Bottle & luxury box staging</p>
+
+        <!-- Project 35: Dugue Crimson Staging -->
+        <article class="portfolio-two__single" data-category="ads" data-index="34" data-src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg"  data-title="Dugue Crimson Staging" data-badge="3D PRODUCT" data-desc="Crimson monochromatic • Bottle & luxury box staging">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Dugue Crimson Staging">
+            <div class="img-wrap">
+              <img src="assets/images/posters/dugue-luxury-perfume-3d-staging.jpg" alt="Dugue Crimson Staging" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Dugue Crimson Staging</a></h4>
+              <p class="content-desc">Crimson monochromatic • Bottle & luxury box staging</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 35: Dugue Gold Edition -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="35" data-src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg" data-title="Dugue Gold Edition" data-badge="3D PRODUCT" data-desc="Floating luxury mockup • Gold flacon & minimalist box">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg" alt="Dugue Gold Edition Perfume Mockup" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Dugue Gold Edition</h3>
-              <p>Floating luxury mockup • Gold flacon & minimalist box</p>
+
+        <!-- Project 36: Dugue Gold Edition -->
+        <article class="portfolio-two__single" data-category="ads" data-index="35" data-src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg"  data-title="Dugue Gold Edition" data-badge="3D PRODUCT" data-desc="Floating luxury mockup • Gold flacon & minimalist box">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Dugue Gold Edition">
+            <div class="img-wrap">
+              <img src="assets/images/posters/dugue-gold-edition-perfume-mockup.jpg" alt="Dugue Gold Edition" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Dugue Gold Edition</a></h4>
+              <p class="content-desc">Floating luxury mockup • Gold flacon & minimalist box</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 36: Dugue Obsidian & Magma -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="36" data-src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg" data-title="Dugue Obsidian & Magma" data-badge="3D PRODUCT" data-desc="Volcanic obsidian rock • Internal crimson glow staging">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg" alt="Dugue Obsidian and Magma Perfume Staging" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Dugue Obsidian & Magma</h3>
-              <p>Volcanic obsidian rock • Internal crimson glow staging</p>
+
+        <!-- Project 37: Dugue Obsidian & Magma -->
+        <article class="portfolio-two__single" data-category="ads" data-index="36" data-src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg"  data-title="Dugue Obsidian & Magma" data-badge="3D PRODUCT" data-desc="Volcanic obsidian rock • Internal crimson glow staging">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Dugue Obsidian & Magma">
+            <div class="img-wrap">
+              <img src="assets/images/posters/dugue-crimson-magma-perfume-staging.jpg" alt="Dugue Obsidian & Magma" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Dugue Obsidian & Magma</a></h4>
+              <p class="content-desc">Volcanic obsidian rock • Internal crimson glow staging</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 37: OffLimits Store Danglers -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="37" data-src="assets/images/posters/offlimits-retail-dangler-mockup.png" data-title="OffLimits Store Danglers" data-badge="RETAIL BRANDING" data-desc="Hanging store danglers • 50% Off campaign mockup">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/offlimits-retail-dangler-mockup.png" alt="OffLimits Footwear Retail Danglers Mockup" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>OffLimits Store Danglers</h3>
-              <p>Hanging store danglers • 50% Off campaign mockup</p>
+
+        <!-- Project 38: OffLimits Store Danglers -->
+        <article class="portfolio-two__single" data-category="ads" data-index="37" data-src="assets/images/posters/offlimits-retail-dangler-mockup.png"  data-title="OffLimits Store Danglers" data-badge="RETAIL BRANDING" data-desc="Hanging store danglers • 50% Off campaign mockup">
+          <div class="thumb" tabindex="0" role="button" aria-label="View OffLimits Store Danglers">
+            <div class="img-wrap">
+              <img src="assets/images/posters/offlimits-retail-dangler-mockup.png" alt="OffLimits Store Danglers" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">OffLimits Store Danglers</a></h4>
+              <p class="content-desc">Hanging store danglers • 50% Off campaign mockup</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 38: Arena Tri-Fold Brochure -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="38" data-src="assets/images/posters/arena-motion-graphics-brochure.jpg" data-title="Arena Tri-Fold Brochure" data-badge="PRINT DESIGN" data-desc="Admissions brochure • Dynamic motion design layout">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/arena-motion-graphics-brochure.jpg" alt="Arena Motion Graphics Tri-Fold Brochure" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Arena Tri-Fold Brochure</h3>
-              <p>Admissions brochure • Dynamic motion design layout</p>
+
+        <!-- Project 39: Arena Tri-Fold Brochure -->
+        <article class="portfolio-two__single" data-category="ads" data-index="38" data-src="assets/images/posters/arena-motion-graphics-brochure.jpg"  data-title="Arena Tri-Fold Brochure" data-badge="PRINT DESIGN" data-desc="Admissions brochure • Dynamic motion design layout">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Arena Tri-Fold Brochure">
+            <div class="img-wrap">
+              <img src="assets/images/posters/arena-motion-graphics-brochure.jpg" alt="Arena Tri-Fold Brochure" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Arena Tri-Fold Brochure</a></h4>
+              <p class="content-desc">Admissions brochure • Dynamic motion design layout</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 39: Emirates Catering Iftar -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="39" data-src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg" data-title="Emirates Catering Iftar" data-badge="HOSPITALITY AD" data-desc="Ramadan catering • Traditional feast spread & lantern glow">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg" alt="Emirates Events and Catering Iftar Feast" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Emirates Catering Iftar</h3>
-              <p>Ramadan catering • Traditional feast spread & lantern glow</p>
+
+        <!-- Project 40: Emirates Catering Iftar -->
+        <article class="portfolio-two__single" data-category="ads" data-index="39" data-src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg"  data-title="Emirates Catering Iftar" data-badge="HOSPITALITY AD" data-desc="Ramadan catering • Traditional feast spread & lantern glow">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Emirates Catering Iftar">
+            <div class="img-wrap">
+              <img src="assets/images/posters/emirates-catering-iftar-feast-ad.jpg" alt="Emirates Catering Iftar" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Emirates Catering Iftar</a></h4>
+              <p class="content-desc">Ramadan catering • Traditional feast spread & lantern glow</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 40: MN LY Grand Opening -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="40" data-src="assets/images/posters/mnly-grand-opening-launch-poster.jpg" data-title="MN LY Grand Opening" data-badge="EVENT POSTER" data-desc="Fashion hub launch • Editorial model & guest lineup">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/mnly-grand-opening-launch-poster.jpg" alt="MN LY Fashion Hub Grand Opening Event Poster" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>MN LY Grand Opening</h3>
-              <p>Fashion hub launch • Editorial model & guest lineup</p>
+
+        <!-- Project 41: MN LY Grand Opening -->
+        <article class="portfolio-two__single" data-category="ads" data-index="40" data-src="assets/images/posters/mnly-grand-opening-launch-poster.jpg"  data-title="MN LY Grand Opening" data-badge="EVENT POSTER" data-desc="Fashion hub launch • Editorial model & guest lineup">
+          <div class="thumb" tabindex="0" role="button" aria-label="View MN LY Grand Opening">
+            <div class="img-wrap">
+              <img src="assets/images/posters/mnly-grand-opening-launch-poster.jpg" alt="MN LY Grand Opening" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">MN LY Grand Opening</a></h4>
+              <p class="content-desc">Fashion hub launch • Editorial model & guest lineup</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 41: Free Style Women's Fashion -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="41" data-src="assets/images/posters/freestyle-women-clothing-ad.jpg" data-title="Free Style Women's Fashion" data-badge="FASHION AD" data-desc="Apparel catalog • Festive women & kids collection">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/freestyle-women-clothing-ad.jpg" alt="Free Style Women Clothing Advertisement" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Free Style Women's Fashion</h3>
-              <p>Apparel catalog • Festive women & kids collection</p>
+
+        <!-- Project 42: Free Style Women's Fashion -->
+        <article class="portfolio-two__single" data-category="ads" data-index="41" data-src="assets/images/posters/freestyle-women-clothing-ad.jpg"  data-title="Free Style Women's Fashion" data-badge="FASHION AD" data-desc="Apparel catalog • Festive women & kids collection">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Free Style Women's Fashion">
+            <div class="img-wrap">
+              <img src="assets/images/posters/freestyle-women-clothing-ad.jpg" alt="Free Style Women's Fashion" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Free Style Women's Fashion</a></h4>
+              <p class="content-desc">Apparel catalog • Festive women & kids collection</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
-        <!-- Project 42: Free Style Visiting Card -->
-        <article class="portfolio-card reveal" data-category="ads" data-index="42" data-src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg" data-title="Free Style Visiting Card" data-badge="VISITING CARD" data-desc="Fashion boutique identity • Double-sided visiting card">
-          <div class="portfolio-img-box">
-            <img src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg" alt="Free Style Women Clothing Visiting Card" loading="lazy">
-            <div class="portfolio-zoom-hint mono">VIEW FULL ↗</div>
-          </div>
-          <div class="project-caption">
-            <div>
-              <h3>Free Style Visiting Card</h3>
-              <p>Fashion boutique identity • Double-sided visiting card</p>
+
+        <!-- Project 43: Free Style Visiting Card -->
+        <article class="portfolio-two__single" data-category="ads" data-index="42" data-src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg"  data-title="Free Style Visiting Card" data-badge="VISITING CARD" data-desc="Fashion boutique identity • Double-sided visiting card">
+          <div class="thumb" tabindex="0" role="button" aria-label="View Free Style Visiting Card">
+            <div class="img-wrap">
+              <img src="assets/images/posters/freestyle-women-clothing-visiting-card.jpg" alt="Free Style Visiting Card" loading="lazy">
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
+            
+            <div class="btn-wrap" aria-hidden="true">
+              <div class="circle-btn">
+                <svg class="circle-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                <span>VIEW DETAILS</span>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="content-title-box">
+              <h4><a href="javascript:void(0)">Free Style Visiting Card</a></h4>
+              <p class="content-desc">Fashion boutique identity • Double-sided visiting card</p>
+            </div>
+            <div class="tags">
+              <span class="tag-pill">COMMERCIAL AD</span>
+            </div>
           </div>
         </article>
+      </div>
+
+      <!-- Xfolio Pagination Controls -->
+      <div class="xfolio-pagination-wrapper">
+        <ul class="xfolio-pagination" id="xfolioPagination">
+          <!-- Dynamically populated by assets/js/xfolio-projects.js -->
+        </ul>
+        <div class="xfolio-pagination-info">
+          SHOWING <span id="xfolioPageRange">1–8</span> OF <span id="xfolioTotalCount">43</span> WORKS
         </div>
+      </div>
     </section>
   </main>
 
-  <!-- Master Footer -->
-  <footer id="contact" class="footer section">
-    <div class="wrap footer-wrap">
-      <div class="footer-top">
-        <span class="mono">SHIBEEB RAHIMAN / CREATIVE DESIGNER</span>
-        <div class="availability mono"><span class="pulse-dot"></span>AVAILABLE FOR SELECT PROJECTS · 2026</div>
-      </div>
-      <div class="footer-middle">
-        <div class="footer-cta-col">
-          <h2>READY TO BRING<br><span>IDEAS TO LIFE?</span></h2>
+  <!-- Global Footer -->
+  <footer class="footer" id="contact">
+    <div class="wrap">
+      <div class="footer-cta-container">
+        <div class="footer-cta-card">
+          <span class="mono kicker">COMMERCIAL INQUIRIES &amp; COLLABORATION</span>
+          <h2>Have a project in mind?<br><span>Let's make it real.</span></h2>
           <p>Let's collaborate on brand identities, motion graphics, and high-converting visual assets.</p>
           <div class="footer-action-row">
             <a href="mailto:shibeebrahman@gmail.com" class="contact-pill-button contact-pill-button-main" aria-label="Contact Shibeeb Rahiman">
@@ -967,14 +1379,14 @@
             <h3 class="lightbox-title" id="lightboxTitle"></h3>
             <p class="lightbox-desc" id="lightboxDesc"></p>
           </div>
-          <span class="lightbox-counter mono" id="lightboxCounter">01 / 20</span>
+          <span class="lightbox-counter mono" id="lightboxCounter">01 / 43</span>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="assets/js/diana-projects.js"></script>
-
+  <!-- Page Scripts -->
+  <script src="assets/js/xfolio-projects.js?v=4"></script>
   <script src="assets/js/script.js"></script>
 </body>
 </html>
