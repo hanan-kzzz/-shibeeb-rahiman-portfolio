@@ -2159,16 +2159,15 @@ body{cursor:default}
 .reel-orbital-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
-  max-height: 1080px;
-  overflow: hidden;
+  min-height: 100vh;
+  padding-top: 130px !important;
+  padding-bottom: 110px !important;
   background: radial-gradient(circle at 50% 45%, #0e111c 0%, #06070a 85%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 0 20px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Ambient 3D Orbital Background */
@@ -2212,24 +2211,25 @@ body{cursor:default}
   border-style: solid;
 }
 
-/* Stage Header */
+/* Stage Header - respects .wrap boundaries */
 .reel-stage-header {
   position: relative;
   z-index: 10;
-  width: 100%;
+  width: min(1460px, calc(100% - 10.5vw));
+  margin-inline: auto;
 }
 
 .showreel-intro {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 10px 0 6px;
+  padding: 16px 0 10px;
   gap: 20px;
 }
 
 .showreel-intro-text h2 {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(34px, 5.2vw, 68px);
+  font-size: clamp(38px, 5.5vw, 76px);
   letter-spacing: -.075em;
   line-height: .88;
   margin: 0;
@@ -2243,9 +2243,9 @@ body{cursor:default}
 .showreel-intro-text p {
   max-width: 440px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #aaa99e;
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
 /* Gallery Navigation & Counter HUD */
@@ -2280,8 +2280,8 @@ body{cursor:default}
 }
 
 .reel-arrow-btn {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: rgba(20, 22, 30, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -2308,20 +2308,21 @@ body{cursor:default}
 .reel-orbital-perspective-stage {
   position: relative;
   z-index: 5;
-  width: 100vw;
-  height: clamp(340px, 48vh, 480px);
+  width: 100%;
+  max-width: 100vw;
+  height: clamp(380px, 50vh, 500px);
   perspective: 1600px;
   perspective-origin: 50% 50%;
   overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto 0;
+  margin: 30px 0 30px;
 }
 
 .reel-orbital-track {
   position: relative;
-  width: clamp(300px, 52vw, 780px);
+  width: clamp(300px, 54vw, 800px);
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
@@ -2568,17 +2569,18 @@ body{cursor:default}
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
-/* Stage Footer & Progress Controls */
+/* Stage Footer & Progress Controls - respects .wrap boundaries */
 .reel-stage-footer {
   position: relative;
   z-index: 10;
-  width: 100%;
+  width: min(1460px, calc(100% - 10.5vw));
+  margin-inline: auto;
 }
 
 .reel-progress-row {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .reel-progress-bar-wrap {
@@ -2608,7 +2610,7 @@ body{cursor:default}
   background: rgba(20, 22, 30, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #8f92a1;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 999px;
   font-size: 11px;
   cursor: pointer;
@@ -2634,16 +2636,16 @@ body{cursor:default}
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 6px;
-  font-size: 10px;
+  margin-top: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .scroll-indicator-pulse {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   color: #3d69ff;
   animation: bounceDown 1.8s infinite;
 }
@@ -2765,6 +2767,10 @@ body{cursor:default}
 }
 
 @media (max-width: 900px) {
+  .reel-orbital-section {
+    padding-top: 100px !important;
+    padding-bottom: 70px !important;
+  }
   .reel-orbital-track {
     width: 78vw;
   }
