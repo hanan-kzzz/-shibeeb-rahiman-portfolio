@@ -844,3 +844,172 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }, 2800);
   });
 })();
+
+// ============================================================
+// ESPACEX SPACE-LAUNCH PRELOADER ENGINE
+// ============================================================
+(function initEspaceXPreloader() {
+  const preloader = document.getElementById('sitePreloader');
+  if (!preloader) return;
+
+  const counterEl = document.getElementById('espaceCounter');
+  const barFill = document.getElementById('espaceProgressFill');
+  const statusText = document.getElementById('espaceStatusText');
+  const skipBtn = document.getElementById('espaceSkipBtn');
+  const canvas = document.getElementById('espaceStars');
+  const htmlEl = document.documentElement;
+  const bodyEl = document.body;
+
+  htmlEl.classList.add('is-loading');
+  bodyEl.classList.add('is-loading');
+
+  // Starfield Canvas Animation
+  let starsAnimId = null;
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    const stars = [];
+    const STAR_COUNT = Math.min(140, Math.floor((width * height) / 9000));
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5 + 0.4,
+        alpha: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.8 + 0.3
+      });
+    }
+
+    function renderStars() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 210, 255, ${s.alpha})`;
+        ctx.fill();
+
+        // Drift downward giving feeling of rocket climbing
+        s.y += s.speed;
+        if (s.y > height) {
+          s.y = 0;
+          s.x = Math.random() * width;
+        }
+      }
+      starsAnimId = requestAnimationFrame(renderStars);
+    }
+    renderStars();
+  }
+
+  // Realistic Space Mission Progress Logic
+  let currentPercent = 0;
+  let targetPercent = 14;
+  let isWindowLoaded = false;
+  let isExiting = false;
+
+  const statusPhases = [
+    { max: 25, text: "INITIALIZING AVIONICS & GRAPHICS ENGINES..." },
+    { max: 55, text: "LOADING 43+ CLIENT CAMPAIGNS & MOTION REELS..." },
+    { max: 80, text: "SYNCHRONIZING 3D ASSETS & BRAND SYSTEMS..." },
+    { max: 99, text: "ALL SYSTEMS NOMINAL • PREPARING ORBITAL INSERTION..." },
+    { max: 100, text: "LAUNCH VECTOR CONFIRMED • WELCOME TO SHIBEEB.STUDIO" }
+  ];
+
+  function getStatusText(percent) {
+    for (let phase of statusPhases) {
+      if (percent <= phase.max) return phase.text;
+    }
+    return statusPhases[statusPhases.length - 1].text;
+  }
+
+  function dismissPreloader() {
+    if (isExiting) return;
+    isExiting = true;
+
+    if (counterEl) counterEl.textContent = '100%';
+    if (barFill) barFill.style.width = '100%';
+    if (statusText) statusText.textContent = "LAUNCH VECTOR CONFIRMED • WELCOME TO SHIBEEB.STUDIO";
+
+    // 1. Rocket blast-off overdrive
+    preloader.classList.add('is-launching');
+
+    // 2. Curtain slide up after 380ms
+    setTimeout(() => {
+      preloader.classList.add('is-loaded');
+      htmlEl.classList.remove('is-loading');
+      bodyEl.classList.remove('is-loading');
+
+      // 3. Remove DOM elements and stop star loop
+      setTimeout(() => {
+        if (starsAnimId) cancelAnimationFrame(starsAnimId);
+        preloader.setAttribute('aria-hidden', 'true');
+        preloader.style.display = 'none';
+      }, 950);
+    }, 380);
+  }
+
+  function updateProgress() {
+    if (currentPercent < targetPercent) {
+      const step = Math.max(1, Math.ceil((targetPercent - currentPercent) * 0.16));
+      currentPercent += step;
+      if (currentPercent > targetPercent) currentPercent = targetPercent;
+
+      const formatted = (currentPercent < 10 ? '0' : '') + currentPercent + '%';
+      if (counterEl) counterEl.textContent = formatted;
+      if (barFill) barFill.style.width = currentPercent + '%';
+      if (statusText) statusText.textContent = getStatusText(currentPercent);
+    }
+
+    if (currentPercent < 100) {
+      requestAnimationFrame(updateProgress);
+    } else {
+      setTimeout(dismissPreloader, 180);
+    }
+  }
+
+  requestAnimationFrame(updateProgress);
+
+  // Simulated progressive load
+  const stepInterval = setInterval(() => {
+    if (!isWindowLoaded) {
+      if (targetPercent < 42) {
+        targetPercent += Math.floor(Math.random() * 12) + 7;
+      } else if (targetPercent < 76) {
+        targetPercent += Math.floor(Math.random() * 10) + 5;
+      } else if (targetPercent < 94) {
+        targetPercent += Math.floor(Math.random() * 4) + 2;
+      }
+    }
+  }, 75);
+
+  function finish() {
+    if (isWindowLoaded) return;
+    isWindowLoaded = true;
+    clearInterval(stepInterval);
+    targetPercent = 100;
+  }
+
+  if (document.readyState === 'complete') {
+    finish();
+  } else {
+    window.addEventListener('load', finish);
+  }
+
+  // Safety timer: Never block more than 2 seconds
+  setTimeout(finish, 2000);
+
+  // Skip button click handler
+  if (skipBtn) {
+    skipBtn.addEventListener('click', () => {
+      clearInterval(stepInterval);
+      dismissPreloader();
+    });
+  }
+})();

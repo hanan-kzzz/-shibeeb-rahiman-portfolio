@@ -5128,3 +5128,361 @@ body{cursor:default}
     align-items: flex-start;
   }
 }
+
+/* ============================================================
+   ESPACEX STUDIO PRELOADER (Inspired by Neomodeon EspaceX)
+   ============================================================ */
+html.is-loading,
+body.is-loading {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+.espace-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  background: radial-gradient(circle at 50% 25%, #101736 0%, #060917 55%, #030409 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(20px, 4vh, 48px) clamp(20px, 5vw, 60px);
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: all;
+  overflow: hidden;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1),
+              opacity 0.6s ease;
+  will-change: transform, opacity;
+}
+
+.espace-preloader.is-loaded {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Background Stars Canvas */
+.espace-stars-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 1. TOP TELEMETRY HUD */
+.espace-hud-top {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: espaceFadeDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.espace-hud-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(18, 24, 52, 0.65);
+  border: 1px solid rgba(61, 105, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: #c7d2fe;
+  backdrop-filter: blur(10px);
+}
+
+.espace-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3d69ff;
+  box-shadow: 0 0 10px #3d69ff, 0 0 20px #3d69ff;
+  animation: espaceDotPulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes espaceDotPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.espace-hud-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: #7987b5;
+}
+
+.hud-sep {
+  color: #3d69ff;
+}
+
+/* 2. CENTER STAGE (ROCKET & ORBIT) */
+.espace-center-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  max-height: 480px;
+}
+
+.espace-orbit-ring {
+  position: absolute;
+  width: clamp(240px, 45vw, 360px);
+  height: clamp(240px, 45vw, 360px);
+  border-radius: 50%;
+  border: 1px dashed rgba(61, 105, 255, 0.25);
+  box-shadow: 0 0 60px rgba(61, 105, 255, 0.08), inset 0 0 60px rgba(61, 105, 255, 0.05);
+  animation: espaceOrbitSpin 28s linear infinite;
+  pointer-events: none;
+}
+
+.espace-orbit-reticle {
+  position: absolute;
+  width: clamp(280px, 52vw, 420px);
+  height: clamp(280px, 52vw, 420px);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+@keyframes espaceOrbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Rocket Wrapper */
+.espace-rocket-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: espaceRocketHover 2.4s ease-in-out infinite alternate;
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+@keyframes espaceRocketHover {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-0.5deg); }
+  100% { transform: translateY(6px) rotate(0.5deg); }
+}
+
+/* Blast-Off Zoom Out upon 100% Launch */
+.espace-preloader.is-launching .espace-rocket-container {
+  transform: translateY(-900px) scale(1.6) !important;
+  transition: transform 0.65s cubic-bezier(0.7, 0, 0.2, 1) !important;
+}
+
+.espace-rocket-svg {
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8))
+         drop-shadow(0 0 25px rgba(61, 105, 255, 0.35));
+}
+
+/* Thruster Flame Animation */
+.espace-flame-core {
+  animation: espaceFlameFlicker 0.12s ease-in-out infinite alternate;
+  transform-origin: 60px 152px;
+}
+
+.espace-flame-glow {
+  animation: espaceGlowPulse 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes espaceFlameFlicker {
+  0% { transform: scaleY(0.92) scaleX(0.95); opacity: 0.88; }
+  100% { transform: scaleY(1.15) scaleX(1.05); opacity: 1; }
+}
+
+@keyframes espaceGlowPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 0.95; }
+}
+
+/* Sparks dropping from engine */
+.espace-exhaust-sparks {
+  position: absolute;
+  top: 155px;
+  width: 30px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #60a5fa;
+  box-shadow: 0 0 8px #93c5fd;
+  opacity: 0;
+}
+
+.spark.s1 { left: 8px; animation: sparkFall 0.8s linear infinite 0.1s; }
+.spark.s2 { left: 20px; animation: sparkFall 0.9s linear infinite 0.3s; }
+.spark.s3 { left: 14px; animation: sparkFall 0.7s linear infinite 0.5s; }
+.spark.s4 { left: 6px; animation: sparkFall 0.85s linear infinite 0.7s; }
+
+@keyframes sparkFall {
+  0% { transform: translateY(0) scale(1.2); opacity: 1; }
+  100% { transform: translateY(35px) scale(0.2); opacity: 0; }
+}
+
+/* 3. BOTTOM HUD & PROGRESS */
+.espace-hud-bottom {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: espaceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.espace-counter-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.espace-percent-display {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 30px rgba(61, 105, 255, 0.75), 0 0 60px rgba(61, 105, 255, 0.35);
+}
+
+/* Progress Track & Seeker */
+.espace-progress-wrap {
+  width: 100%;
+}
+
+.espace-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(18, 24, 52, 0.9);
+  border: 1px solid rgba(61, 105, 255, 0.35);
+  border-radius: 999px;
+  padding: 1.5px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px rgba(61, 105, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.espace-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #1d4ed8 0%, #3d69ff 60%, #67e8f9 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.85);
+  position: relative;
+  transition: width 0.08s linear;
+}
+
+.espace-progress-seeker {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 14px #67e8f9;
+}
+
+/* Dynamic Status Message */
+.espace-status-feed {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #8da2d8;
+  text-transform: uppercase;
+  max-width: 90%;
+  text-align: center;
+}
+
+.status-marker {
+  color: #38bdf8;
+  font-size: 0.65rem;
+  animation: espaceBlink 0.8s infinite;
+}
+
+@keyframes espaceBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* 4. SKIP BUTTON */
+.espace-skip-btn {
+  position: absolute;
+  bottom: clamp(16px, 3vh, 32px);
+  right: clamp(16px, 4vw, 40px);
+  z-index: 3;
+  background: rgba(18, 24, 52, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.espace-skip-btn:hover {
+  background: rgba(61, 105, 255, 0.25);
+  border-color: #3d69ff;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@keyframes espaceFadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes espaceFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .espace-hud-telemetry {
+    display: none;
+  }
+  .espace-rocket-svg {
+    width: 78px;
+    height: 130px;
+  }
+  .espace-percent-display {
+    font-size: 2.3rem;
+  }
+  .espace-status-feed {
+    font-size: 0.68rem;
+  }
+}
