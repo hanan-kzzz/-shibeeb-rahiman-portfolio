@@ -320,6 +320,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const theaterBackdrop = document.getElementById('reelTheaterBackdrop');
   const theaterTag = document.getElementById('reelTheaterTag');
   const theaterTitle = document.getElementById('reelTheaterTitle');
+  const theaterDesc = document.getElementById('reelTheaterDesc');
 
   if (!section || !panels.length) return;
 
@@ -546,6 +547,8 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       const src = panel.getAttribute('data-video-src');
       const title = panel.getAttribute('data-title');
       const tag = panel.getAttribute('data-tag');
+      const descEl = panel.querySelector('.reel-desc');
+      const desc = descEl ? descEl.textContent.trim() : (panel.getAttribute('data-desc') || '');
 
       if (!theaterModal || !theaterVideo) return;
 
@@ -553,6 +556,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       theaterVideo.muted = false;
       if (theaterTag) theaterTag.textContent = tag;
       if (theaterTitle) theaterTitle.textContent = title;
+      if (theaterDesc) theaterDesc.textContent = desc;
 
       theaterModal.classList.add('is-open');
       theaterModal.setAttribute('aria-hidden', 'false');
