@@ -304,8 +304,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
    PORTFOLIO SHOWREEL AUTOPLAY CONTROLLER
    ======================================================== */
 (function initScrollDrivenOrbitalReel() {
-  const container = document.getElementById('reelPinnedContainer');
-  const stage = document.getElementById('reelStickyStage');
+  const section = document.getElementById('showreel');
   const track = document.getElementById('reelOrbitalTrack');
   const panels = document.querySelectorAll('.reel-panel');
   const prevBtn = document.getElementById('reelPrevBtn');
@@ -322,172 +321,185 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const theaterTag = document.getElementById('reelTheaterTag');
   const theaterTitle = document.getElementById('reelTheaterTitle');
 
-  if (!container || !track || !panels.length) return;
+  if (!section || !panels.length) return;
 
   const totalPanels = panels.length;
-  let targetProgress = 0;
-  let currentProgress = 0;
-  let currentActiveIndex = 0;
-  let isDragging = false;
+  let activeIndex = 0;
+  let isThrottled = false;
 
-  // Calculate track travel distance
-  function getTravelDistance() {
-    const firstPanel = panels[0];
-    const lastPanel = panels[totalPanels - 1];
-    if (!firstPanel || !lastPanel) return 0;
-    return lastPanel.offsetLeft - firstPanel.offsetLeft;
-  }
+  // Apply 3D orbital positioning to each panel based on activeIndex
+  function renderOrbitalState(targetIdx) {
+    activeIndex = Math.max(0, Math.min(totalPanels - 1, targetIdx));
 
-  // Update target progress from window vertical scroll
-  function updateScrollTarget() {
-    const rect = container.getBoundingClientRect();
-    const scrollDistance = container.offsetHeight - window.innerHeight;
-    if (scrollDistance <= 0) return;
+    panels.forEach((panel, i) => {
+      const offset = i - activeIndex;
+      const absOffset = Math.abs(offset);
+      const isActive = offset === 0;
 
-    const raw = -rect.top / scrollDistance;
-    targetProgress = Math.max(0, Math.min(1, raw));
-  }
+      panel.classList.toggle('is-active', isActive);
 
-  window.addEventListener('scroll', updateScrollTarget, { passive: true });
-  window.addEventListener('resize', updateScrollTarget, { passive: true });
+      // Orbital 3D Cylinder geometry calculations
+      let translateX = 0;
+      let translateZ = 0;
+      let rotateY = 0;
+      let scale = 1;
+      let opacity = 1;
 
-  // Render loop with lerp momentum for orbital 3D physics
-  function renderLoop() {
-    // Smooth lerp interpolation
-    currentProgress += (targetProgress - currentProgress) * 0.12;
-
-    const travelDist = getTravelDistance();
-    const currentTranslateX = currentProgress * travelDist;
-    track.style.transform = `translate3d(-${currentTranslateX.toFixed(2)}px, 0, 0)`;
-
-    const vpCenter = window.innerWidth / 2;
-    let closestIndex = 0;
-    let minDiff = Infinity;
-
-    panels.forEach((panel, idx) => {
-      const pRect = panel.getBoundingClientRect();
-      const pCenter = pRect.left + pRect.width / 2;
-      const distFromCenter = pCenter - vpCenter;
-      const normalizedDist = distFromCenter / (window.innerWidth * 0.45); // -1 to 1
-
-      const absDiff = Math.abs(distFromCenter);
-      if (absDiff < minDiff) {
-        minDiff = absDiff;
-        closestIndex = idx;
+      if (isActive) {
+        translateX = 0;
+        translateZ = 0;
+        rotateY = 0;
+        scale = 1;
+        opacity = 1;
+      } else if (offset > 0) {
+        translateX = Math.min(180, 68 + (offset - 1) * 45); // percentage
+        translateZ = -140 - (offset - 1) * 110; // px into screen
+        rotateY = -24 - (offset - 1) * 12; // degrees inward
+        scale = Math.max(0.65, 0.86 - (offset - 1) * 0.1);
+        opacity = Math.max(0.2, 0.7 - (offset - 1) * 0.25);
+      } else {
+        translateX = Math.max(-180, -68 - (absOffset - 1) * 45); // percentage
+        translateZ = -140 - (absOffset - 1) * 110; // px into screen
+        rotateY = 24 + (absOffset - 1) * 12; // degrees inward
+        scale = Math.max(0.65, 0.86 - (absOffset - 1) * 0.1);
+        opacity = Math.max(0.2, 0.7 - (absOffset - 1) * 0.25);
       }
 
-      // 3D Orbital Cylindrical Rotation Calculations:
-      // Cards turn inward toward viewer along an orbital curved cylinder
-      const rotateY = Math.max(-32, Math.min(32, normalizedDist * 25));
-      const translateZ = -Math.pow(Math.min(1.5, Math.abs(normalizedDist)), 1.25) * 150;
-      const scale = Math.max(0.78, 1 - Math.abs(normalizedDist) * 0.13);
-      const opacity = Math.max(0.35, 1 - Math.abs(normalizedDist) * 0.45);
+      panel.style.transform = `translate3d(${translateX}%, 0, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+      panel.style.opacity = opacity;
+      panel.style.zIndex = isActive ? 10 : 10 - absOffset;
+      panel.style.pointerEvents = isActive ? 'auto' : 'none';
 
-      panel.style.transform = `rotateY(${rotateY.toFixed(2)}deg) translateZ(${translateZ.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-      panel.style.opacity = opacity.toFixed(2);
-
-      // Inner video parallax
-      const video = panel.querySelector('.reel-video');
-      if (video && !panel.classList.contains('is-vertical')) {
-        const videoShift = Math.max(-45, Math.min(45, normalizedDist * -30));
-        video.style.transform = `translate3d(${videoShift.toFixed(1)}px, 0, 0) scale(1.08)`;
+      // Play video only on active panel
+      const v = panel.querySelector('.reel-video');
+      if (v) {
+        if (isActive) {
+          if (v.paused) v.play().catch(() => {});
+        } else {
+          if (!v.paused) v.pause();
+        }
       }
     });
 
-    if (closestIndex !== currentActiveIndex) {
-      currentActiveIndex = closestIndex;
-      panels.forEach((p, idx) => {
-        const isActive = idx === closestIndex;
-        p.classList.toggle('is-active', isActive);
-        const v = p.querySelector('.reel-video');
-        if (v) {
-          if (isActive) {
-            if (v.paused) v.play().catch(() => {});
-          } else {
-            if (!v.paused) v.pause();
-          }
-        }
-      });
-
-      if (currentIndexEl) {
-        currentIndexEl.textContent = String(closestIndex + 1).padStart(2, '0');
-      }
-
-      pills.forEach((pill, idx) => {
-        pill.classList.toggle('is-active', idx === closestIndex);
-      });
+    if (currentIndexEl) {
+      currentIndexEl.textContent = String(activeIndex + 1).padStart(2, '0');
     }
 
     if (progressFill) {
-      progressFill.style.width = `${Math.max(8, Math.min(100, currentProgress * 100))}%`;
+      const pct = (activeIndex / (totalPanels - 1)) * 100;
+      progressFill.style.width = `${Math.max(12, Math.min(100, pct))}%`;
     }
 
-    requestAnimationFrame(renderLoop);
-  }
-
-  // Smooth scroll to a specific card via vertical page scroll
-  function scrollToCard(index) {
-    if (index < 0 || index >= totalPanels) return;
-    const targetFraction = index / (totalPanels - 1);
-    const scrollDistance = container.offsetHeight - window.innerHeight;
-    const containerTop = container.offsetTop;
-    const targetScrollY = containerTop + targetFraction * scrollDistance;
-
-    window.scrollTo({
-      top: targetScrollY,
-      behavior: 'smooth'
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('is-active', idx === activeIndex);
     });
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => scrollToCard(currentActiveIndex - 1));
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => scrollToCard(currentActiveIndex + 1));
+  // Check if section occupies the screen
+  function isSectionActive() {
+    const rect = section.getBoundingClientRect();
+    return rect.top <= 80 && rect.bottom >= window.innerHeight - 80;
   }
 
+  // Intercept Wheel Scrolling while inside showreel
+  window.addEventListener('wheel', (e) => {
+    if (theaterModal && theaterModal.classList.contains('is-open')) return;
+    if (!isSectionActive()) return;
+
+    const delta = e.deltaY;
+
+    if (delta > 0) {
+      // User is scrolling DOWN
+      if (activeIndex < totalPanels - 1) {
+        // We still have videos to show! Stay in reel section!
+        e.preventDefault();
+        if (isThrottled) return;
+        isThrottled = true;
+        renderOrbitalState(activeIndex + 1);
+        setTimeout(() => { isThrottled = false; }, 360);
+      } else {
+        // We are on Video 5 (the last video) -> "all video comes"
+        // Let page scroll down naturally to #projects!
+      }
+    } else if (delta < 0) {
+      // User is scrolling UP
+      if (activeIndex > 0) {
+        // Still have previous videos in section!
+        e.preventDefault();
+        if (isThrottled) return;
+        isThrottled = true;
+        renderOrbitalState(activeIndex - 1);
+        setTimeout(() => { isThrottled = false; }, 360);
+      } else {
+        // On Video 1 -> let page scroll up!
+      }
+    }
+  }, { passive: false });
+
+  // Touch Swipe on mobile
+  let touchStartY = 0;
+  let touchStartX = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (theaterModal && theaterModal.classList.contains('is-open')) return;
+    if (!isSectionActive()) return;
+
+    const touchY = e.touches[0].clientY;
+    const touchX = e.touches[0].clientX;
+    const diffY = touchStartY - touchY;
+    const diffX = touchStartX - touchX;
+    const dominantDiff = Math.abs(diffX) > Math.abs(diffY) ? diffX : diffY;
+
+    if (dominantDiff > 35) {
+      // Swiping to next video
+      if (activeIndex < totalPanels - 1) {
+        e.preventDefault();
+        if (isThrottled) return;
+        isThrottled = true;
+        touchStartY = touchY;
+        touchStartX = touchX;
+        renderOrbitalState(activeIndex + 1);
+        setTimeout(() => { isThrottled = false; }, 360);
+      }
+    } else if (dominantDiff < -35) {
+      // Swiping to prev video
+      if (activeIndex > 0) {
+        e.preventDefault();
+        if (isThrottled) return;
+        isThrottled = true;
+        touchStartY = touchY;
+        touchStartX = touchX;
+        renderOrbitalState(activeIndex - 1);
+        setTimeout(() => { isThrottled = false; }, 360);
+      }
+    }
+  }, { passive: false });
+
+  // Arrow Buttons
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      renderOrbitalState(activeIndex - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      renderOrbitalState(activeIndex + 1);
+    });
+  }
+
+  // Chapter Pills
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       const idx = parseInt(pill.getAttribute('data-index'), 10);
-      scrollToCard(idx);
+      renderOrbitalState(idx);
     });
   });
 
-  // Drag & Swipe on Track
-  let isDown = false;
-  let startX = 0;
-  let startScrollY = 0;
-  track.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.reel-action-btn') || e.target.closest('.reel-center-action')) return;
-    isDown = true;
-    isDragging = false;
-    track.classList.add('is-dragging');
-    startX = e.pageX;
-    startScrollY = window.scrollY;
-  });
-
-  window.addEventListener('mouseup', () => {
-    if (!isDown) return;
-    isDown = false;
-    track.classList.remove('is-dragging');
-    setTimeout(() => { isDragging = false; }, 60);
-  });
-
-  window.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    const dx = e.pageX - startX;
-    if (Math.abs(dx) > 5) isDragging = true;
-    // Map horizontal drag to vertical page scroll
-    const scrollDistance = container.offsetHeight - window.innerHeight;
-    const travelDist = getTravelDistance() || 1;
-    const scrollDelta = -(dx / travelDist) * scrollDistance;
-    window.scrollTo({
-      top: startScrollY + scrollDelta,
-      behavior: 'auto'
-    });
-  });
-
-  // Sound toggle on cards
+  // Sound & Theater Modal
   panels.forEach(panel => {
     const video = panel.querySelector('.reel-video');
     const soundBtn = panel.querySelector('.reel-sound-toggle');
@@ -531,7 +543,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     const expandBtn = panel.querySelector('.reel-fullscreen-trigger');
 
     function openTheater() {
-      if (isDragging) return;
       const src = panel.getAttribute('data-video-src');
       const title = panel.getAttribute('data-title');
       const tag = panel.getAttribute('data-tag');
@@ -558,7 +569,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     });
   });
 
-  // Theater Modal Close
+  // Close Theater Modal
   function closeTheater() {
     if (!theaterModal || !theaterVideo) return;
     theaterVideo.pause();
@@ -567,7 +578,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     theaterModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
 
-    const activePanel = panels[currentActiveIndex];
+    const activePanel = panels[activeIndex];
     if (activePanel) {
       const v = activePanel.querySelector('.reel-video');
       if (v) v.play().catch(() => {});
@@ -588,18 +599,17 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }
   });
 
-  // Handle header nav click for #showreel
+  // Nav click for #showreel
   document.querySelectorAll('a[href="#showreel"]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const containerTop = container.offsetTop;
-      window.scrollTo({ top: containerTop, behavior: 'smooth' });
+      section.scrollIntoView({ behavior: 'smooth' });
+      renderOrbitalState(0);
     });
   });
 
-  // Start loop & initial trigger
-  updateScrollTarget();
-  renderLoop();
+  // Initialize first panel state
+  renderOrbitalState(0);
 })();
 
 /* ========================================================

@@ -457,247 +457,243 @@
     <!-- Showreel / Portfolio Video Section -->
         <!-- Showreel / Portfolio Video Section (Horizontal Parallax Gallery) -->
         <!-- Showreel / Portfolio Video Section (Scroll-Driven 3D Orbital Gallery) -->
-    <section id="showreel" class="showreel-section reel-pinned-section">
-      <div class="reel-pinned-container" id="reelPinnedContainer">
-        <div class="reel-sticky-stage" id="reelStickyStage">
-          <!-- Ambient 3D Orbital Rings & Glow -->
-          <div class="reel-orbital-ambient" aria-hidden="true">
-            <div class="orbital-glow"></div>
-            <div class="orbital-ring orbital-ring-1"></div>
-            <div class="orbital-ring orbital-ring-2"></div>
+        <!-- Showreel / Portfolio Video Section (Scroll-Driven 3D Orbital Gallery) -->
+    <section id="showreel" class="showreel-section reel-orbital-section">
+      <!-- Ambient 3D Orbital Rings & Glow -->
+      <div class="reel-orbital-ambient" aria-hidden="true">
+        <div class="orbital-glow"></div>
+        <div class="orbital-ring orbital-ring-1"></div>
+        <div class="orbital-ring orbital-ring-2"></div>
+      </div>
+
+      <!-- Header -->
+      <div class="wrap reel-stage-header">
+        <div class="section-kicker mono">
+          <span>02 / MOTION &amp; REELS</span>
+          <span>SCROLL-DRIVEN 3D ORBITAL REEL</span>
+        </div>
+
+        <div class="showreel-intro">
+          <div class="showreel-intro-text">
+            <h2>MOTION<br><span>IN ACTION.</span></h2>
+            <p>Scroll down to orbit through commercial automotive films, brand showreels, and social motion studies.</p>
           </div>
-
-          <!-- Header -->
-          <div class="wrap reel-stage-header">
-            <div class="section-kicker mono">
-              <span>02 / MOTION &amp; REELS</span>
-              <span>SCROLL-DRIVEN 3D ORBITAL REEL</span>
+          <div class="reel-nav-hud">
+            <div class="reel-counter mono">
+              <span id="reelCurrentIndex">01</span> / <span id="reelTotalCount">05</span>
             </div>
+            <div class="reel-nav-arrows">
+              <button type="button" class="reel-arrow-btn reel-arrow-prev" id="reelPrevBtn" aria-label="Previous Reel" title="Previous Reel">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="reel-arrow-btn reel-arrow-next" id="reelNextBtn" aria-label="Next Reel" title="Next Reel">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="showreel-intro">
-              <div class="showreel-intro-text">
-                <h2>MOTION<br><span>IN ACTION.</span></h2>
-                <p>Scroll down to orbit through commercial automotive films, brand showreels, and social motion studies.</p>
+      <!-- 3D Orbital Perspective Stage -->
+      <div class="reel-orbital-perspective-stage" id="reelPerspectiveStage">
+        <div class="reel-orbital-track" id="reelOrbitalTrack">
+
+          <!-- Reel 01: Showreel 2026 -->
+          <article class="reel-panel is-active" data-index="0" data-video-src="assets/videos/shibeeb-showreel.mp4" data-poster="assets/images/posters/showreel-thumb.jpg" data-title="Showreel 2026 — Motion In Action" data-tag="01 · MAIN REEL" data-duration="00:30">
+            <div class="reel-media-box">
+              <video class="reel-video" src="assets/videos/shibeeb-showreel.mp4" poster="assets/images/posters/showreel-thumb.jpg" playsinline muted loop preload="auto"></video>
+              <div class="reel-media-overlay"></div>
+              <div class="reel-panel-header">
+                <span class="reel-tag mono">01 · MAIN REEL</span>
+                <span class="reel-duration mono">00:30</span>
               </div>
-              <div class="reel-nav-hud">
-                <div class="reel-counter mono">
-                  <span id="reelCurrentIndex">01</span> / <span id="reelTotalCount">05</span>
+              <div class="reel-center-action">
+                <div class="reel-play-circle" aria-label="Play Reel">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
                 </div>
-                <div class="reel-nav-arrows">
-                  <button type="button" class="reel-arrow-btn reel-arrow-prev" id="reelPrevBtn" aria-label="Previous Reel" title="Previous Reel">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="19" y1="12" x2="5" y2="12"></line>
-                      <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
+                <span class="reel-play-label mono">WATCH REEL</span>
+              </div>
+              <div class="reel-panel-footer">
+                <div class="reel-info">
+                  <h3 class="reel-title">Showreel 2026</h3>
+                  <p class="reel-desc">Brand identities, kinetic typography &amp; 3D pacing.</p>
+                </div>
+                <div class="reel-panel-actions">
+                  <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span class="sound-text">SOUND</span>
                   </button>
-                  <button type="button" class="reel-arrow-btn reel-arrow-next" id="reelNextBtn" aria-label="Next Reel" title="Next Reel">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                  <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
+                    <span>THEATER ↗</span>
                   </button>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <!-- 3D Orbital Perspective Stage -->
-          <div class="reel-orbital-perspective-stage" id="reelPerspectiveStage">
-            <div class="reel-orbital-track" id="reelOrbitalTrack">
-
-              <!-- Reel 01: Showreel 2026 -->
-              <article class="reel-panel is-active" data-index="0" data-video-src="assets/videos/shibeeb-showreel.mp4" data-poster="assets/images/posters/showreel-thumb.jpg" data-title="Showreel 2026 — Motion In Action" data-tag="01 · MAIN REEL" data-duration="00:30">
-                <div class="reel-media-box">
-                  <video class="reel-video" src="assets/videos/shibeeb-showreel.mp4" poster="assets/images/posters/showreel-thumb.jpg" playsinline muted loop preload="auto"></video>
-                  <div class="reel-media-overlay"></div>
-                  <div class="reel-panel-header">
-                    <span class="reel-tag mono">01 · MAIN REEL</span>
-                    <span class="reel-duration mono">00:30</span>
-                  </div>
-                  <div class="reel-center-action">
-                    <div class="reel-play-circle" aria-label="Play Reel">
-                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-                    </div>
-                    <span class="reel-play-label mono">WATCH REEL</span>
-                  </div>
-                  <div class="reel-panel-footer">
-                    <div class="reel-info">
-                      <h3 class="reel-title">Showreel 2026</h3>
-                      <p class="reel-desc">Brand identities, kinetic typography &amp; 3D pacing.</p>
-                    </div>
-                    <div class="reel-panel-actions">
-                      <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
-                        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
-                        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        <span class="sound-text">SOUND</span>
-                      </button>
-                      <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
-                        <span>THEATER ↗</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Reel 02: Mahindra Thar 4K -->
-              <article class="reel-panel" data-index="1" data-video-src="assets/videos/cinematic-car-reel.mp4" data-poster="assets/images/posters/car-video-thumb.jpg" data-title="Mahindra Thar 4K" data-tag="02 · AUTOMOTIVE" data-duration="00:58">
-                <div class="reel-media-box">
-                  <video class="reel-video" src="assets/videos/cinematic-car-reel.mp4" poster="assets/images/posters/car-video-thumb.jpg" playsinline muted loop preload="none"></video>
-                  <div class="reel-media-overlay"></div>
-                  <div class="reel-panel-header">
-                    <span class="reel-tag mono">02 · AUTOMOTIVE</span>
-                    <span class="reel-duration mono">00:58</span>
-                  </div>
-                  <div class="reel-center-action">
-                    <div class="reel-play-circle" aria-label="Play Reel">
-                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-                    </div>
-                    <span class="reel-play-label mono">WATCH REEL</span>
-                  </div>
-                  <div class="reel-panel-footer">
-                    <div class="reel-info">
-                      <h3 class="reel-title">Mahindra Thar 4K</h3>
-                      <p class="reel-desc">Off-road physics, dynamic mud particles &amp; cinematic composite.</p>
-                    </div>
-                    <div class="reel-panel-actions">
-                      <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
-                        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
-                        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        <span class="sound-text">SOUND</span>
-                      </button>
-                      <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
-                        <span>THEATER ↗</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Reel 03: Vertical Social Reel -->
-              <article class="reel-panel is-vertical" data-index="2" data-video-src="assets/videos/social-motion-reel.mp4" data-poster="assets/images/posters/final-out-thumb.jpg" data-title="Vertical Social Reel" data-tag="03 · VERTICAL REEL" data-duration="00:24">
-                <div class="reel-media-box">
-                  <video class="reel-video" src="assets/videos/social-motion-reel.mp4" poster="assets/images/posters/final-out-thumb.jpg" playsinline muted loop preload="none"></video>
-                  <div class="reel-media-overlay"></div>
-                  <div class="reel-panel-header">
-                    <span class="reel-tag mono">03 · VERTICAL REEL</span>
-                    <span class="reel-duration mono">00:24</span>
-                  </div>
-                  <div class="reel-center-action">
-                    <div class="reel-play-circle" aria-label="Play Reel">
-                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-                    </div>
-                    <span class="reel-play-label mono">WATCH REEL</span>
-                  </div>
-                  <div class="reel-panel-footer">
-                    <div class="reel-info">
-                      <h3 class="reel-title">Vertical Social Reel</h3>
-                      <p class="reel-desc">Fast-paced mobile transitions, kinetic typography &amp; beat pacing.</p>
-                    </div>
-                    <div class="reel-panel-actions">
-                      <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
-                        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
-                        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        <span class="sound-text">SOUND</span>
-                      </button>
-                      <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
-                        <span>THEATER ↗</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Reel 04: Creative Showcase CV -->
-              <article class="reel-panel" data-index="3" data-video-src="assets/videos/shibeeb-cv.mp4" data-poster="assets/images/posters/reel-frame.jpg" data-title="Creative Showcase CV" data-tag="04 · PORTFOLIO REEL" data-duration="00:46">
-                <div class="reel-media-box">
-                  <video class="reel-video" src="assets/videos/shibeeb-cv.mp4" poster="assets/images/posters/reel-frame.jpg" playsinline muted loop preload="none"></video>
-                  <div class="reel-media-overlay"></div>
-                  <div class="reel-panel-header">
-                    <span class="reel-tag mono">04 · PORTFOLIO REEL</span>
-                    <span class="reel-duration mono">00:46</span>
-                  </div>
-                  <div class="reel-center-action">
-                    <div class="reel-play-circle" aria-label="Play Reel">
-                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-                    </div>
-                    <span class="reel-play-label mono">WATCH REEL</span>
-                  </div>
-                  <div class="reel-panel-footer">
-                    <div class="reel-info">
-                      <h3 class="reel-title">Creative Showcase CV</h3>
-                      <p class="reel-desc">Curated brand identity design &amp; motion graphics showcase reel.</p>
-                    </div>
-                    <div class="reel-panel-actions">
-                      <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
-                        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
-                        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        <span class="sound-text">SOUND</span>
-                      </button>
-                      <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
-                        <span>THEATER ↗</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Reel 05: Shibi Motion Film -->
-              <article class="reel-panel" data-index="4" data-video-src="assets/videos/shibi.mp4" data-poster="assets/images/posters/shibi-motion-thumb.jpg" data-title="Shibi Motion Film" data-tag="05 · KINETIC FILM" data-duration="00:40">
-                <div class="reel-media-box">
-                  <video class="reel-video" src="assets/videos/shibi.mp4" poster="assets/images/posters/shibi-motion-thumb.jpg" playsinline muted loop preload="none"></video>
-                  <div class="reel-media-overlay"></div>
-                  <div class="reel-panel-header">
-                    <span class="reel-tag mono">05 · KINETIC FILM</span>
-                    <span class="reel-duration mono">00:40</span>
-                  </div>
-                  <div class="reel-center-action">
-                    <div class="reel-play-circle" aria-label="Play Reel">
-                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-                    </div>
-                    <span class="reel-play-label mono">WATCH REEL</span>
-                  </div>
-                  <div class="reel-panel-footer">
-                    <div class="reel-info">
-                      <h3 class="reel-title">Shibi Motion Film</h3>
-                      <p class="reel-desc">Dynamic camera staging, kinetic pacing &amp; atmospheric passes.</p>
-                    </div>
-                    <div class="reel-panel-actions">
-                      <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
-                        <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
-                        <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        <span class="sound-text">SOUND</span>
-                      </button>
-                      <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
-                        <span>THEATER ↗</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-            </div>
-          </div>
-
-          <!-- Bottom HUD: Orbital Progress & Chapter Navigation -->
-          <div class="wrap reel-stage-footer">
-            <div class="reel-progress-row">
-              <div class="reel-progress-bar-wrap">
-                <div class="reel-progress-bar-fill" id="reelProgressFill" style="width: 20%;"></div>
+          <!-- Reel 02: Mahindra Thar 4K -->
+          <article class="reel-panel" data-index="1" data-video-src="assets/videos/cinematic-car-reel.mp4" data-poster="assets/images/posters/car-video-thumb.jpg" data-title="Mahindra Thar 4K" data-tag="02 · AUTOMOTIVE" data-duration="00:58">
+            <div class="reel-media-box">
+              <video class="reel-video" src="assets/videos/cinematic-car-reel.mp4" poster="assets/images/posters/car-video-thumb.jpg" playsinline muted loop preload="none"></video>
+              <div class="reel-media-overlay"></div>
+              <div class="reel-panel-header">
+                <span class="reel-tag mono">02 · AUTOMOTIVE</span>
+                <span class="reel-duration mono">00:58</span>
               </div>
-              <div class="reel-pills-nav" id="reelPillsNav" role="tablist" aria-label="Reel chapters">
-                <button type="button" class="reel-pill-btn is-active" data-index="0">01 Main Reel</button>
-                <button type="button" class="reel-pill-btn" data-index="1">02 Mahindra Thar</button>
-                <button type="button" class="reel-pill-btn" data-index="2">03 Vertical Social</button>
-                <button type="button" class="reel-pill-btn" data-index="3">04 CV Reel</button>
-                <button type="button" class="reel-pill-btn" data-index="4">05 Shibi Motion</button>
+              <div class="reel-center-action">
+                <div class="reel-play-circle" aria-label="Play Reel">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+                </div>
+                <span class="reel-play-label mono">WATCH REEL</span>
+              </div>
+              <div class="reel-panel-footer">
+                <div class="reel-info">
+                  <h3 class="reel-title">Mahindra Thar 4K</h3>
+                  <p class="reel-desc">Off-road physics, dynamic mud particles &amp; cinematic composite.</p>
+                </div>
+                <div class="reel-panel-actions">
+                  <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span class="sound-text">SOUND</span>
+                  </button>
+                  <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
+                    <span>THEATER ↗</span>
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="reel-scroll-hint-bar mono" aria-hidden="true">
-              <span>ORBITAL REEL SYSTEM</span>
-              <span class="scroll-indicator-pulse">SCROLL DOWN TO ORBIT ↓</span>
-            </div>
-          </div>
+          </article>
 
+          <!-- Reel 03: Vertical Social Reel -->
+          <article class="reel-panel is-vertical" data-index="2" data-video-src="assets/videos/social-motion-reel.mp4" data-poster="assets/images/posters/final-out-thumb.jpg" data-title="Vertical Social Reel" data-tag="03 · VERTICAL REEL" data-duration="00:24">
+            <div class="reel-media-box">
+              <video class="reel-video" src="assets/videos/social-motion-reel.mp4" poster="assets/images/posters/final-out-thumb.jpg" playsinline muted loop preload="none"></video>
+              <div class="reel-media-overlay"></div>
+              <div class="reel-panel-header">
+                <span class="reel-tag mono">03 · VERTICAL REEL</span>
+                <span class="reel-duration mono">00:24</span>
+              </div>
+              <div class="reel-center-action">
+                <div class="reel-play-circle" aria-label="Play Reel">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+                </div>
+                <span class="reel-play-label mono">WATCH REEL</span>
+              </div>
+              <div class="reel-panel-footer">
+                <div class="reel-info">
+                  <h3 class="reel-title">Vertical Social Reel</h3>
+                  <p class="reel-desc">Fast-paced mobile transitions, kinetic typography &amp; beat pacing.</p>
+                </div>
+                <div class="reel-panel-actions">
+                  <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span class="sound-text">SOUND</span>
+                  </button>
+                  <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
+                    <span>THEATER ↗</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Reel 04: Creative Showcase CV -->
+          <article class="reel-panel" data-index="3" data-video-src="assets/videos/shibeeb-cv.mp4" data-poster="assets/images/posters/reel-frame.jpg" data-title="Creative Showcase CV" data-tag="04 · PORTFOLIO REEL" data-duration="00:46">
+            <div class="reel-media-box">
+              <video class="reel-video" src="assets/videos/shibeeb-cv.mp4" poster="assets/images/posters/reel-frame.jpg" playsinline muted loop preload="none"></video>
+              <div class="reel-media-overlay"></div>
+              <div class="reel-panel-header">
+                <span class="reel-tag mono">04 · PORTFOLIO REEL</span>
+                <span class="reel-duration mono">00:46</span>
+              </div>
+              <div class="reel-center-action">
+                <div class="reel-play-circle" aria-label="Play Reel">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+                </div>
+                <span class="reel-play-label mono">WATCH REEL</span>
+              </div>
+              <div class="reel-panel-footer">
+                <div class="reel-info">
+                  <h3 class="reel-title">Creative Showcase CV</h3>
+                  <p class="reel-desc">Curated brand identity design &amp; motion graphics showcase reel.</p>
+                </div>
+                <div class="reel-panel-actions">
+                  <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span class="sound-text">SOUND</span>
+                  </button>
+                  <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
+                    <span>THEATER ↗</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Reel 05: Shibi Motion Film -->
+          <article class="reel-panel" data-index="4" data-video-src="assets/videos/shibi.mp4" data-poster="assets/images/posters/shibi-motion-thumb.jpg" data-title="Shibi Motion Film" data-tag="05 · KINETIC FILM" data-duration="00:40">
+            <div class="reel-media-box">
+              <video class="reel-video" src="assets/videos/shibi.mp4" poster="assets/images/posters/shibi-motion-thumb.jpg" playsinline muted loop preload="none"></video>
+              <div class="reel-media-overlay"></div>
+              <div class="reel-panel-header">
+                <span class="reel-tag mono">05 · KINETIC FILM</span>
+                <span class="reel-duration mono">00:40</span>
+              </div>
+              <div class="reel-center-action">
+                <div class="reel-play-circle" aria-label="Play Reel">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+                </div>
+                <span class="reel-play-label mono">WATCH REEL</span>
+              </div>
+              <div class="reel-panel-footer">
+                <div class="reel-info">
+                  <h3 class="reel-title">Shibi Motion Film</h3>
+                  <p class="reel-desc">Dynamic camera staging, kinetic pacing &amp; atmospheric passes.</p>
+                </div>
+                <div class="reel-panel-actions">
+                  <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span class="sound-text">SOUND</span>
+                  </button>
+                  <button type="button" class="reel-action-btn reel-fullscreen-trigger" aria-label="Fullscreen Theater" title="Open Theater View">
+                    <span>THEATER ↗</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Bottom HUD: Orbital Progress & Chapter Navigation -->
+      <div class="wrap reel-stage-footer">
+        <div class="reel-progress-row">
+          <div class="reel-progress-bar-wrap">
+            <div class="reel-progress-bar-fill" id="reelProgressFill" style="width: 20%;"></div>
+          </div>
+          <div class="reel-pills-nav" id="reelPillsNav" role="tablist" aria-label="Reel chapters">
+            <button type="button" class="reel-pill-btn is-active" data-index="0">01 Main Reel</button>
+            <button type="button" class="reel-pill-btn" data-index="1">02 Mahindra Thar</button>
+            <button type="button" class="reel-pill-btn" data-index="2">03 Vertical Social</button>
+            <button type="button" class="reel-pill-btn" data-index="3">04 CV Reel</button>
+            <button type="button" class="reel-pill-btn" data-index="4">05 Shibi Motion</button>
+          </div>
+        </div>
+        <div class="reel-scroll-hint-bar mono" aria-hidden="true">
+          <span>3D ORBITAL MOTION REEL</span>
+          <span class="scroll-indicator-pulse">SCROLL DOWN TO ORBIT VIDEOS ↓</span>
         </div>
       </div>
     </section>
