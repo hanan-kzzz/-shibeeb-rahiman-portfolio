@@ -303,10 +303,10 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 /* ========================================================
    PORTFOLIO SHOWREEL AUTOPLAY CONTROLLER
    ======================================================== */
-(function initHorizontalReelGallery() {
-  const container = document.getElementById('reelGalleryContainer');
-  const viewport = document.getElementById('reelTrackViewport');
-  const track = document.getElementById('reelTrack');
+(function initScrollDrivenOrbitalReel() {
+  const container = document.getElementById('reelPinnedContainer');
+  const stage = document.getElementById('reelStickyStage');
+  const track = document.getElementById('reelOrbitalTrack');
   const panels = document.querySelectorAll('.reel-panel');
   const prevBtn = document.getElementById('reelPrevBtn');
   const nextBtn = document.getElementById('reelNextBtn');
@@ -322,155 +322,172 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
   const theaterTag = document.getElementById('reelTheaterTag');
   const theaterTitle = document.getElementById('reelTheaterTitle');
 
-  if (!viewport || !panels.length) return;
+  if (!container || !track || !panels.length) return;
 
-  let isDown = false;
-  let startX = 0;
-  let scrollLeft = 0;
-  let isDragging = false;
+  const totalPanels = panels.length;
+  let targetProgress = 0;
+  let currentProgress = 0;
   let currentActiveIndex = 0;
+  let isDragging = false;
 
-  // 1. Smooth Mouse Wheel to Horizontal Scroll
-  viewport.addEventListener('wheel', (e) => {
-    // Only hijack if dominant vertical wheel on the gallery
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-      const atStart = viewport.scrollLeft <= 0 && e.deltaY < 0;
-      const atEnd = viewport.scrollLeft >= maxScroll - 2 && e.deltaY > 0;
+  // Calculate track travel distance
+  function getTravelDistance() {
+    const firstPanel = panels[0];
+    const lastPanel = panels[totalPanels - 1];
+    if (!firstPanel || !lastPanel) return 0;
+    return lastPanel.offsetLeft - firstPanel.offsetLeft;
+  }
 
-      if (!atStart && !atEnd) {
-        e.preventDefault();
-        viewport.scrollLeft += e.deltaY * 1.15;
-      }
-    }
-  }, { passive: false });
+  // Update target progress from window vertical scroll
+  function updateScrollTarget() {
+    const rect = container.getBoundingClientRect();
+    const scrollDistance = container.offsetHeight - window.innerHeight;
+    if (scrollDistance <= 0) return;
 
-  // 2. Click-and-Drag Momentum Scrolling
-  viewport.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.reel-action-btn') || e.target.closest('.reel-center-action')) return;
-    isDown = true;
-    isDragging = false;
-    viewport.classList.add('is-dragging');
-    startX = e.pageX - viewport.offsetLeft;
-    scrollLeft = viewport.scrollLeft;
-  });
+    const raw = -rect.top / scrollDistance;
+    targetProgress = Math.max(0, Math.min(1, raw));
+  }
 
-  window.addEventListener('mouseup', () => {
-    if (!isDown) return;
-    isDown = false;
-    viewport.classList.remove('is-dragging');
-    setTimeout(() => { isDragging = false; }, 60);
-  });
+  window.addEventListener('scroll', updateScrollTarget, { passive: true });
+  window.addEventListener('resize', updateScrollTarget, { passive: true });
 
-  viewport.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - viewport.offsetLeft;
-    const walk = (x - startX) * 1.4;
-    if (Math.abs(walk) > 4) isDragging = true;
-    viewport.scrollLeft = scrollLeft - walk;
-  });
+  // Render loop with lerp momentum for orbital 3D physics
+  function renderLoop() {
+    // Smooth lerp interpolation
+    currentProgress += (targetProgress - currentProgress) * 0.12;
 
-  // 3. Parallax Media Shift & Active Panel Detection on Scroll
-  function updateParallax() {
-    const vpRect = viewport.getBoundingClientRect();
-    const vpCenter = vpRect.left + vpRect.width / 2;
+    const travelDist = getTravelDistance();
+    const currentTranslateX = currentProgress * travelDist;
+    track.style.transform = `translate3d(-${currentTranslateX.toFixed(2)}px, 0, 0)`;
+
+    const vpCenter = window.innerWidth / 2;
     let closestIndex = 0;
     let minDiff = Infinity;
 
     panels.forEach((panel, idx) => {
       const pRect = panel.getBoundingClientRect();
       const pCenter = pRect.left + pRect.width / 2;
-      const diff = Math.abs(pCenter - vpCenter);
+      const distFromCenter = pCenter - vpCenter;
+      const normalizedDist = distFromCenter / (window.innerWidth * 0.45); // -1 to 1
 
-      if (diff < minDiff) {
-        minDiff = diff;
+      const absDiff = Math.abs(distFromCenter);
+      if (absDiff < minDiff) {
+        minDiff = absDiff;
         closestIndex = idx;
       }
 
-      // Parallax shift calculation for the video element inside
-      const progress = (pCenter - vpCenter) / (vpRect.width || 1);
+      // 3D Orbital Cylindrical Rotation Calculations:
+      // Cards turn inward toward viewer along an orbital curved cylinder
+      const rotateY = Math.max(-32, Math.min(32, normalizedDist * 25));
+      const translateZ = -Math.pow(Math.min(1.5, Math.abs(normalizedDist)), 1.25) * 150;
+      const scale = Math.max(0.78, 1 - Math.abs(normalizedDist) * 0.13);
+      const opacity = Math.max(0.35, 1 - Math.abs(normalizedDist) * 0.45);
+
+      panel.style.transform = `rotateY(${rotateY.toFixed(2)}deg) translateZ(${translateZ.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      panel.style.opacity = opacity.toFixed(2);
+
+      // Inner video parallax
       const video = panel.querySelector('.reel-video');
       if (video && !panel.classList.contains('is-vertical')) {
-        const offset = Math.max(-60, Math.min(60, progress * -45));
-        video.style.transform = `translate3d(${offset.toFixed(1)}px, 0, 0) scale(1.08)`;
+        const videoShift = Math.max(-45, Math.min(45, normalizedDist * -30));
+        video.style.transform = `translate3d(${videoShift.toFixed(1)}px, 0, 0) scale(1.08)`;
       }
     });
 
-    currentActiveIndex = closestIndex;
-
-    // Update active panel class and play state
-    panels.forEach((panel, idx) => {
-      const isActive = idx === closestIndex;
-      panel.classList.toggle('is-active', isActive);
-
-      const video = panel.querySelector('.reel-video');
-      if (video) {
-        if (isActive) {
-          if (video.paused && !video.dataset.userPaused) {
-            video.play().catch(() => {});
-          }
-        } else {
-          if (!video.paused) {
-            video.pause();
+    if (closestIndex !== currentActiveIndex) {
+      currentActiveIndex = closestIndex;
+      panels.forEach((p, idx) => {
+        const isActive = idx === closestIndex;
+        p.classList.toggle('is-active', isActive);
+        const v = p.querySelector('.reel-video');
+        if (v) {
+          if (isActive) {
+            if (v.paused) v.play().catch(() => {});
+          } else {
+            if (!v.paused) v.pause();
           }
         }
+      });
+
+      if (currentIndexEl) {
+        currentIndexEl.textContent = String(closestIndex + 1).padStart(2, '0');
       }
-    });
 
-    // Update Counter & HUD
-    if (currentIndexEl) {
-      currentIndexEl.textContent = String(closestIndex + 1).padStart(2, '0');
+      pills.forEach((pill, idx) => {
+        pill.classList.toggle('is-active', idx === closestIndex);
+      });
     }
 
-    // Update Progress Fill
-    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-    const scrollPct = maxScroll > 0 ? (viewport.scrollLeft / maxScroll) : (closestIndex / (panels.length - 1));
     if (progressFill) {
-      progressFill.style.width = `${Math.max(12, Math.min(100, (scrollPct * 88) + 12))}%`;
+      progressFill.style.width = `${Math.max(8, Math.min(100, currentProgress * 100))}%`;
     }
 
-    // Update Pills
-    pills.forEach((pill, idx) => {
-      pill.classList.toggle('is-active', idx === closestIndex);
-    });
+    requestAnimationFrame(renderLoop);
   }
 
-  let rAF = null;
-  viewport.addEventListener('scroll', () => {
-    if (rAF) cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(updateParallax);
-  }, { passive: true });
+  // Smooth scroll to a specific card via vertical page scroll
+  function scrollToCard(index) {
+    if (index < 0 || index >= totalPanels) return;
+    const targetFraction = index / (totalPanels - 1);
+    const scrollDistance = container.offsetHeight - window.innerHeight;
+    const containerTop = container.offsetTop;
+    const targetScrollY = containerTop + targetFraction * scrollDistance;
 
-  // 4. Smooth Scrolling to Panel
-  function scrollToPanel(index) {
-    if (index < 0 || index >= panels.length) return;
-    const targetPanel = panels[index];
-    const vpWidth = viewport.clientWidth;
-    const panelWidth = targetPanel.offsetWidth;
-    const targetScroll = targetPanel.offsetLeft - (vpWidth / 2) + (panelWidth / 2);
-    
-    viewport.scrollTo({
-      left: Math.max(0, targetScroll),
+    window.scrollTo({
+      top: targetScrollY,
       behavior: 'smooth'
     });
   }
 
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => scrollToPanel(currentActiveIndex - 1));
+    prevBtn.addEventListener('click', () => scrollToCard(currentActiveIndex - 1));
   }
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => scrollToPanel(currentActiveIndex + 1));
+    nextBtn.addEventListener('click', () => scrollToCard(currentActiveIndex + 1));
   }
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       const idx = parseInt(pill.getAttribute('data-index'), 10);
-      scrollToPanel(idx);
+      scrollToCard(idx);
     });
   });
 
-  // 5. Card Hover & Sound Controls
+  // Drag & Swipe on Track
+  let isDown = false;
+  let startX = 0;
+  let startScrollY = 0;
+  track.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.reel-action-btn') || e.target.closest('.reel-center-action')) return;
+    isDown = true;
+    isDragging = false;
+    track.classList.add('is-dragging');
+    startX = e.pageX;
+    startScrollY = window.scrollY;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    track.classList.remove('is-dragging');
+    setTimeout(() => { isDragging = false; }, 60);
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    if (Math.abs(dx) > 5) isDragging = true;
+    // Map horizontal drag to vertical page scroll
+    const scrollDistance = container.offsetHeight - window.innerHeight;
+    const travelDist = getTravelDistance() || 1;
+    const scrollDelta = -(dx / travelDist) * scrollDistance;
+    window.scrollTo({
+      top: startScrollY + scrollDelta,
+      behavior: 'auto'
+    });
+  });
+
+  // Sound toggle on cards
   panels.forEach(panel => {
     const video = panel.querySelector('.reel-video');
     const soundBtn = panel.querySelector('.reel-sound-toggle');
@@ -478,17 +495,10 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     const iconOff = soundBtn ? soundBtn.querySelector('.icon-sound-off') : null;
     const iconOn = soundBtn ? soundBtn.querySelector('.icon-sound-on') : null;
 
-    panel.addEventListener('mouseenter', () => {
-      if (video && video.paused) {
-        video.play().catch(() => {});
-      }
-    });
-
     if (soundBtn && video) {
       soundBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (video.muted) {
-          // Mute all other videos
           document.querySelectorAll('.reel-video').forEach(v => {
             if (v !== video) {
               v.muted = true;
@@ -503,7 +513,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
               }
             }
           });
-
           video.muted = false;
           iconOff.style.display = 'none';
           iconOn.style.display = 'inline-block';
@@ -518,7 +527,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       });
     }
 
-    // Play Trigger / Theater Open
     const centerTrigger = panel.querySelector('.reel-center-action');
     const expandBtn = panel.querySelector('.reel-fullscreen-trigger');
 
@@ -539,9 +547,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       theaterModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
-      // Pause all gallery previews
       document.querySelectorAll('.reel-video').forEach(v => v.pause());
-
       theaterVideo.play().catch(() => {});
     }
 
@@ -552,7 +558,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     });
   });
 
-  // 6. Theater Modal Close & Keyboard Navigation
+  // Theater Modal Close
   function closeTheater() {
     if (!theaterModal || !theaterVideo) return;
     theaterVideo.pause();
@@ -561,7 +567,6 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     theaterModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
 
-    // Resume active panel video
     const activePanel = panels[currentActiveIndex];
     if (activePanel) {
       const v = activePanel.querySelector('.reel-video');
@@ -583,21 +588,18 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     }
   });
 
-  // Handle header nav anchor click for #showreel
+  // Handle header nav click for #showreel
   document.querySelectorAll('a[href="#showreel"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      const section = document.getElementById('showreel');
-      if (section) {
-        e.preventDefault();
-        section.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => scrollToPanel(0), 400);
-      }
+      e.preventDefault();
+      const containerTop = container.offsetTop;
+      window.scrollTo({ top: containerTop, behavior: 'smooth' });
     });
   });
 
-  // Initial trigger
-  updateParallax();
-  setTimeout(updateParallax, 200);
+  // Start loop & initial trigger
+  updateScrollTarget();
+  renderLoop();
 })();
 
 /* ========================================================
