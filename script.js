@@ -303,342 +303,301 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 /* ========================================================
    PORTFOLIO SHOWREEL AUTOPLAY CONTROLLER
    ======================================================== */
-(function initShowreel() {
-  const frame = document.getElementById('showreelFrame');
-  const video = document.getElementById('portfolioVideo');
-  const overlay = document.getElementById('videoPosterOverlay');
-  const loader = document.getElementById('videoLoadingIndicator');
-  const ctrlPlayBtn = document.getElementById('ctrlPlayBtn');
-  const progressWrap = document.getElementById('ctrlProgressWrap');
-  const progressBar = document.getElementById('ctrlProgressBar');
-  const timeDisplay = document.getElementById('ctrlTime');
-  const muteBtn = document.getElementById('ctrlMuteBtn');
-  const fsBtn = document.getElementById('ctrlFullscreenBtn');
+(function initHorizontalReelGallery() {
+  const container = document.getElementById('reelGalleryContainer');
+  const viewport = document.getElementById('reelTrackViewport');
+  const track = document.getElementById('reelTrack');
+  const panels = document.querySelectorAll('.reel-panel');
+  const prevBtn = document.getElementById('reelPrevBtn');
+  const nextBtn = document.getElementById('reelNextBtn');
+  const currentIndexEl = document.getElementById('reelCurrentIndex');
+  const progressFill = document.getElementById('reelProgressFill');
+  const pills = document.querySelectorAll('.reel-pill-btn');
 
-  if (!frame || !video) return;
+  // Theater modal elements
+  const theaterModal = document.getElementById('reelTheaterModal');
+  const theaterVideo = document.getElementById('reelTheaterVideo');
+  const theaterClose = document.getElementById('reelTheaterClose');
+  const theaterBackdrop = document.getElementById('reelTheaterBackdrop');
+  const theaterTag = document.getElementById('reelTheaterTag');
+  const theaterTitle = document.getElementById('reelTheaterTitle');
 
-  const playIcon = ctrlPlayBtn ? ctrlPlayBtn.querySelector('.ctrl-icon-play') : null;
-  const pauseIcon = ctrlPlayBtn ? ctrlPlayBtn.querySelector('.ctrl-icon-pause') : null;
-  const mutedIcon = muteBtn ? muteBtn.querySelector('.ctrl-icon-muted') : null;
-  const unmutedIcon = muteBtn ? muteBtn.querySelector('.ctrl-icon-unmuted') : null;
+  if (!viewport || !panels.length) return;
 
-  let userPaused = false;
-  let controlsTimeout = null;
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let isDragging = false;
+  let currentActiveIndex = 0;
 
-  function formatTime(sec) {
-    if (!sec || isNaN(sec)) return '00:00';
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
-  }
+  // 1. Smooth Mouse Wheel to Horizontal Scroll
+  viewport.addEventListener('wheel', (e) => {
+    // Only hijack if dominant vertical wheel on the gallery
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+      const atStart = viewport.scrollLeft <= 0 && e.deltaY < 0;
+      const atEnd = viewport.scrollLeft >= maxScroll - 2 && e.deltaY > 0;
 
-  function showLoader() {
-    if (loader) loader.classList.add('is-visible');
-  }
-
-  function hideLoader() {
-    if (loader) loader.classList.remove('is-visible');
-  }
-
-  function wakeControls() {
-    frame.classList.add('controls-active');
-    clearTimeout(controlsTimeout);
-    if (!video.paused && !video.ended) {
-      controlsTimeout = setTimeout(() => {
-        frame.classList.remove('controls-active');
-      }, 2500);
-    }
-  }
-
-  frame.addEventListener('mousemove', wakeControls);
-  frame.addEventListener('touchstart', wakeControls, { passive: true });
-
-  function updatePlayPauseUI() {
-    const isPlaying = !video.paused && !video.ended;
-    if (isPlaying) {
-      if (overlay) overlay.classList.add('is-hidden');
-      frame.classList.add('is-playing');
-      frame.classList.remove('is-paused');
-      if (playIcon) playIcon.style.display = 'none';
-      if (pauseIcon) pauseIcon.style.display = 'block';
-      if (ctrlPlayBtn) {
-        ctrlPlayBtn.setAttribute('title', 'Pause Video');
-        ctrlPlayBtn.setAttribute('aria-label', 'Pause Video');
-      }
-      wakeControls();
-    } else {
-      frame.classList.remove('is-playing');
-      frame.classList.add('is-paused');
-      frame.classList.add('controls-active');
-      clearTimeout(controlsTimeout);
-      if (playIcon) playIcon.style.display = 'block';
-      if (pauseIcon) pauseIcon.style.display = 'none';
-      if (ctrlPlayBtn) {
-        ctrlPlayBtn.setAttribute('title', 'Resume Video');
-        ctrlPlayBtn.setAttribute('aria-label', 'Resume Video');
+      if (!atStart && !atEnd) {
+        e.preventDefault();
+        viewport.scrollLeft += e.deltaY * 1.15;
       }
     }
-  }
+  }, { passive: false });
 
-  function updateSoundUI() {
-    if (!muteBtn) return;
-    if (video.muted) {
-      if (mutedIcon) mutedIcon.style.display = 'block';
-      if (unmutedIcon) unmutedIcon.style.display = 'none';
-      muteBtn.setAttribute('title', 'Click to Unmute');
-      muteBtn.setAttribute('aria-label', 'Click to Unmute');
-    } else {
-      if (mutedIcon) mutedIcon.style.display = 'none';
-      if (unmutedIcon) unmutedIcon.style.display = 'block';
-      muteBtn.setAttribute('title', 'Click to Mute');
-      muteBtn.setAttribute('aria-label', 'Click to Mute');
-    }
-  }
-
-  function playVideo() {
-    userPaused = false;
-    const promise = video.play();
-    if (promise !== undefined) {
-      promise.then(() => {
-        updatePlayPauseUI();
-      }).catch(() => {
-        video.muted = true;
-        updateSoundUI();
-        video.play().then(() => updatePlayPauseUI()).catch(() => {});
-      });
-    }
-  }
-
-  function pauseVideo() {
-    video.pause();
-    updatePlayPauseUI();
-  }
-
-  function togglePlay(e) {
-    if (e && e.stopPropagation) e.stopPropagation();
-    if (video.paused || video.ended) {
-      userPaused = false;
-      playVideo();
-    } else {
-      userPaused = true;
-      pauseVideo();
-    }
-  }
-
-  // Loading and buffer events
-  video.addEventListener('loadstart', () => {
-    if (video.readyState < 3) showLoader();
-  });
-  video.addEventListener('waiting', showLoader);
-  video.addEventListener('seeking', showLoader);
-  video.addEventListener('canplay', hideLoader);
-  video.addEventListener('canplaythrough', hideLoader);
-  video.addEventListener('playing', () => {
-    hideLoader();
-    updatePlayPauseUI();
-  });
-  video.addEventListener('pause', () => {
-    hideLoader();
-    updatePlayPauseUI();
-  });
-  video.addEventListener('seeked', hideLoader);
-  video.addEventListener('error', hideLoader);
-
-  video.addEventListener('play', updatePlayPauseUI);
-  video.addEventListener('ended', () => {
-    userPaused = false;
-    updatePlayPauseUI();
+  // 2. Click-and-Drag Momentum Scrolling
+  viewport.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.reel-action-btn') || e.target.closest('.reel-center-action')) return;
+    isDown = true;
+    isDragging = false;
+    viewport.classList.add('is-dragging');
+    startX = e.pageX - viewport.offsetLeft;
+    scrollLeft = viewport.scrollLeft;
   });
 
-  video.addEventListener('volumechange', updateSoundUI);
-
-  if (ctrlPlayBtn) ctrlPlayBtn.addEventListener('click', togglePlay);
-  video.addEventListener('click', togglePlay);
-
-  // Time & Progress Bar
-  video.addEventListener('timeupdate', () => {
-    if (!video.duration) return;
-    const pct = (video.currentTime / video.duration) * 100;
-    if (progressBar) progressBar.style.width = pct + '%';
-    if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
+  window.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    viewport.classList.remove('is-dragging');
+    setTimeout(() => { isDragging = false; }, 60);
   });
 
-  // Initialize video timeline display and auto-start playback
-  function initializeVideoPlayback() {
-    const dur = video.duration || 46.41;
-    const cur = video.currentTime || 0;
-    if (timeDisplay) {
-      timeDisplay.textContent = formatTime(cur) + ' / ' + formatTime(dur);
-    }
-    if (progressBar && dur > 0) {
-      progressBar.style.width = ((cur / dur) * 100) + '%';
-    }
-    updateSoundUI();
-    updatePlayPauseUI();
-
-    // Auto-start playback when metadata is ready
-    if (!userPaused && video.paused) {
-      playVideo();
-    }
-  }
-
-  video.addEventListener('loadedmetadata', initializeVideoPlayback);
-  video.addEventListener('canplay', () => {
-    if (!userPaused && video.paused) {
-      playVideo();
-    }
+  viewport.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - viewport.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    if (Math.abs(walk) > 4) isDragging = true;
+    viewport.scrollLeft = scrollLeft - walk;
   });
-  if (video.readyState >= 1) initializeVideoPlayback();
 
-  // Autoplay as soon as the showreel scrolls into view
-  if ('IntersectionObserver' in window) {
-    const reelObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!userPaused && video.paused) {
-            playVideo();
+  // 3. Parallax Media Shift & Active Panel Detection on Scroll
+  function updateParallax() {
+    const vpRect = viewport.getBoundingClientRect();
+    const vpCenter = vpRect.left + vpRect.width / 2;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+
+    panels.forEach((panel, idx) => {
+      const pRect = panel.getBoundingClientRect();
+      const pCenter = pRect.left + pRect.width / 2;
+      const diff = Math.abs(pCenter - vpCenter);
+
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = idx;
+      }
+
+      // Parallax shift calculation for the video element inside
+      const progress = (pCenter - vpCenter) / (vpRect.width || 1);
+      const video = panel.querySelector('.reel-video');
+      if (video && !panel.classList.contains('is-vertical')) {
+        const offset = Math.max(-60, Math.min(60, progress * -45));
+        video.style.transform = `translate3d(${offset.toFixed(1)}px, 0, 0) scale(1.08)`;
+      }
+    });
+
+    currentActiveIndex = closestIndex;
+
+    // Update active panel class and play state
+    panels.forEach((panel, idx) => {
+      const isActive = idx === closestIndex;
+      panel.classList.toggle('is-active', isActive);
+
+      const video = panel.querySelector('.reel-video');
+      if (video) {
+        if (isActive) {
+          if (video.paused && !video.dataset.userPaused) {
+            video.play().catch(() => {});
+          }
+        } else {
+          if (!video.paused) {
+            video.pause();
           }
         }
-      });
-    }, {
-      root: null,
-      threshold: 0.15
+      }
     });
-    reelObserver.observe(frame);
+
+    // Update Counter & HUD
+    if (currentIndexEl) {
+      currentIndexEl.textContent = String(closestIndex + 1).padStart(2, '0');
+    }
+
+    // Update Progress Fill
+    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+    const scrollPct = maxScroll > 0 ? (viewport.scrollLeft / maxScroll) : (closestIndex / (panels.length - 1));
+    if (progressFill) {
+      progressFill.style.width = `${Math.max(12, Math.min(100, (scrollPct * 88) + 12))}%`;
+    }
+
+    // Update Pills
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('is-active', idx === closestIndex);
+    });
   }
 
-  // Backup: First user touch or scroll anywhere starts playback if blocked by browser policy
-  const triggerAutoplayOnGesture = () => {
-    if (!userPaused && video.paused) {
-      playVideo();
-    }
-    ['touchstart', 'scroll', 'click', 'keydown'].forEach(evt => {
-      window.removeEventListener(evt, triggerAutoplayOnGesture);
+  let rAF = null;
+  viewport.addEventListener('scroll', () => {
+    if (rAF) cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(updateParallax);
+  }, { passive: true });
+
+  // 4. Smooth Scrolling to Panel
+  function scrollToPanel(index) {
+    if (index < 0 || index >= panels.length) return;
+    const targetPanel = panels[index];
+    const vpWidth = viewport.clientWidth;
+    const panelWidth = targetPanel.offsetWidth;
+    const targetScroll = targetPanel.offsetLeft - (vpWidth / 2) + (panelWidth / 2);
+    
+    viewport.scrollTo({
+      left: Math.max(0, targetScroll),
+      behavior: 'smooth'
     });
-  };
-  ['touchstart', 'scroll', 'click', 'keydown'].forEach(evt => {
-    window.addEventListener(evt, triggerAutoplayOnGesture, { passive: true, once: true });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => scrollToPanel(currentActiveIndex - 1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => scrollToPanel(currentActiveIndex + 1));
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const idx = parseInt(pill.getAttribute('data-index'), 10);
+      scrollToPanel(idx);
+    });
   });
 
-  // Progress timeline seeking
-  if (progressWrap) {
-    progressWrap.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const rect = progressWrap.getBoundingClientRect();
-      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      if (video.duration) {
-        video.currentTime = pos * video.duration;
+  // 5. Card Hover & Sound Controls
+  panels.forEach(panel => {
+    const video = panel.querySelector('.reel-video');
+    const soundBtn = panel.querySelector('.reel-sound-toggle');
+    const soundText = soundBtn ? soundBtn.querySelector('.sound-text') : null;
+    const iconOff = soundBtn ? soundBtn.querySelector('.icon-sound-off') : null;
+    const iconOn = soundBtn ? soundBtn.querySelector('.icon-sound-on') : null;
+
+    panel.addEventListener('mouseenter', () => {
+      if (video && video.paused) {
+        video.play().catch(() => {});
       }
     });
-  }
 
-  // Sound toggle
-  if (muteBtn) {
-    muteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      video.muted = !video.muted;
-      updateSoundUI();
-    });
-  }
+    if (soundBtn && video) {
+      soundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (video.muted) {
+          // Mute all other videos
+          document.querySelectorAll('.reel-video').forEach(v => {
+            if (v !== video) {
+              v.muted = true;
+              const p = v.closest('.reel-panel');
+              if (p) {
+                const s = p.querySelector('.reel-sound-toggle');
+                if (s) {
+                  s.querySelector('.icon-sound-off').style.display = 'inline-block';
+                  s.querySelector('.icon-sound-on').style.display = 'none';
+                  s.querySelector('.sound-text').textContent = 'SOUND';
+                }
+              }
+            }
+          });
 
-  // Fullscreen toggle
-  if (fsBtn) {
-    fsBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!document.fullscreenElement) {
-        if (frame.requestFullscreen) {
-          frame.requestFullscreen();
-        } else if (frame.webkitRequestFullscreen) {
-          frame.webkitRequestFullscreen();
+          video.muted = false;
+          iconOff.style.display = 'none';
+          iconOn.style.display = 'inline-block';
+          soundText.textContent = 'MUTED';
+          video.play().catch(() => {});
+        } else {
+          video.muted = true;
+          iconOff.style.display = 'inline-block';
+          iconOn.style.display = 'none';
+          soundText.textContent = 'SOUND';
         }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
-    });
-  }
-
-  // Smooth scroll directly to center the showreel frame under the navbar
-  function scrollToReelFrame() {
-    const target = document.getElementById('showreelFrame') || document.getElementById('showreel');
-    if (target) {
-      const navContainer = document.querySelector('.pill-nav-container');
-      const navOffset = navContainer ? (navContainer.offsetHeight + 18) : 80;
-      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navOffset;
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: 'smooth'
       });
+    }
+
+    // Play Trigger / Theater Open
+    const centerTrigger = panel.querySelector('.reel-center-action');
+    const expandBtn = panel.querySelector('.reel-fullscreen-trigger');
+
+    function openTheater() {
+      if (isDragging) return;
+      const src = panel.getAttribute('data-video-src');
+      const title = panel.getAttribute('data-title');
+      const tag = panel.getAttribute('data-tag');
+
+      if (!theaterModal || !theaterVideo) return;
+
+      theaterVideo.src = src;
+      theaterVideo.muted = false;
+      if (theaterTag) theaterTag.textContent = tag;
+      if (theaterTitle) theaterTitle.textContent = title;
+
+      theaterModal.classList.add('is-open');
+      theaterModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Pause all gallery previews
+      document.querySelectorAll('.reel-video').forEach(v => v.pause());
+
+      theaterVideo.play().catch(() => {});
+    }
+
+    if (centerTrigger) centerTrigger.addEventListener('click', openTheater);
+    if (expandBtn) expandBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openTheater();
+    });
+  });
+
+  // 6. Theater Modal Close & Keyboard Navigation
+  function closeTheater() {
+    if (!theaterModal || !theaterVideo) return;
+    theaterVideo.pause();
+    theaterVideo.src = '';
+    theaterModal.classList.remove('is-open');
+    theaterModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Resume active panel video
+    const activePanel = panels[currentActiveIndex];
+    if (activePanel) {
+      const v = activePanel.querySelector('.reel-video');
+      if (v) v.play().catch(() => {});
     }
   }
 
-  // Navigation click trigger for "Reel"
-  document.querySelectorAll('a[href="#showreel"]').forEach((link) => {
+  if (theaterClose) theaterClose.addEventListener('click', closeTheater);
+  if (theaterBackdrop) theaterBackdrop.addEventListener('click', closeTheater);
+
+  window.addEventListener('keydown', (e) => {
+    if (theaterModal && theaterModal.classList.contains('is-open')) {
+      if (e.key === 'Escape') closeTheater();
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        if (theaterVideo.paused) theaterVideo.play();
+        else theaterVideo.pause();
+      }
+    }
+  });
+
+  // Handle header nav anchor click for #showreel
+  document.querySelectorAll('a[href="#showreel"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollToReelFrame();
-      if (!userPaused && video.paused) {
-        playVideo();
+      const section = document.getElementById('showreel');
+      if (section) {
+        e.preventDefault();
+        section.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => scrollToPanel(0), 400);
       }
     });
   });
 
-  if (window.location.hash === '#showreel') {
-    setTimeout(() => {
-      scrollToReelFrame();
-      if (!userPaused && video.paused) {
-        playVideo();
-      }
-    }, 400);
-  }
-
-  // Video Playlist / Showcase Track Switching (Supports Horizontal & Vertical 9:16)
-  const playlistCards = document.querySelectorAll('.video-track-card');
-
-  playlistCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const src = card.getAttribute('data-video-src');
-      const poster = card.getAttribute('data-poster');
-      const isVertical = card.getAttribute('data-is-vertical') === 'true';
-
-      if (!src || video.src.includes(src)) return;
-
-      playlistCards.forEach(c => {
-        c.classList.remove('is-active');
-        c.setAttribute('aria-selected', 'false');
-      });
-      card.classList.add('is-active');
-      card.setAttribute('aria-selected', 'true');
-
-      // Seamlessly toggle vertical phone format for Vertical Social Reel only
-      if (isVertical) {
-        frame.classList.add('is-vertical');
-      } else {
-        frame.classList.remove('is-vertical');
-      }
-
-      showLoader();
-      if (progressBar) progressBar.style.width = '0%';
-      if (timeDisplay) timeDisplay.textContent = '00:00 / --:--';
-
-      video.pause();
-      video.src = src;
-      if (poster) video.poster = poster;
-      const sourceEl = video.querySelector('source');
-      if (sourceEl) sourceEl.src = src;
-
-      video.load();
-      userPaused = false;
-      playVideo();
-    });
-  });
-
-  // Auto-play immediately on script execution
-  video.muted = true;
-  updateSoundUI();
-  updatePlayPauseUI();
-  playVideo();
+  // Initial trigger
+  updateParallax();
+  setTimeout(updateParallax, 200);
 })();
 
 /* ========================================================
@@ -843,4 +802,173 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       banner.style.transform = 'translateX(-50%) translateY(120px)';
     }, 2800);
   });
+})();
+
+// ============================================================
+// ESPACEX SPACE-LAUNCH PRELOADER ENGINE
+// ============================================================
+(function initEspaceXPreloader() {
+  const preloader = document.getElementById('sitePreloader');
+  if (!preloader) return;
+
+  const counterEl = document.getElementById('espaceCounter');
+  const barFill = document.getElementById('espaceProgressFill');
+  const statusText = document.getElementById('espaceStatusText');
+  const skipBtn = document.getElementById('espaceSkipBtn');
+  const canvas = document.getElementById('espaceStars');
+  const htmlEl = document.documentElement;
+  const bodyEl = document.body;
+
+  htmlEl.classList.add('is-loading');
+  bodyEl.classList.add('is-loading');
+
+  // Starfield Canvas Animation
+  let starsAnimId = null;
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    const stars = [];
+    const STAR_COUNT = Math.min(140, Math.floor((width * height) / 9000));
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5 + 0.4,
+        alpha: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.8 + 0.3
+      });
+    }
+
+    function renderStars() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 210, 255, ${s.alpha})`;
+        ctx.fill();
+
+        // Drift downward giving feeling of rocket climbing
+        s.y += s.speed;
+        if (s.y > height) {
+          s.y = 0;
+          s.x = Math.random() * width;
+        }
+      }
+      starsAnimId = requestAnimationFrame(renderStars);
+    }
+    renderStars();
+  }
+
+  // Realistic Space Mission Progress Logic
+  let currentPercent = 0;
+  let targetPercent = 14;
+  let isWindowLoaded = false;
+  let isExiting = false;
+
+  const statusPhases = [
+    { max: 25, text: "INITIALIZING AVIONICS & GRAPHICS ENGINES..." },
+    { max: 55, text: "LOADING 43+ CLIENT CAMPAIGNS & MOTION REELS..." },
+    { max: 80, text: "SYNCHRONIZING 3D ASSETS & BRAND SYSTEMS..." },
+    { max: 99, text: "ALL SYSTEMS NOMINAL • PREPARING ORBITAL INSERTION..." },
+    { max: 100, text: "LAUNCH VECTOR CONFIRMED • WELCOME TO SHIBEEB.STUDIO" }
+  ];
+
+  function getStatusText(percent) {
+    for (let phase of statusPhases) {
+      if (percent <= phase.max) return phase.text;
+    }
+    return statusPhases[statusPhases.length - 1].text;
+  }
+
+  function dismissPreloader() {
+    if (isExiting) return;
+    isExiting = true;
+
+    if (counterEl) counterEl.textContent = '100%';
+    if (barFill) barFill.style.width = '100%';
+    if (statusText) statusText.textContent = "LAUNCH VECTOR CONFIRMED • WELCOME TO SHIBEEB.STUDIO";
+
+    // 1. Rocket blast-off overdrive
+    preloader.classList.add('is-launching');
+
+    // 2. Curtain slide up after 380ms
+    setTimeout(() => {
+      preloader.classList.add('is-loaded');
+      htmlEl.classList.remove('is-loading');
+      bodyEl.classList.remove('is-loading');
+
+      // 3. Remove DOM elements and stop star loop
+      setTimeout(() => {
+        if (starsAnimId) cancelAnimationFrame(starsAnimId);
+        preloader.setAttribute('aria-hidden', 'true');
+        preloader.style.display = 'none';
+      }, 950);
+    }, 380);
+  }
+
+  function updateProgress() {
+    if (currentPercent < targetPercent) {
+      const step = Math.max(1, Math.ceil((targetPercent - currentPercent) * 0.16));
+      currentPercent += step;
+      if (currentPercent > targetPercent) currentPercent = targetPercent;
+
+      const formatted = (currentPercent < 10 ? '0' : '') + currentPercent + '%';
+      if (counterEl) counterEl.textContent = formatted;
+      if (barFill) barFill.style.width = currentPercent + '%';
+      if (statusText) statusText.textContent = getStatusText(currentPercent);
+    }
+
+    if (currentPercent < 100) {
+      requestAnimationFrame(updateProgress);
+    } else {
+      setTimeout(dismissPreloader, 180);
+    }
+  }
+
+  requestAnimationFrame(updateProgress);
+
+  // Simulated progressive load
+  const stepInterval = setInterval(() => {
+    if (!isWindowLoaded) {
+      if (targetPercent < 42) {
+        targetPercent += Math.floor(Math.random() * 12) + 7;
+      } else if (targetPercent < 76) {
+        targetPercent += Math.floor(Math.random() * 10) + 5;
+      } else if (targetPercent < 94) {
+        targetPercent += Math.floor(Math.random() * 4) + 2;
+      }
+    }
+  }, 75);
+
+  function finish() {
+    if (isWindowLoaded) return;
+    isWindowLoaded = true;
+    clearInterval(stepInterval);
+    targetPercent = 100;
+  }
+
+  if (document.readyState === 'complete') {
+    finish();
+  } else {
+    window.addEventListener('load', finish);
+  }
+
+  // Safety timer: Never block more than 2 seconds
+  setTimeout(finish, 2000);
+
+  // Skip button click handler
+  if (skipBtn) {
+    skipBtn.addEventListener('click', () => {
+      clearInterval(stepInterval);
+      dismissPreloader();
+    });
+  }
 })();
