@@ -12,13 +12,13 @@
     "id": 0,
     "category": "motion",
     "year": "2026",
-    "title": "Showreel 2026 — Motion In Action",
-    "badge": "SHOWREEL · 00:30",
+    "title": "Showreel 2026 \u2014 Motion In Action",
+    "badge": "SHOWREEL \u00b7 00:30",
     "desc": "Brand identities, kinetic typography & 3D pacing across commercial campaigns.",
     "src": "assets/images/posters/showreel-thumb.jpg",
     "videoSrc": "assets/videos/shibeeb-showreel.mp4",
     "role": "Creative Direction, 3D Animation & Motion Design",
-    "timeline": "Ongoing Direction · 2024–2026",
+    "timeline": "Ongoing Direction \u00b7 2024\u20132026",
     "stakeholders": "Commercial Clients & Global Brand Specs",
     "tools": "Cinema 4D, After Effects, Octane Render, DaVinci Resolve",
     "overview": "Showreel 2026 represents the pinnacle of motion direction and visual storytelling by Shibeeb Rahiman. Compiling cutting-edge automotive 3D pacing, kinetic typography systems, luxury perfume lighting, and commercial broadcast cuts, the reel captures fluid rhythm and high-retention energy designed for modern digital campaigns.",
@@ -51,8 +51,8 @@
     "id": 1,
     "category": "motion",
     "year": "2026",
-    "title": "Mahindra Thar — 4K Automotive Motion",
-    "badge": "AUTOMOTIVE · 00:58",
+    "title": "Mahindra Thar \u2014 4K Automotive Motion",
+    "badge": "AUTOMOTIVE \u00b7 00:58",
     "desc": "Off-road vehicle dynamics, procedural dirt particles & cinematic dusk composite.",
     "src": "assets/images/posters/car-video-thumb.jpg",
     "videoSrc": "assets/videos/cinematic-car-reel.mp4",
@@ -72,7 +72,7 @@
       },
       {
         "title": "Cinematic Dusk Color Palette",
-        "desc": "Employed a dramatic split-tone grade—deep cobalt twilight shadows paired with warm incandescent headlight beam refractions."
+        "desc": "Employed a dramatic split-tone grade\u2014deep cobalt twilight shadows paired with warm incandescent headlight beam refractions."
       },
       {
         "title": "Macro Mechanical Detailing",
@@ -90,8 +90,8 @@
     "id": 2,
     "category": "motion",
     "year": "2025",
-    "title": "Vertical Motion — Social & Campaign Cuts",
-    "badge": "SOCIAL REEL · 00:24",
+    "title": "Vertical Motion \u2014 Social & Campaign Cuts",
+    "badge": "SOCIAL REEL \u00b7 00:24",
     "desc": "Fast-paced mobile transitions, retention hooks & punchy editorial typography.",
     "src": "assets/images/posters/final-out-thumb.jpg",
     "videoSrc": "assets/videos/social-motion-reel.mp4",
@@ -124,8 +124,8 @@
     "id": 3,
     "category": "motion",
     "year": "2025",
-    "title": "Interactive CV — Visual Identity Reel",
-    "badge": "PORTFOLIO · 00:46",
+    "title": "Interactive CV \u2014 Visual Identity Reel",
+    "badge": "PORTFOLIO \u00b7 00:46",
     "desc": "Curated brand identity design, editorial layout motion & typography showcase.",
     "src": "assets/images/posters/reel-frame.jpg",
     "videoSrc": "assets/videos/shibeeb-cv.mp4",
@@ -153,8 +153,8 @@
     "id": 4,
     "category": "ads",
     "year": "2025",
-    "title": "YAS Sports — Footwear Promo",
-    "badge": "COMMERCIAL AD · YAS SPORTS",
+    "title": "YAS Sports \u2014 Footwear Promo",
+    "badge": "COMMERCIAL AD \u00b7 YAS SPORTS",
     "desc": "Performance footwear launch on a sculpted 3D pedestal with ambient stadium lighting.",
     "src": "assets/images/posters/yas-sports-shoes-promo.jpg",
     "videoSrc": null,
@@ -170,7 +170,7 @@
       },
       {
         "title": "High-Contrast Discount Hierarchy",
-        "desc": "Balanced commercial clarity with premium aesthetics—the '50% OFF' promotion commands instant attention without diluting brand prestige."
+        "desc": "Balanced commercial clarity with premium aesthetics\u2014the '50% OFF' promotion commands instant attention without diluting brand prestige."
       },
       {
         "title": "Dynamic Shoe Sole Shadowing",
@@ -188,7 +188,7 @@
     "category": "educraft",
     "year": "2025",
     "title": "Malappuram Sahodaya Memento",
-    "badge": "3D PRODUCT · EDUCRAFT",
+    "badge": "3D PRODUCT \u00b7 EDUCRAFT",
     "desc": "Prestigious award ceremony plaque rendered with fluid podium curves & laser engraving.",
     "src": "assets/images/posters/educraft-sahodaya-memento.png",
     "videoSrc": null,
@@ -222,8 +222,8 @@
     "id": 6,
     "category": "posters",
     "year": "2024",
-    "title": "Sachin Tendulkar Tribute — God of Cricket",
-    "badge": "SPORTS POSTER · TRIBUTE",
+    "title": "Sachin Tendulkar Tribute \u2014 God of Cricket",
+    "badge": "SPORTS POSTER \u00b7 TRIBUTE",
     "desc": "Monochrome sports triptych study celebrating cricket's greatest batting maestro.",
     "src": "assets/images/posters/sachin-tendulkar-god-of-cricket.jpg",
     "videoSrc": null,
@@ -253,7 +253,7 @@
     "category": "ads",
     "year": "2025",
     "title": "OffLimits Cricket Spikes",
-    "badge": "COMMERCIAL AD · OFFLIMITS",
+    "badge": "COMMERCIAL AD \u00b7 OFFLIMITS",
     "desc": "Performance footwear launch featuring dynamic turf particle collisions & high speed.",
     "src": "assets/images/posters/offlimits-cricket-shoes-ad.jpg",
     "videoSrc": null,
@@ -283,7 +283,7 @@
     "category": "educraft",
     "year": "2025",
     "title": "Championship Series Trophies",
-    "badge": "3D STAGING · EDUCRAFT",
+    "badge": "3D STAGING \u00b7 EDUCRAFT",
     "desc": "1st, 2nd & 3rd place podium staged in polished acrylic, champagne gold & silver.",
     "src": "assets/images/posters/educraft-podium-trophies.png",
     "videoSrc": null,
@@ -344,7 +344,7 @@
     "category": "ads",
     "year": "2024",
     "title": "MN LY Menswear Fashion Hub",
-    "badge": "BRAND LAUNCH · MN LY",
+    "badge": "BRAND LAUNCH \u00b7 MN LY",
     "desc": "Modern urban menswear campaign blending architectural minimalism with bold type.",
     "src": "assets/images/posters/mnly-fashion-hub-launch.jpg",
     "videoSrc": null,
@@ -395,7 +395,7 @@
     "category": "educraft",
     "year": "2024",
     "title": "MSAT 2024 Excellence Award",
-    "badge": "AWARD DESIGN · EDUCRAFT",
+    "badge": "AWARD DESIGN \u00b7 EDUCRAFT",
     "desc": "Geometric crystal scholarship award with frosted laser detailing & mirror base.",
     "src": "assets/images/posters/educraft-msat-excellence-award.png",
     "videoSrc": null,
@@ -445,7 +445,7 @@
     "category": "educraft",
     "year": "2025",
     "title": "Rotary Cricket League Set",
-    "badge": "SPORTS TROPHIES · EDUCRAFT",
+    "badge": "SPORTS TROPHIES \u00b7 EDUCRAFT",
     "desc": "Tournament championship trophy and individual player awards staged in brass and glass.",
     "src": "assets/images/posters/educraft-rotary-cricket-awards.png",
     "videoSrc": null,
@@ -470,7 +470,7 @@
     "category": "educraft",
     "year": "2025",
     "title": "Best Batsman Golden Sculpture",
-    "badge": "3D PRODUCT · EDUCRAFT",
+    "badge": "3D PRODUCT \u00b7 EDUCRAFT",
     "desc": "Sculptural metallic batsman poised in follow-through stance on marble base.",
     "src": "assets/images/posters/educraft-best-batsman-award.png",
     "videoSrc": null,
@@ -495,7 +495,7 @@
     "category": "educraft",
     "year": "2024",
     "title": "Leadership & Service Citations",
-    "badge": "CORPORATE AWARDS · EDUCRAFT",
+    "badge": "CORPORATE AWARDS \u00b7 EDUCRAFT",
     "desc": "Executive recognition plaques in piano black lacquer and brushed brass.",
     "src": "assets/images/posters/educraft-leadership-acrylic-plaque.png",
     "videoSrc": null,
@@ -543,7 +543,7 @@
     "category": "educraft",
     "year": "2024",
     "title": "ALFIA Student's Memento",
-    "badge": "ARABIC TYPE · EDUCRAFT",
+    "badge": "ARABIC TYPE \u00b7 EDUCRAFT",
     "desc": "Intricate Arabic calligraphy memento in laser-cut mirrored gold acrylic.",
     "src": "assets/images/posters/educraft-arabic-calligraphy-memento.png",
     "videoSrc": null,
@@ -591,7 +591,7 @@
     "category": "educraft",
     "year": "2025",
     "title": "Plymarc Excellence Award Plaque",
-    "badge": "3D PRODUCT • EDUCRAFT",
+    "badge": "3D PRODUCT \u2022 EDUCRAFT",
     "desc": "Architectural wooden veneer plaque with laser-etched gold brand crest.",
     "src": "assets/images/posters/educraft-plymarc-wooden-plaque.png",
     "videoSrc": null,
@@ -615,7 +615,7 @@
     "category": "posters",
     "year": "2025",
     "title": "Mercedes G-Class: The Best or Nothing",
-    "badge": "MANIPULATION • AUTOMOTIVE",
+    "badge": "MANIPULATION \u2022 AUTOMOTIVE",
     "desc": "Monolithic luxury SUV emerging through dense rain, wet asphalt & neon flares.",
     "src": "assets/images/posters/mercedes-benz-g-class-manipulation.jpg",
     "videoSrc": null,
@@ -640,7 +640,7 @@
     "category": "posters",
     "year": "2024",
     "title": "Nightfall Quarantine Zone",
-    "badge": "MATTE PAINTING • CINEMATIC",
+    "badge": "MATTE PAINTING \u2022 CINEMATIC",
     "desc": "Post-apocalyptic atmospheric matte painting featuring survival architecture & searchlights.",
     "src": "assets/images/posters/dystopian-matte-painting-concept.jpg",
     "videoSrc": null,
@@ -663,8 +663,8 @@
     "id": 23,
     "category": "posters",
     "year": "2024",
-    "title": "Thomas Shelby — Peaky Blinders Tribute",
-    "badge": "DIGITAL ART • SMUDGE PAINTING",
+    "title": "Thomas Shelby \u2014 Peaky Blinders Tribute",
+    "badge": "DIGITAL ART \u2022 SMUDGE PAINTING",
     "desc": "Atmospheric digital portrait capturing the razor-sharp intensity of Cillian Murphy.",
     "src": "assets/images/posters/thomas-shelby-peaky-blinders-smudge-art.jpg",
     "videoSrc": null,
@@ -688,7 +688,7 @@
     "category": "posters",
     "year": "2024",
     "title": "Fast X: Dominic Toretto Tribute",
-    "badge": "VECTOR ART • FAST X",
+    "badge": "VECTOR ART \u2022 FAST X",
     "desc": "Stylized vector tribute celebrating high-speed nitro adrenaline and family legacy.",
     "src": "assets/images/posters/fast-x-dom-toretto-vector-art.jpg",
     "videoSrc": null,
@@ -711,8 +711,8 @@
     "id": 25,
     "category": "posters",
     "year": "2024",
-    "title": "Finding — Children's Book Illustration",
-    "badge": "ILLUSTRATION • VECTOR",
+    "title": "Finding \u2014 Children's Book Illustration",
+    "badge": "ILLUSTRATION \u2022 VECTOR",
     "desc": "Whimsical children's book cover illustration full of curiosity and discovery.",
     "src": "assets/images/posters/finding-vector-illustration.jpg",
     "videoSrc": null,
@@ -736,7 +736,7 @@
     "category": "ads",
     "year": "2025",
     "title": "Jalamithra Water Purifier Campaign",
-    "badge": "COMMERCIAL AD • JALAMITHRA",
+    "badge": "COMMERCIAL AD \u2022 JALAMITHRA",
     "desc": "Purity-focused commercial ad with dynamic mineral water splashes & crystal clarity.",
     "src": "assets/images/posters/jalamithra-water-purifier-ad.jpg",
     "videoSrc": null,
@@ -762,7 +762,7 @@
     "category": "ads",
     "year": "2025",
     "title": "Jalamithra Eid Mubarak Campaign",
-    "badge": "FESTIVE AD • JALAMITHRA",
+    "badge": "FESTIVE AD \u2022 JALAMITHRA",
     "desc": "Festive celebration ad intertwining pure hydration with blessed family greetings.",
     "src": "assets/images/posters/jalamithra-eid-mubarak-ad.png",
     "videoSrc": null,
@@ -786,7 +786,7 @@
     "category": "ads",
     "year": "2025",
     "title": "Jalamithra Pure Living Campaign",
-    "badge": "COMMERCIAL AD • WATER PURIFIER",
+    "badge": "COMMERCIAL AD \u2022 WATER PURIFIER",
     "desc": "Lifestyle health campaign emphasizing pure mineral replenishment for modern homes.",
     "src": "assets/images/posters/jalamithra-pure-living-ad.jpg",
     "videoSrc": null,
@@ -809,32 +809,8 @@
     "id": 29,
     "category": "ads",
     "year": "2025",
-    "title": "Jalamithra Lineup & Endorsement",
-    "badge": "PRODUCT AD • JALAMITHRA",
-    "desc": "Celebrity endorsement and full product range catalog for retail dealerships.",
-    "src": "assets/images/posters/jalamithra-product-lineup-ad.jpg",
-    "videoSrc": null,
-    "role": "Retail & Print Designer",
-    "timeline": "1 Week",
-    "stakeholders": "Jalamithra Distribution Network",
-    "tools": "Photoshop, InDesign",
-    "overview": "Complete commercial spread showcasing Jalamithra's 5 domestic and commercial purifier variants.",
-    "dropCards": [
-      {
-        "title": "Comparison Clarity",
-        "desc": "Structured key specifications so consumers can easily compare filtration stages and storage capacity."
-      }
-    ],
-    "gallery": [
-      "assets/images/posters/jalamithra-product-lineup-ad.jpg"
-    ]
-  },
-  {
-    "id": 30,
-    "category": "ads",
-    "year": "2025",
     "title": "Jalamithra Extraterrestrial Concept",
-    "badge": "SCI-FI AD • JALAMITHRA",
+    "badge": "SCI-FI AD \u2022 JALAMITHRA",
     "desc": "Creative sci-fi campaign: Alien civilizations searching across space for pure water.",
     "src": "assets/images/posters/jalamithra-ufo-sci-fi-ad.jpg",
     "videoSrc": null,
@@ -854,11 +830,11 @@
     ]
   },
   {
-    "id": 31,
+    "id": 30,
     "category": "ads",
     "year": "2025",
     "title": "CK Arabic Luxury Perfume",
-    "badge": "PRODUCT AD • PERFUME",
+    "badge": "PRODUCT AD \u2022 PERFUME",
     "desc": "Opulent Arabic fragrance staging featuring amber glass bottle & incense smoke.",
     "src": "assets/images/posters/ck-luxury-perfume-product-ad.jpg",
     "videoSrc": null,
@@ -879,11 +855,11 @@
     ]
   },
   {
-    "id": 32,
+    "id": 31,
     "category": "ads",
     "year": "2024",
     "title": "Manly Perfume Campaign",
-    "badge": "COMMERCIAL AD • FRAGRANCE",
+    "badge": "COMMERCIAL AD \u2022 FRAGRANCE",
     "desc": "Robust, masculine fragrance visual with rugged slate textures & hard rim lighting.",
     "src": "assets/images/posters/manly-perfume-commercial-ad.jpg",
     "videoSrc": null,
@@ -903,11 +879,11 @@
     ]
   },
   {
-    "id": 33,
+    "id": 32,
     "category": "ads",
     "year": "2025",
     "title": "Hello Money Remittance Campaign",
-    "badge": "FINTECH AD • REMITTANCE",
+    "badge": "FINTECH AD \u2022 REMITTANCE",
     "desc": "Cross-border mobile money transfer ad highlighting zero fees & instant delivery.",
     "src": "assets/images/posters/hello-money-remittance-ad.jpg",
     "videoSrc": null,
@@ -927,11 +903,11 @@
     ]
   },
   {
-    "id": 34,
+    "id": 33,
     "category": "ads",
     "year": "2025",
     "title": "Dugue Luxury Perfume Staging",
-    "badge": "3D PRODUCT • PACKAGING",
+    "badge": "3D PRODUCT \u2022 PACKAGING",
     "desc": "Photorealistic 3D flacon staging on obsidian plinth with caustic light reflections.",
     "src": "assets/images/posters/dugue-luxury-perfume-3d-staging.jpg",
     "videoSrc": null,
@@ -953,11 +929,11 @@
     ]
   },
   {
-    "id": 35,
+    "id": 34,
     "category": "ads",
     "year": "2025",
     "title": "Dugue Gold Edition Perfume Mockup",
-    "badge": "3D PRODUCT • LUXURY BRANDING",
+    "badge": "3D PRODUCT \u2022 LUXURY BRANDING",
     "desc": "24-karat gold cap and beveled bottle staging with warm champagne bounce lighting.",
     "src": "assets/images/posters/dugue-gold-edition-perfume-mockup.jpg",
     "videoSrc": null,
@@ -977,11 +953,11 @@
     ]
   },
   {
-    "id": 36,
+    "id": 35,
     "category": "ads",
     "year": "2025",
     "title": "Dugue Obsidian & Magma Staging",
-    "badge": "3D PRODUCT • DRAMATIC LIGHTING",
+    "badge": "3D PRODUCT \u2022 DRAMATIC LIGHTING",
     "desc": "Dramatic staging on glowing volcanic magma rock with embers & dark obsidian glass.",
     "src": "assets/images/posters/dugue-crimson-magma-perfume-staging.jpg",
     "videoSrc": null,
@@ -1001,11 +977,11 @@
     ]
   },
   {
-    "id": 37,
+    "id": 36,
     "category": "ads",
     "year": "2024",
     "title": "OffLimits Footwear Retail Danglers",
-    "badge": "RETAIL MOCKUP • POINT OF SALE",
+    "badge": "RETAIL MOCKUP \u2022 POINT OF SALE",
     "desc": "In-store hanging retail display danglers with dynamic die-cut shoe contours.",
     "src": "assets/images/posters/offlimits-retail-dangler-mockup.png",
     "videoSrc": null,
@@ -1025,13 +1001,13 @@
     ]
   },
   {
-    "id": 38,
+    "id": 37,
     "category": "ads",
     "year": "2024",
     "title": "Arena Motion Graphics Brochure",
-    "badge": "PRINT DESIGN • TRI-FOLD BROCHURE",
+    "badge": "PRINT DESIGN \u2022 TRI-FOLD BROCHURE",
     "desc": "Tri-fold curriculum prospectus with futuristic cybernetic typography & student showcases.",
-    "src": "assets/images/posters/arena-motion-graphics-brochure.jpg",
+    "src": "assets/images/posters/arena-motion-graphics-brochure-combined.jpg",
     "videoSrc": null,
     "role": "Editorial Layout & Brochure Designer",
     "timeline": "1 Week",
@@ -1045,15 +1021,17 @@
       }
     ],
     "gallery": [
-      "assets/images/posters/arena-motion-graphics-brochure.jpg"
+      "assets/images/posters/arena-motion-graphics-brochure-combined.jpg",
+      "assets/images/posters/arena-motion-graphics-brochure.jpg",
+      "assets/images/posters/arena-motion-graphics-brochure-inside.jpg"
     ]
   },
   {
-    "id": 39,
+    "id": 38,
     "category": "ads",
     "year": "2025",
     "title": "Emirates Catering Iftar Feast",
-    "badge": "FOOD & CATERING • EMIRATES",
+    "badge": "FOOD & CATERING \u2022 EMIRATES",
     "desc": "Luxury Ramadan catering menu featuring fragrant biryanis, roasted meats & dessert spreads.",
     "src": "assets/images/posters/emirates-catering-iftar-feast-ad.jpg",
     "videoSrc": null,
@@ -1073,11 +1051,11 @@
     ]
   },
   {
-    "id": 40,
+    "id": 39,
     "category": "ads",
     "year": "2024",
     "title": "MN LY Fashion Hub Grand Opening",
-    "badge": "RETAIL LAUNCH • MNLY",
+    "badge": "RETAIL LAUNCH \u2022 MNLY",
     "desc": "City-wide opening banner campaign with architectural facade rendering & opening deals.",
     "src": "assets/images/posters/mnly-grand-opening-launch-poster.jpg",
     "videoSrc": null,
@@ -1098,11 +1076,11 @@
     ]
   },
   {
-    "id": 41,
+    "id": 40,
     "category": "ads",
     "year": "2024",
     "title": "Free Style Women's Clothing",
-    "badge": "FASHION AD • FREE STYLE",
+    "badge": "FASHION AD \u2022 FREE STYLE",
     "desc": "Youthful contemporary women's apparel campaign celebrating self-expression.",
     "src": "assets/images/posters/freestyle-women-clothing-ad.jpg",
     "videoSrc": null,
@@ -1123,11 +1101,11 @@
     ]
   },
   {
-    "id": 42,
+    "id": 41,
     "category": "ads",
     "year": "2024",
     "title": "Free Style Apparel Landscape Banner",
-    "badge": "RETAIL BANNER • FREE STYLE",
+    "badge": "RETAIL BANNER \u2022 FREE STYLE",
     "desc": "Wide-format retail storefront billboard highlighting summer collection arrivals.",
     "src": "assets/images/posters/freestyle-women-clothing-visiting-card.jpg",
     "videoSrc": null,
@@ -1144,6 +1122,161 @@
     ],
     "gallery": [
       "assets/images/posters/freestyle-women-clothing-visiting-card.jpg"
+    ]
+  },
+  {
+    "id": 42,
+    "category": "motion",
+    "year": "2026",
+    "title": "Shibi \u2014 Cinematic Kinetic Brand Film",
+    "badge": "MOTION FILM \u00b7 00:40",
+    "desc": "Dynamic camera staging, kinetic pacing & atmospheric composite passes.",
+    "src": "assets/images/posters/shibi-motion-thumb.jpg",
+    "videoSrc": "assets/videos/shibi.mp4",
+    "role": "Motion Direction, Cinematic Editing & Sound Design",
+    "timeline": "2026 Production",
+    "stakeholders": "Commercial Brand Motion Spec",
+    "tools": "Cinema 4D, After Effects, DaVinci Resolve, Premiere Pro",
+    "overview": "A cinematic 40-second widescreen motion film showcasing advanced visual dynamics, rhythmic editing, and high-retention motion graphics. The piece combines dynamic speed ramps, lighting flares, and bespoke kinetic typography.",
+    "dropCards": [
+      {
+        "title": "Kinetic Rhythm & Speed Ramping",
+        "desc": "Precision frame cutting alternating between slow-motion atmospheric pauses and instantaneous camera snaps to command audience focus."
+      },
+      {
+        "title": "Widescreen 2.39:1 Cinematic Ratio",
+        "desc": "Framed in cinematic scope with anamorphic lens flares, rich tonal contrast, and subtle chromatic aberration."
+      },
+      {
+        "title": "Spatial Sound Synchronization",
+        "desc": "Every mechanical transition and particle drift is reinforced with layered Foley effects and deep bass sweeps."
+      }
+    ],
+    "gallery": [
+      "assets/images/posters/shibi-motion-thumb.jpg",
+      "assets/images/posters/showreel-thumb.jpg",
+      "assets/images/posters/car-video-thumb.jpg"
+    ]
+  },
+  {
+    "id": 42,
+    "category": "ads",
+    "year": "2025",
+    "title": "Jalamithra \u2014 Parachute Air-Drop Launch",
+    "badge": "COMMERCIAL AD \u00b7 JALAMITHRA",
+    "desc": "Creative skydiving air-drop concept poster announcing Jalamithra arrival in Kodakkad.",
+    "src": "assets/images/posters/jalamithra-airdrop-parachute-campaign.jpg",
+    "videoSrc": null,
+    "role": "Creative Advertising & Digital Compositor",
+    "timeline": "2025 Campaign",
+    "stakeholders": "APA Jalamithra Pvt. Ltd. (Kodakkad)",
+    "tools": "Adobe Photoshop, Lightroom",
+    "overview": "A striking aerial composite depicting Jalamithra natural water filter cylinders parachuting down from an airplane across the sunlit Kodakkad town skyline, symbolizing immediate, direct water purity delivered straight to local residents.",
+    "dropCards": [
+      {
+        "title": "Aerial Metaphor & Excitement",
+        "desc": "The parachute delivery metaphor communicates rapid regional availability and exciting brand arrival with playful visual humor."
+      },
+      {
+        "title": "Daylight Atmospheric Depth",
+        "desc": "Golden hour horizon light and cumulus cloud layering evoke fresh natural cleanliness and high spatial depth."
+      },
+      {
+        "title": "Regional Typographic Anchors",
+        "desc": "Integrated bold Malayalam headline typography with high-contrast local dial-in contacts for instant lead conversion."
+      }
+    ],
+    "gallery": [
+      "assets/images/posters/jalamithra-airdrop-parachute-campaign.jpg",
+      "assets/images/posters/jalamithra-water-purifier-ad.jpg",
+      "assets/images/posters/jalamithra-rooftop-water-filter.jpg"
+    ]
+  },
+  {
+    "id": 44,
+    "category": "ads",
+    "year": "2025",
+    "title": "Jalamithra \u2014 Water Purity Split Comparison",
+    "badge": "PRODUCT AD \u00b7 JALAMITHRA",
+    "desc": "Dynamic half-and-half comparison visual contrasting contaminated water with pristine pure hydration.",
+    "src": "assets/images/posters/jalamithra-water-taste-purity-split.jpg",
+    "videoSrc": null,
+    "role": "Commercial Art Director & Retoucher",
+    "timeline": "2025 Campaign",
+    "stakeholders": "APA Jalamithra Pvt. Ltd.",
+    "tools": "Photoshop, Cinema 4D (Fluid Simulation)",
+    "overview": "Direct visual proof advertising comparing murky, discolored water on the left against vibrant crystal-blue water splashing around the Jalamithra cylinder on the right, providing an unignorable before-and-after demonstration.",
+    "dropCards": [
+      {
+        "title": "Dual Contrast Composition",
+        "desc": "Split-screen chromatic tension instantly highlights the everyday problem of discolored water and Jalamithra's immediate solution."
+      },
+      {
+        "title": "Hydrodynamic Splash Sculpting",
+        "desc": "Dynamic water droplets and froth rendered with high surface tension realism to communicate pure, refreshing hydration."
+      }
+    ],
+    "gallery": [
+      "assets/images/posters/jalamithra-water-taste-purity-split.jpg",
+      "assets/images/posters/jalamithra-pure-living-ad.jpg"
+    ]
+  },
+  {
+    "id": 45,
+    "category": "ads",
+    "year": "2025",
+    "title": "Jalamithra \u2014 Rooftop Natural Water Filter",
+    "badge": "COMMERCIAL AD \u00b7 JALAMITHRA",
+    "desc": "Monolithic 3D rooftop staging of natural green filtration cylinders beside domestic water tanks.",
+    "src": "assets/images/posters/jalamithra-rooftop-water-filter.jpg",
+    "videoSrc": null,
+    "role": "Commercial Poster & 3D Stager",
+    "timeline": "2025 Campaign",
+    "stakeholders": "APA Jalamithra Pvt. Ltd.",
+    "tools": "Photoshop, Cinema 4D",
+    "overview": "Architectural rooftop composition placing 3 green Jalamithra cylinders on an elevated concrete parapet, flanked by domestic overhead water storage tanks with crystalline water waves.",
+    "dropCards": [
+      {
+        "title": "Architectural Staging & Real-World Scale",
+        "desc": "Demonstrates realistic rooftop installation scale alongside standard household water storage tanks."
+      },
+      {
+        "title": "Monochrome Sky Contrast",
+        "desc": "Vivid royal blue sky backdrop enhances green cylinder visibility and product dominance."
+      }
+    ],
+    "gallery": [
+      "assets/images/posters/jalamithra-rooftop-water-filter.jpg",
+      "assets/images/posters/jalamithra-airdrop-parachute-campaign.jpg"
+    ]
+  },
+  {
+    "id": 46,
+    "category": "ads",
+    "year": "2025",
+    "title": "Jalamithra \u2014 Blue Cylinder Filtration Lineup",
+    "badge": "PRODUCT AD \u00b7 JALAMITHRA",
+    "desc": "Clean water purification poster featuring blue 14x65 commercial filter cylinders & herbal infusion.",
+    "src": "assets/images/posters/jalamithra-blue-cylinder-purification.jpg",
+    "videoSrc": null,
+    "role": "Commercial Layout & Product Designer",
+    "timeline": "2025 Campaign",
+    "stakeholders": "APA Jalamithra Pvt. Ltd.",
+    "tools": "Photoshop, Illustrator",
+    "overview": "Promotional poster for Jalamithra's 14x65 blue cylinder series featuring herbal Nellikka (gooseberry) wood filtration technology, floating mint leaves, and crisp water splash dynamics.",
+    "dropCards": [
+      {
+        "title": "Herbal Health Signaling",
+        "desc": "Green floating leaves and aquatic splashes emphasize 100% natural organic purification."
+      },
+      {
+        "title": "Product Scale Hierarchy",
+        "desc": "Trio of scaled cylinders demonstrates household to commercial volume capacity."
+      }
+    ],
+    "gallery": [
+      "assets/images/posters/jalamithra-blue-cylinder-purification.jpg",
+      "assets/images/posters/jalamithra-water-purifier-ad.jpg"
     ]
   }
 ];
