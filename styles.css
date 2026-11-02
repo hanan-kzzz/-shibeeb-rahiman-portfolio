@@ -2495,30 +2495,22 @@ body{cursor:default}
   padding: 20px;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   z-index: 3;
+  pointer-events: none;
 }
 
 .reel-info {
-  max-width: 62%;
+  display: none !important;
 }
 
 .reel-title {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(18px, 2.2vw, 26px);
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 4px 0;
-  line-height: 1.2;
+  display: none !important;
 }
 
 .reel-desc {
-  font-size: 12px;
-  line-height: 1.45;
-  color: #b0b4c3;
-  margin: 0;
-  max-width: 400px;
+  display: none !important;
 }
 
 .reel-panel-actions {
@@ -2526,6 +2518,8 @@ body{cursor:default}
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  margin-left: auto;
+  pointer-events: auto;
 }
 
 .reel-action-btn {
@@ -2792,12 +2786,9 @@ body{cursor:default}
   .reel-orbital-track {
     width: 78vw;
   }
-  .reel-info {
-    max-width: 100%;
-  }
   .reel-panel-footer {
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: flex-end;
+    align-items: flex-end;
     gap: 10px;
   }
   .reel-pills-nav {

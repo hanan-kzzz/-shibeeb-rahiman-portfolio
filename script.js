@@ -396,21 +396,43 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     });
   }
 
-  // Check if section occupies the screen
-  function isSectionActive() {
+  // Track mouse hover over showreel section
+  let isMouseOverSection = false;
+  section.addEventListener('mouseenter', () => { isMouseOverSection = true; });
+  section.addEventListener('mouseleave', () => { isMouseOverSection = false; });
+
+  // Check if section occupies the screen or is hovered
+  function isSectionActive(isExplicitHorizontal = false) {
     const rect = section.getBoundingClientRect();
-    return rect.top <= 80 && rect.bottom >= window.innerHeight - 80;
+    const vh = window.innerHeight;
+
+    if (isExplicitHorizontal) {
+      // For deliberate horizontal swipe/scroll, active if visible on screen
+      return rect.top < vh * 0.85 && rect.bottom > vh * 0.15;
+    }
+
+    // Active when section is framed in central view or mouse is directly over it
+    const inCentralView = rect.top <= 140 && rect.bottom >= vh * 0.35;
+    const isHoveredInView = isMouseOverSection && rect.top < vh && rect.bottom > 0;
+
+    return inCentralView || isHoveredInView;
   }
 
   // Intercept Wheel Scrolling while inside showreel
   window.addEventListener('wheel', (e) => {
     if (theaterModal && theaterModal.classList.contains('is-open')) return;
-    if (!isSectionActive()) return;
 
-    const delta = e.deltaY;
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+    if (absX < 3 && absY < 3) return; // Ignore micro jitter
+
+    const isExplicitHorizontal = absX > absY;
+    if (!isSectionActive(isExplicitHorizontal)) return;
+
+    const delta = isExplicitHorizontal ? e.deltaX : e.deltaY;
 
     if (delta > 0) {
-      // User is scrolling DOWN
+      // User is scrolling DOWN or RIGHT
       if (activeIndex < totalPanels - 1) {
         // We still have videos to show! Stay in reel section!
         e.preventDefault();
@@ -423,7 +445,7 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
         // Let page scroll down naturally to #projects!
       }
     } else if (delta < 0) {
-      // User is scrolling UP
+      // User is scrolling UP or LEFT
       if (activeIndex > 0) {
         // Still have previous videos in section!
         e.preventDefault();
@@ -447,13 +469,15 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 
   window.addEventListener('touchmove', (e) => {
     if (theaterModal && theaterModal.classList.contains('is-open')) return;
-    if (!isSectionActive()) return;
 
     const touchY = e.touches[0].clientY;
     const touchX = e.touches[0].clientX;
     const diffY = touchStartY - touchY;
     const diffX = touchStartX - touchX;
     const dominantDiff = Math.abs(diffX) > Math.abs(diffY) ? diffX : diffY;
+
+    const isHorizontalGesture = Math.abs(diffX) > Math.abs(diffY);
+    if (!isSectionActive(isHorizontalGesture)) return;
 
     if (dominantDiff > 35) {
       // Swiping to next video
@@ -479,6 +503,56 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
       }
     }
   }, { passive: false });
+
+  // Desktop mouse drag to navigate horizontally
+  const perspectiveStage = document.getElementById('reelPerspectiveStage');
+  if (perspectiveStage) {
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    perspectiveStage.addEventListener('mousedown', (e) => {
+      if (e.target.closest('button') || e.target.closest('a') || e.target.closest('.reel-action-btn')) return;
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const diffX = dragStartX - e.clientX;
+      const diffY = dragStartY - e.clientY;
+      if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 0 && activeIndex < totalPanels - 1) {
+          renderOrbitalState(activeIndex + 1);
+        } else if (diffX < 0 && activeIndex > 0) {
+          renderOrbitalState(activeIndex - 1);
+        }
+        isDragging = false;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+  }
+
+  // Keyboard Left / Right arrow navigation when section in view
+  window.addEventListener('keydown', (e) => {
+    if (theaterModal && theaterModal.classList.contains('is-open')) return;
+    if (!isSectionActive(true)) return;
+    if (e.key === 'ArrowRight') {
+      if (activeIndex < totalPanels - 1) {
+        e.preventDefault();
+        renderOrbitalState(activeIndex + 1);
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (activeIndex > 0) {
+        e.preventDefault();
+        renderOrbitalState(activeIndex - 1);
+      }
+    }
+  });
 
   // Arrow Buttons
   if (prevBtn) {
@@ -753,6 +827,21 @@ document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
 // Service Worker Registration & Live Network Offline Detector
 // ==========================================================================
 (function initServiceWorkerAndNetwork() {
+  // Disable Service Worker on localhost during development so changes appear immediately
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let reg of registrations) reg.unregister();
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then((keys) => {
+        for (let key of keys) caches.delete(key);
+      });
+    }
+    return;
+  }
+
   // Register Service Worker for offline support
   if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {

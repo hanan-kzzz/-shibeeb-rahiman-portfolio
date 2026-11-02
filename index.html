@@ -80,11 +80,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=3">
+  <link rel="stylesheet" href="assets/css/styles.css?v=5">
 
   <style>
     .pill-flame-svg { width: 22px !important; height: 22px !important; max-width: 22px !important; display: block !important; }
     .pill-flame-circle { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+    /* Video Reel Cards: clean without title and description overlays */
+    .reel-info, .reel-title, .reel-desc { display: none !important; }
+    .reel-panel-footer { justify-content: flex-end !important; pointer-events: none !important; }
+    .reel-panel-actions { margin-left: auto !important; pointer-events: auto !important; }
   </style>
   <style>
     /* Critical EspaceX Preloader Display */
@@ -505,7 +509,7 @@
         <div class="reel-orbital-track" id="reelOrbitalTrack">
 
           <!-- Reel 01: Showreel 2026 -->
-          <article class="reel-panel is-active" data-index="0" data-video-src="assets/videos/shibeeb-showreel.mp4" data-poster="assets/images/posters/showreel-thumb.jpg" data-title="Showreel 2026 — Motion In Action" data-tag="01 · MAIN REEL" data-duration="00:30">
+          <article class="reel-panel is-active" data-index="0" data-video-src="assets/videos/shibeeb-showreel.mp4" data-poster="assets/images/posters/showreel-thumb.jpg" data-title="Showreel 2026 — Motion In Action" data-desc="Brand identities, kinetic typography &amp; 3D pacing." data-tag="01 · MAIN REEL" data-duration="00:30">
             <div class="reel-media-box">
               <video class="reel-video" src="assets/videos/shibeeb-showreel.mp4" poster="assets/images/posters/showreel-thumb.jpg" playsinline muted loop preload="auto"></video>
               <div class="reel-media-overlay"></div>
@@ -520,10 +524,6 @@
                 <span class="reel-play-label mono">WATCH REEL</span>
               </div>
               <div class="reel-panel-footer">
-                <div class="reel-info">
-                  <h3 class="reel-title">Showreel 2026</h3>
-                  <p class="reel-desc">Brand identities, kinetic typography &amp; 3D pacing.</p>
-                </div>
                 <div class="reel-panel-actions">
                   <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
                     <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
@@ -539,7 +539,7 @@
           </article>
 
           <!-- Reel 02: Mahindra Thar 4K -->
-          <article class="reel-panel" data-index="1" data-video-src="assets/videos/cinematic-car-reel.mp4" data-poster="assets/images/posters/car-video-thumb.jpg" data-title="Mahindra Thar 4K" data-tag="02 · AUTOMOTIVE" data-duration="00:58">
+          <article class="reel-panel" data-index="1" data-video-src="assets/videos/cinematic-car-reel.mp4" data-poster="assets/images/posters/car-video-thumb.jpg" data-title="Mahindra Thar 4K" data-desc="Off-road physics, dynamic mud particles &amp; cinematic composite." data-tag="02 · AUTOMOTIVE" data-duration="00:58">
             <div class="reel-media-box">
               <video class="reel-video" src="assets/videos/cinematic-car-reel.mp4" poster="assets/images/posters/car-video-thumb.jpg" playsinline muted loop preload="none"></video>
               <div class="reel-media-overlay"></div>
@@ -554,10 +554,6 @@
                 <span class="reel-play-label mono">WATCH REEL</span>
               </div>
               <div class="reel-panel-footer">
-                <div class="reel-info">
-                  <h3 class="reel-title">Mahindra Thar 4K</h3>
-                  <p class="reel-desc">Off-road physics, dynamic mud particles &amp; cinematic composite.</p>
-                </div>
                 <div class="reel-panel-actions">
                   <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
                     <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
@@ -573,7 +569,7 @@
           </article>
 
           <!-- Reel 03: Vertical Social Reel -->
-          <article class="reel-panel is-vertical" data-index="2" data-video-src="assets/videos/social-motion-reel.mp4" data-poster="assets/images/posters/final-out-thumb.jpg" data-title="Vertical Social Reel" data-tag="03 · VERTICAL REEL" data-duration="00:24">
+          <article class="reel-panel is-vertical" data-index="2" data-video-src="assets/videos/social-motion-reel.mp4" data-poster="assets/images/posters/final-out-thumb.jpg" data-title="Vertical Social Reel" data-desc="Fast-paced mobile transitions, kinetic typography &amp; beat pacing." data-tag="03 · VERTICAL REEL" data-duration="00:24">
             <div class="reel-media-box">
               <video class="reel-video" src="assets/videos/social-motion-reel.mp4" poster="assets/images/posters/final-out-thumb.jpg" playsinline muted loop preload="none"></video>
               <div class="reel-media-overlay"></div>
@@ -588,10 +584,6 @@
                 <span class="reel-play-label mono">WATCH REEL</span>
               </div>
               <div class="reel-panel-footer">
-                <div class="reel-info">
-                  <h3 class="reel-title">Vertical Social Reel</h3>
-                  <p class="reel-desc">Fast-paced mobile transitions, kinetic typography &amp; beat pacing.</p>
-                </div>
                 <div class="reel-panel-actions">
                   <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
                     <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
@@ -607,7 +599,7 @@
           </article>
 
           <!-- Reel 04: Creative Showcase CV -->
-          <article class="reel-panel" data-index="3" data-video-src="assets/videos/shibeeb-cv.mp4" data-poster="assets/images/posters/reel-frame.jpg" data-title="Creative Showcase CV" data-tag="04 · PORTFOLIO REEL" data-duration="00:46">
+          <article class="reel-panel" data-index="3" data-video-src="assets/videos/shibeeb-cv.mp4" data-poster="assets/images/posters/reel-frame.jpg" data-title="Creative Showcase CV" data-desc="Curated brand identity design &amp; motion graphics showcase reel." data-tag="04 · PORTFOLIO REEL" data-duration="00:46">
             <div class="reel-media-box">
               <video class="reel-video" src="assets/videos/shibeeb-cv.mp4" poster="assets/images/posters/reel-frame.jpg" playsinline muted loop preload="none"></video>
               <div class="reel-media-overlay"></div>
@@ -622,10 +614,6 @@
                 <span class="reel-play-label mono">WATCH REEL</span>
               </div>
               <div class="reel-panel-footer">
-                <div class="reel-info">
-                  <h3 class="reel-title">Creative Showcase CV</h3>
-                  <p class="reel-desc">Curated brand identity design &amp; motion graphics showcase reel.</p>
-                </div>
                 <div class="reel-panel-actions">
                   <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
                     <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
@@ -641,7 +629,7 @@
           </article>
 
           <!-- Reel 05: Shibi Motion Film -->
-          <article class="reel-panel" data-index="4" data-video-src="assets/videos/shibi.mp4" data-poster="assets/images/posters/shibi-motion-thumb.jpg" data-title="Shibi Motion Film" data-tag="05 · KINETIC FILM" data-duration="00:40">
+          <article class="reel-panel" data-index="4" data-video-src="assets/videos/shibi.mp4" data-poster="assets/images/posters/shibi-motion-thumb.jpg" data-title="Shibi Motion Film" data-desc="Dynamic camera staging, kinetic pacing &amp; atmospheric passes." data-tag="05 · KINETIC FILM" data-duration="00:40">
             <div class="reel-media-box">
               <video class="reel-video" src="assets/videos/shibi.mp4" poster="assets/images/posters/shibi-motion-thumb.jpg" playsinline muted loop preload="none"></video>
               <div class="reel-media-overlay"></div>
@@ -656,10 +644,6 @@
                 <span class="reel-play-label mono">WATCH REEL</span>
               </div>
               <div class="reel-panel-footer">
-                <div class="reel-info">
-                  <h3 class="reel-title">Shibi Motion Film</h3>
-                  <p class="reel-desc">Dynamic camera staging, kinetic pacing &amp; atmospheric passes.</p>
-                </div>
                 <div class="reel-panel-actions">
                   <button type="button" class="reel-action-btn reel-sound-toggle" aria-label="Toggle Sound" title="Toggle Sound">
                     <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/></svg>
@@ -1049,5 +1033,5 @@
     </div>
   </div>
 
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/script.js?v=5"></script>
 </body></html>
